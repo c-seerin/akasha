@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>阿卡夏之书</title>
-<link href="img/entry/fonts/gfonts.css" rel="stylesheet">
+<!-- 字体走系统回退，原先引用的 gfonts.css 不存在，已移除 -->
 <style>
 :root{
   --bg-dark-blue-start:#07090b;
@@ -1014,14 +1014,7 @@ body{letter-spacing:.01em}
 </style>
 </head>
 <body>
-<div id="entry-gate" aria-label="入馆">
-  <div class="eg-inner">
-    <div class="eg-title">阿 卡 夏 之 书</div>
-    <div class="eg-sub">T H E &nbsp; A K A S H I C &nbsp; R E C O R D</div>
-    <div class="eg-rule"></div>
-    <div class="eg-hint">翻 开 第 一 页 · 此 世 织 物 皆 录 于 此</div>
-  </div>
-</div>
+
 
 <button id="door-portal" tabindex="0" aria-label="门"></button>
 <canvas id="gate-petals" aria-hidden="true"></canvas>
@@ -1093,7 +1086,7 @@ body{letter-spacing:.01em}
   </div>
   <section id="home" class="tm-section">
       <div class="card">
-        <h3 class="card-title">世界架构<span class="en-title">World Architecture</span></h3>
+        <h3 class="card-title" id="door-hold-zone">世界架构<span class="en-title">World Architecture</span></h3>
         <p class="wb-lead">星球只有一颗，贴在上面的“世界”却是可以换的织物（<i class="en">Texture</i>）。这张卡把地表到人理排成四层：剧情里所有的年代、神域、异闻，都先在这四层里找位置，再谈是谁的地盘。</p>
         <div class="wb-stack">
           <div class="wb-layer" data-tag="顶层 · 人的世界">
@@ -2051,6 +2044,16 @@ body.in-genesis #app-shell, body.in-genesis #horizontal-nav-container{opacity:0;
     .a3-sig{font-size:11px}
     .a3-types{gap:.8rem}
   }
+
+    82%{opacity:.24}
+  }
+
+  /* 手机端：背景被横向裁切，右侧的门不在屏内 → 换成「长按标题」触发 */
+  @media (max-width:560px){
+    #door-portal{display:none !important}
+  }
+  /* 长按标题时不选中文字 */
+  .card-title{-webkit-touch-callout:none}
 </style>
 <div class="fs-dust" id="fs-dust"></div><div class="fs-wrap">
  <div class="fs-brand"><h1>型 月 世 界 档 案 馆</h1>
@@ -3320,6 +3323,8 @@ document.addEventListener('error', function (e) {
     btn.style.left = Math.round(left) + 'px';
     btn.style.top = Math.round(top) + 'px';
     var offscreen = (top + h < 0) || (top > vh) || (left + w < 0) || (left > vw);
+    // 手机竖屏：背景被裁切，真实的门不在屏内 → 直接不显示热区，改由「长按标题」触发
+    if(vw <= 560){ btn.style.display = 'none'; return; }
     btn.style.display = offscreen ? 'none' : 'block';
   }
   place();
@@ -3363,9 +3368,10 @@ document.addEventListener('error', function (e) {
     }, 1900);
   }
 
+  var lastPressAt = 0;
   btn.addEventListener('click', function(e){
     e.stopPropagation();
-    if (TOUCH) return;          // 触屏不吃普通点击，必须长按
+    if (Date.now() - lastPressAt < 900) return;   // 长按刚触发过，忽略随后的 click
     openDoor();
   });
 
@@ -3379,7 +3385,7 @@ document.addEventListener('error', function (e) {
     btn.classList.add('on-hover');
     pressTimer = setTimeout(function(){
       pressTimer = null;
-      if(!moved) openDoor();
+      if(!moved){ lastPressAt = Date.now(); openDoor(); }
     }, 600);
   }, {passive:true});
 
@@ -4046,20 +4052,37 @@ document.addEventListener('keydown', function(e){
 
 
 <script>
-/* ===== 入场页 ===== */
+/* ===== 手机端：长按「世界架构」标题开门 ===== */
 (function(){
-  var gate = document.getElementById('entry-gate');
-  if(!gate) return;
-  window.__enter = function(){
-    if(gate.dataset.done) return;
-    gate.dataset.done = '1';
-    gate.classList.add('off');
-    setTimeout(function(){ gate.style.display = 'none'; }, 950);
-    if(window.startArchiveBGM) window.startArchiveBGM();
-  };
-  gate.addEventListener('click', window.__enter);
-  document.addEventListener('keydown', function(e){
-    if(e.key === 'Enter' || e.key === ' ') window.__enter();
+  var zone = document.getElementById('door-hold-zone');
+  if(!zone) return;
+  var timer = null, moved = false, sx = 0, sy = 0;
+
+  zone.addEventListener('touchstart', function(e){
+    if(window.innerWidth > 560) return;
+    moved = false;
+    var t = e.touches[0]; sx = t.clientX; sy = t.clientY;
+    timer = setTimeout(function(){
+      timer = null;
+      if(moved) return;
+      var btn = document.getElementById('door-portal');
+      if(btn){ btn.click(); }
+      if(navigator.vibrate) { try{ navigator.vibrate(30); }catch(err){} }
+    }, 700);
+  }, {passive:true});
+
+  zone.addEventListener('touchmove', function(e){
+    var t = e.touches[0];
+    if(Math.abs(t.clientX - sx) > 14 || Math.abs(t.clientY - sy) > 14){
+      moved = true;
+      if(timer){ clearTimeout(timer); timer = null; }
+    }
+  }, {passive:true});
+
+  ['touchend','touchcancel'].forEach(function(ev){
+    zone.addEventListener(ev, function(){
+      if(timer){ clearTimeout(timer); timer = null; }
+    }, {passive:true});
   });
 })();
 </script>
