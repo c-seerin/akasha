@@ -190,6 +190,9 @@
 @keyframes liSkip{to{opacity:1}}
 
 @media (max-width:560px){
+  /* 手机端：底部提示上移，避免和「离开」按钮重叠 */
+  #genesis .g-hint{bottom:clamp(78px,10vh,124px) !important}
+  #genesis .g-back{bottom:clamp(14px,2.4vh,26px)}
   .li-title span{font-size:clamp(46px,15vw,76px)}
   .li-sub{letter-spacing:.5em;text-indent:.5em}
 }
