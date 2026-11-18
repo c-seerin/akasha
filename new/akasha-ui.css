@@ -1,0 +1,805 @@
+/* ==========================================================================
+   AKASHA · IMPECCABLE PASS  —  "Engraved Archive" / 蚀刻档案馆
+   设计层：只在旧样式之后追加覆盖，不改动原有结构、不触碰原有 JS 逻辑。
+   1 tokens · 2 base · 3 masthead · 4 nav · 5 plates · 6 type · 7 media
+   8 forms · 9 controls · 10 tiles · 11 empty · 12 motion · 13 a11y
+   14 scrollbar · 15 accent variants · 16 responsive
+   ========================================================================== */
+
+/* ------------------------------------------------------------------ 1. tokens */
+:root{
+  /* 墨（偏青的暖黑，不用纯黑） */
+  --ink-0:#06090c;
+  --ink-1:#0a0f14;
+  --ink-2:#0e141a;
+  --ink-3:#131a21;
+
+  /* 字 */
+  --tx-1:#eef2f1;
+  --tx-2:#c6cfd2;
+  --tx-3:#93a0a6;
+  --tx-4:#8d99a0;
+
+  /* 金属 */
+  --gold:#e2c183;
+  --gold-2:#b9975f;
+  --gold-3:#a68a55;
+  --teal:#a9c8cd;
+  --rust:#d59a8b;
+
+  /* 线 */
+  --line:rgba(226,193,131,.15);
+  --line-2:rgba(226,193,131,.32);
+  --line-3:rgba(226,193,131,.55);
+
+  /* 版式 */
+  --font-display:"Cormorant Garamond","Noto Serif SC","Songti SC","STSong",Georgia,serif;
+  --font-body:"Noto Serif SC","Songti SC","Source Han Serif SC",Georgia,"SimSun",serif;
+  --font-ui:"Manrope","Noto Sans SC",-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  --font-mono:"Cascadia Mono","JetBrains Mono","SFMono-Regular",Consolas,monospace;
+
+  /* 节奏 */
+  --gut:clamp(16px,2.6vw,40px);
+  --stack-1:.35rem;
+  --stack-2:.7rem;
+  --stack-3:1.15rem;
+  --stack-4:clamp(18px,2.2vw,30px);
+  --stack-5:clamp(30px,4vw,64px);
+  --measure:1180px;
+  --radius:3px;
+  --ease:cubic-bezier(.22,1,.36,1);
+  --ease-in-out:cubic-bezier(.4,0,.2,1);
+
+  /* 沿用旧变量名 → 全局一次性换血 */
+  --text-primary:var(--tx-1);
+  --text-secondary:var(--tx-2);
+  --border-color:var(--line);
+  --accent-gold:var(--gold);
+  --accent-cyan:var(--teal);
+  --accent-blue:var(--teal);
+  --shadow-color:rgba(226,193,131,.10);
+  --glow-color-blue:rgba(226,193,131,.28);
+  --glow-color-cyan:rgba(169,200,205,.24);
+  --font-sans:var(--font-ui);
+  --font-serif:var(--font-body);
+  --font-title:var(--font-display);
+  --bg-dark-blue-start:var(--ink-0);
+  --bg-dark-blue-end:var(--ink-2);
+  --bg-secondary:rgba(10,15,20,.88);
+  --bg-glass:rgba(10,15,20,.72);
+}
+
+/* -------------------------------------------------------------------- 2. base */
+html{ -webkit-text-size-adjust:100%; }
+body{
+  font-family:var(--font-body) !important;
+  color:var(--tx-1) !important;
+  font-size:16px !important;
+  line-height:1.9 !important;
+  letter-spacing:.015em !important;
+  text-rendering:optimizeLegibility;
+  -webkit-font-smoothing:antialiased;
+  font-feature-settings:"kern" 1,"liga" 1;
+}
+/* 底噪：在背景美术上压一层墨，正文才敢站上去 */
+body::after{
+  content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    linear-gradient(180deg,rgba(5,8,11,.62),rgba(5,8,11,.42) 34%,rgba(5,8,11,.58));
+}
+::selection{ background:rgba(226,193,131,.26); color:#fff; }
+a{ color:var(--teal); text-underline-offset:3px; text-decoration-thickness:1px; }
+img{ max-width:100%; }
+:focus:not(:focus-visible){ outline:none; }
+:focus-visible{ outline:2px solid var(--gold); outline-offset:3px; border-radius:2px; }
+.card a:focus-visible,.nav-btn:focus-visible,.ink-switch button:focus-visible{ outline-offset:2px; }
+
+/* ---------------------------------------------------------------- 3. masthead */
+#site-title{
+  max-width:var(--measure) !important;
+  margin:clamp(18px,3vw,44px) auto clamp(10px,1.6vw,18px) !important;
+  padding:0 0 clamp(14px,2vw,22px) !important;
+  display:grid !important; justify-items:center; gap:.55rem;
+  background:none !important; border:0 !important;
+  border-bottom:1px solid var(--line) !important;
+  border-radius:0 !important; box-shadow:none !important;
+  backdrop-filter:none !important; -webkit-backdrop-filter:none !important;
+  position:relative;
+}
+#site-title::before{
+  content:""; position:absolute; left:0; right:0; bottom:-1px; height:1px;
+  background:linear-gradient(90deg,transparent,var(--line-2) 22%,var(--line-3) 50%,var(--line-2) 78%,transparent);
+}
+#site-title .st-zh{
+  margin:0 !important;
+  font-family:var(--font-display) !important;
+  font-size:clamp(27px,3.5vw,46px) !important;
+  font-weight:600 !important;
+  line-height:1.14 !important;
+  letter-spacing:.26em !important; text-indent:.26em !important;
+  color:#eddcb6 !important;
+  text-shadow:0 1px 0 rgba(0,0,0,.55),0 14px 40px rgba(0,0,0,.5) !important;
+}
+#site-title .st-en{
+  margin:0 !important;
+  display:flex !important; align-items:center; gap:clamp(10px,2vw,22px);
+  font-family:var(--font-ui) !important;
+  font-size:10px !important; font-weight:600 !important;
+  letter-spacing:.62em !important; text-indent:0 !important;
+  color:var(--gold-2) !important; text-shadow:none !important;
+  text-transform:uppercase;
+}
+#site-title .st-en::before,
+#site-title .st-en::after{
+  content:""; height:1px; width:clamp(18px,7vw,72px);
+  background:linear-gradient(90deg,transparent,var(--line-2));
+}
+#site-title .st-en::after{ background:linear-gradient(90deg,var(--line-2),transparent); }
+#site-title .st-rule{
+  width:min(420px,72%) !important; height:1px !important; margin:.5rem 0 0 !important;
+  background:linear-gradient(90deg,transparent,var(--line),transparent) !important;
+  opacity:1 !important;
+}
+
+/* --------------------------------------------------------- 4. nav · index bar */
+#horizontal-nav-container{
+  position:sticky !important; top:0 !important; z-index:900 !important;
+  max-width:var(--measure) !important; margin:0 auto clamp(16px,2.4vw,28px) !important;
+  padding:0 !important;
+  background:linear-gradient(180deg,rgba(6,10,13,.96),rgba(6,10,13,.88)) !important;
+  backdrop-filter:blur(16px) saturate(.9) !important;
+  -webkit-backdrop-filter:blur(16px) saturate(.9) !important;
+  border:0 !important;
+  border-bottom:1px solid var(--line) !important;
+  border-radius:0 !important;
+  box-shadow:0 18px 40px -32px rgba(0,0,0,.95) !important;
+}
+#horizontal-nav{
+  display:flex !important; align-items:stretch;
+  gap:clamp(4px,1.6vw,30px) !important;
+  padding:.1rem clamp(2px,.6vw,6px) !important;
+  overflow-x:auto !important; scrollbar-width:none;
+  counter-reset:navidx;
+}
+#horizontal-nav .nav-btn{
+  flex:0 0 auto;
+  display:inline-flex !important; align-items:center; gap:.5em;
+  padding:.85rem .1rem .72rem !important;
+  border:0 !important; border-radius:0 !important;
+  background:none !important; box-shadow:none !important;
+  color:var(--tx-3) !important;
+  font-family:var(--font-ui) !important;
+  font-size:13px !important; font-weight:600 !important;
+  letter-spacing:.11em !important; line-height:1 !important;
+  cursor:pointer; position:relative; transition:color .22s var(--ease) !important;
+  counter-increment:navidx;
+  text-decoration:none !important;
+  -webkit-tap-highlight-color:transparent;
+}
+#horizontal-nav .nav-btn a{
+  padding:0 !important; color:inherit !important; text-decoration:none !important;
+  font:inherit !important; letter-spacing:inherit !important; display:inline !important;
+}
+#horizontal-nav .nav-btn::before{
+  content:"0" counter(navidx);
+  font-family:var(--font-ui); font-size:9px; font-weight:600;
+  letter-spacing:.04em; color:var(--gold-3);
+  transform:translateY(-.45em); transition:color .22s var(--ease);
+}
+#horizontal-nav .nav-btn::after{
+  content:""; position:absolute; left:0; right:0; bottom:0; height:1px;
+  background:linear-gradient(90deg,var(--gold),var(--gold-2));
+  transform:scaleX(0); transform-origin:left center;
+  transition:transform .38s var(--ease),height .2s var(--ease),opacity .2s;
+  opacity:.9;
+}
+#horizontal-nav .nav-btn:hover{ color:var(--tx-1) !important; background:none !important; }
+#horizontal-nav .nav-btn:hover::after{ transform:scaleX(.62); opacity:.55; }
+#horizontal-nav .nav-btn:hover::before{ color:var(--gold-2); }
+#horizontal-nav .nav-btn.active,
+body:not(:has(.tm-section:target:not(#home))) .nav-btn[data-target="home"]{
+  background:none !important; border:0 !important; box-shadow:none !important;
+  color:var(--tx-1) !important;
+}
+#horizontal-nav .nav-btn.active::after,
+body:not(:has(.tm-section:target:not(#home))) .nav-btn[data-target="home"]::after{
+  transform:scaleX(1); height:2px;
+}
+#horizontal-nav .nav-btn.active::before,
+body:not(:has(.tm-section:target:not(#home))) .nav-btn[data-target="home"]::before{
+  color:var(--gold);
+}
+
+/* ---------------------------------------------------- 5. sections & plates */
+.tm-section{
+  max-width:var(--measure) !important;
+  margin:0 auto var(--stack-5) !important;
+  scroll-margin-top:72px !important;
+}
+.tm-section > .card:first-child{ margin-top:0 !important; }
+
+.card{
+  position:relative;
+  margin:0 0 var(--stack-4) !important;
+  padding:clamp(20px,2.8vw,40px) !important;
+  border:1px solid var(--line) !important;
+  border-radius:var(--radius) !important;
+  background:linear-gradient(176deg,rgba(12,17,22,.965),rgba(7,11,15,.945)) !important;
+  box-shadow:0 1px 0 rgba(255,255,255,.035) inset,0 30px 70px -46px rgba(0,0,0,.95) !important;
+  /* 牌面已有 96% 不透明度，18px 模糊几乎看不出，却让整块 122 万 CSS 像素进入离屏渲染 —— 去掉 */
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+/* 角标刻线：档案铜牌的意思，不是通用圆角阴影 */
+.card::before,.card::after{
+  content:""; position:absolute; width:13px; height:13px; pointer-events:none;
+  border:0 solid var(--line-2);
+}
+.card::before{ top:-1px; left:-1px; border-top-width:1px; border-left-width:1px; }
+.card::after{ right:-1px; bottom:-1px; border-right-width:1px; border-bottom-width:1px; }
+
+/* 禁止卡片套卡片：内层降级为「刻线分区」（同级兄弟仍是独立铜牌，靠间距分层） */
+.tm-section > .card + .card{ margin-top:clamp(14px,2.2vw,24px) !important; }
+.card .card{
+  margin:0 !important;
+  padding:var(--stack-4) 0 0 !important;
+  background:none !important;
+  border:0 !important;
+  border-top:1px solid var(--line) !important;
+  border-radius:0 !important;
+  box-shadow:none !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+.card .card::before,.card .card::after{ display:none !important; }
+.card .card:first-child{ border-top:0 !important; padding-top:0 !important; }
+
+
+/* 旧版 active 态用一块暗红竖条当指示器（#8e1b22），并把 ::before 的编号清空；
+   这里把它还原成编号，指示器交给金色下划线 */
+#horizontal-nav .nav-btn.active::before,
+body:not(:has(.tm-section:target:not(#home))) .nav-btn[data-target="home"]::before{
+  content:"0" counter(navidx) !important;
+  position:static !important; top:auto !important; bottom:auto !important; left:auto !important;
+  width:auto !important; height:auto !important; background:none !important;
+  color:var(--gold) !important;
+}
+
+/* ------------------------------------------------------------ 6. typography */
+.card-title{
+  font-family:var(--font-display) !important;
+  font-size:clamp(21px,2.4vw,29px) !important;
+  font-weight:600 !important;
+  letter-spacing:.1em !important;
+  line-height:1.3 !important;
+  color:#f0e3c6 !important;
+  text-shadow:none !important;
+  border:0 !important; border-image:none !important;
+  padding:0 0 clamp(14px,1.6vw,20px) !important;
+  margin:0 0 clamp(18px,2.4vw,32px) !important;
+  position:relative;
+}
+.card-title::after{
+  content:""; position:absolute; left:0; bottom:0; height:1px;
+  width:clamp(56px,14%,150px);
+  background:linear-gradient(90deg,var(--gold),rgba(226,193,131,0));
+}
+.card-title .en-title{
+  display:block !important;
+  margin-top:.62rem !important;
+  font-family:var(--font-ui) !important;
+  font-size:10px !important; font-weight:600 !important;
+  letter-spacing:.46em !important;
+  color:var(--gold-3) !important;
+  text-transform:uppercase;
+}
+h4,h5,h6{ font-family:var(--font-display) !important; letter-spacing:.03em; }
+.card h4{ font-size:clamp(16px,1.5vw,19px) !important; color:var(--tx-1) !important; margin:.2rem 0 .5rem !important; }
+.card h5,.card h6{ color:var(--gold) !important; letter-spacing:.06em !important; }
+
+/* 正文：把行高和字号统一，避免 12–14px 的拥挤段落 */
+.card p,.card li,.wb-item p,.wb-item dd,.wb-lead,.card dd,.card dt{
+  font-family:var(--font-body) !important;
+  font-size:15.5px !important;
+  line-height:1.95 !important;
+  color:var(--tx-2) !important;
+  letter-spacing:.012em !important;
+}
+.wb-lead{
+  font-size:clamp(15.5px,1.5vw,17.5px) !important;
+  color:#e5dcc7 !important;
+  line-height:1.9 !important;
+  padding-left:1.1rem !important;
+  border-left:2px solid var(--line-2) !important;
+  margin:0 0 var(--stack-3) !important;
+}
+.card .en,.card i.en{ font-family:var(--font-display) !important; font-style:italic; color:var(--gold-2) !important; }
+strong,b{ color:#f4efe2; font-weight:600; }
+small,.dim{ color:var(--tx-3) !important; }
+
+/* 装饰符：由实心菱形换成细刻点 */
+.card li::before{
+  content:"—" !important; color:var(--gold-3) !important;
+  font-size:.9em !important; text-shadow:none !important; top:.1em !important;
+}
+
+/* ---------------------------------------------------------------- 7. media */
+.work-logo{
+  border-radius:2px !important;
+  filter:drop-shadow(0 10px 22px rgba(0,0,0,.55)) saturate(.95) !important;
+  mix-blend-mode:normal;
+}
+.work-logo.on-light{
+  background:linear-gradient(180deg,#f3f0e7,#ded7c6) !important;
+  border-radius:2px !important; padding:10px 14px !important;
+  box-shadow:0 0 0 1px rgba(0,0,0,.25);
+}
+/* 竖排/头像统一刻线边，避免图片漂在黑底上 */
+img[src$=".jpg"],img[src$=".png"],img[src$=".webp"]{ border-radius:2px; }
+
+/* ----------------------------------------------------------------- 8. forms */
+/* 原站 #servant-profile / #origin-login 已有一套「下划线输入框」写法（作者本意），
+   这里把它统一成全站语言：无边框盒子、只有一条底线；聚焦时底线转金 + 底色微提。 */
+.form-grid{ gap:clamp(14px,1.6vw,22px) clamp(14px,2vw,26px) !important; }
+.form-field{ gap:.4rem !important; }
+.form-field > label{
+  font-family:var(--font-ui) !important;
+  font-size:11px !important; font-weight:600 !important;
+  letter-spacing:.16em !important; text-transform:none;
+  color:var(--gold-2) !important;
+}
+#app-shell .form-field input,
+#app-shell .form-field select,
+#app-shell .form-field textarea,
+#app-shell input[type="text"],
+#app-shell input[type="search"],
+#app-shell select,
+#app-shell textarea{
+  font-family:var(--font-body) !important;
+  font-size:15px !important;
+  color:var(--tx-1) !important;
+  background:rgba(255,255,255,.028) !important;
+  border:0 !important;
+  border-bottom:1px solid rgba(226,193,131,.28) !important;
+  border-radius:0 !important;
+  padding:.6rem .65rem !important;
+  transition:border-color .2s var(--ease),background-color .2s var(--ease),
+             box-shadow .2s var(--ease) !important;
+}
+#app-shell .form-field input:hover,
+#app-shell .form-field select:hover,
+#app-shell .form-field textarea:hover{
+  border-bottom-color:rgba(226,193,131,.48) !important;
+  background:rgba(255,255,255,.045) !important;
+}
+#app-shell .form-field input:focus,
+#app-shell .form-field select:focus,
+#app-shell .form-field textarea:focus,
+#app-shell input[type="text"]:focus,
+#app-shell select:focus,
+#app-shell textarea:focus{
+  border-bottom-color:var(--gold) !important;
+  background:rgba(255,255,255,.06) !important;
+  box-shadow:0 1px 0 0 rgba(226,193,131,.55) !important;
+  outline:none !important;
+}
+#app-shell .form-field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' fill='%23b9975f' viewBox='0 0 16 16'%3E%3Cpath d='M1.6 4.6a.5.5 0 0 1 .8 0L8 10.3l5.6-5.7a.5.5 0 0 1 .8.8l-6 6a.5.5 0 0 1-.8 0l-6-6a.5.5 0 0 1 0-.8z'/%3E%3C/svg%3E") !important;
+  background-repeat:no-repeat !important;
+  background-position:right .55rem center !important;
+  padding-right:2rem !important;
+  -webkit-appearance:none; appearance:none;
+}
+#app-shell .form-field textarea{ min-height:110px !important; resize:vertical; }
+input::placeholder,textarea::placeholder{ color:var(--tx-4) !important; }
+
+/* -------------------------------------------------------------- 9. controls */
+.tm-section button,.tm-section .btn,.tm-section a.btn{
+  font-family:var(--font-ui) !important;
+  letter-spacing:.06em;
+  transition:color .18s var(--ease),background-color .18s var(--ease),
+             border-color .18s var(--ease),box-shadow .18s var(--ease),
+             transform .14s var(--ease) !important;
+}
+.tm-section button:active,.tm-section .btn:active{ transform:translateY(1px) scale(.994); }
+.tm-section .btn,.card .btn,.btn{
+  border:1px solid var(--line-2) !important;
+  border-radius:2px !important;
+  background:rgba(226,193,131,.06) !important;
+  color:#eddfc0 !important;
+  padding:.62rem 1.1rem !important;
+  font-size:13px !important; font-weight:600 !important;
+}
+.tm-section .btn:hover,.btn:hover{
+  background:rgba(226,193,131,.13) !important;
+  border-color:var(--line-3) !important;
+  color:#fff !important;
+}
+.btn.primary,.card .btn.primary{
+  background:linear-gradient(180deg,rgba(226,193,131,.92),rgba(185,151,95,.92)) !important;
+  color:#14100a !important; border-color:transparent !important;
+  box-shadow:0 10px 26px -14px rgba(226,193,131,.6) !important;
+}
+.btn.primary:hover{ filter:brightness(1.06); color:#0b0906 !important; }
+.btn.dim{ color:var(--tx-3) !important; background:none !important; border-color:var(--line) !important; }
+
+/* ------------------------------------------------------- 10. tiles & records */
+.timeline-card,.entry-category-tile,.fs-card,.node-card,.lb-depth-card,.divine-type{
+  border-radius:var(--radius) !important;
+  border:1px solid var(--line) !important;
+  background:linear-gradient(178deg,rgba(255,255,255,.022),rgba(255,255,255,.006)) !important;
+  box-shadow:none !important;
+  transition:border-color .24s var(--ease),background-color .24s var(--ease),
+             transform .24s var(--ease),box-shadow .24s var(--ease) !important;
+}
+.timeline-card:hover,.entry-category-tile:hover,.fs-card:hover,.lb-depth-card:hover{
+  border-color:var(--line-2) !important;
+  transform:translateY(-2px);
+  box-shadow:0 22px 44px -34px rgba(0,0,0,.95) !important;
+}
+.timeline-card::before{ display:none !important; }
+.timeline-card h4{ color:#f1e6cd !important; letter-spacing:.02em !important; }
+.entry-category-tile:hover,.entry-category-tile[aria-expanded="true"]{
+  background:linear-gradient(178deg,rgba(226,193,131,.10),rgba(226,193,131,.03)) !important;
+  border-color:var(--line-3) !important;
+}
+.entry-category-count,.entry-category-tile-meta,.pk-v,.pk-n,.fs-n,
+.node-plate,[class*="count"]{ font-variant-numeric:tabular-nums; }
+.entry-category-group-title{
+  font-family:var(--font-ui) !important;
+  font-size:11.5px !important; font-weight:600 !important;
+  letter-spacing:.3em !important; text-transform:uppercase;
+  color:var(--gold-2) !important;
+}
+.entry-category-status{ font-family:var(--font-ui) !important; font-size:12px !important; letter-spacing:.08em; color:var(--tx-3) !important; }
+
+
+/* 世界架构：层级块与世界层分隔线（原来只是一个 ▼ 字符） */
+.wb-layer{
+  border:1px solid var(--line) !important;
+  border-radius:2px !important;
+  background:linear-gradient(180deg,rgba(255,255,255,.022),rgba(255,255,255,.004)) !important;
+  padding:1.05rem 1.2rem !important;
+  transition:border-color .24s var(--ease) !important;
+}
+.wb-layer:hover{ border-color:var(--line-2) !important; }
+.wb-layer b{
+  display:flex !important; flex-wrap:wrap; align-items:baseline; gap:.65rem;
+  font-family:var(--font-display) !important;
+  font-size:16.5px !important; font-weight:600 !important; letter-spacing:.05em !important;
+  color:#f2e8d2 !important;
+}
+.wb-layer b i.en{
+  font-family:var(--font-ui) !important; font-style:normal !important;
+  font-size:9.5px !important; font-weight:600 !important;
+  letter-spacing:.28em !important; text-transform:uppercase;
+  color:var(--gold-3) !important;
+}
+.wb-layer .src{
+  display:block; margin-top:.55rem;
+  font-size:14.8px !important; line-height:1.9 !important;
+  color:var(--tx-2) !important;
+}
+.wb-arrow{
+  display:flex !important; align-items:center; gap:.7rem;
+  margin:.85rem 0 !important;
+  font-family:var(--font-ui) !important;
+  font-size:10px !important; font-weight:600 !important;
+  letter-spacing:.32em !important; color:var(--gold-3) !important;
+}
+.wb-arrow::before,.wb-arrow::after{
+  content:""; flex:1; height:1px;
+  background:linear-gradient(90deg,transparent,var(--line-2));
+}
+.wb-arrow::after{ background:linear-gradient(90deg,var(--line-2),transparent); }
+
+/* ----------------------------------------------------------- 11. empty state */
+.empty,.eb-empty,#preview-empty{
+  font-family:var(--font-ui) !important;
+  font-size:12.5px !important; letter-spacing:.16em;
+  color:var(--tx-3) !important;
+}
+/* 虚线空态：从「占位框」变成「待刻的碑」 */
+.tm-section .empty{ position:relative; }
+[class*="empty"]{ border-style:dashed !important; }
+
+/* --------------------------------------------------------------- 12. motion */
+@keyframes plate-in{
+  from{ opacity:0; transform:translateY(12px); }
+  to{ opacity:1; transform:none; }
+}
+@keyframes row-in{
+  from{ opacity:0; transform:translateY(8px); }
+  to{ opacity:1; transform:none; }
+}
+.tm-section:target > *,
+body:not(:has(.tm-section:target)) #home > *{
+  animation:plate-in .62s var(--ease) both;
+}
+.tm-section:target > *:nth-child(2),body:not(:has(.tm-section:target)) #home > *:nth-child(2){ animation-delay:.06s; }
+.tm-section:target > *:nth-child(3){ animation-delay:.12s; }
+.tm-section:target > *:nth-child(4){ animation-delay:.18s; }
+.tm-section:target > *:nth-child(n+5){ animation-delay:.22s; }
+/* #genesis 自带开场，不参与 */
+#genesis,#genesis > *{ animation:none !important; }
+
+/* 滚动入场（JS 挂 .rv，无 JS 时完全不隐藏） */
+.rv{ opacity:0; transform:translateY(9px); }
+.rv.is-in{
+  opacity:1; transform:none;
+  transition:opacity .6s var(--ease),transform .6s var(--ease);
+  transition-delay:calc(var(--i,0) * 42ms);
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.001ms !important; animation-delay:0ms !important;
+    transition-duration:.001ms !important; scroll-behavior:auto !important;
+  }
+  .rv{ opacity:1 !important; transform:none !important; }
+}
+
+
+/* 焦点环：金色描边 + 暗色外环，保证在任何背景美术上都可见（WCAG 2.2 焦点可见） */
+:focus-visible{
+  outline:2px solid var(--gold) !important;
+  outline-offset:2px !important;
+  box-shadow:0 0 0 4px rgba(4,7,10,.82) !important;
+}
+
+/* 不支持 backdrop-filter 的浏览器：纸面直接给足不透明度，不依赖滤镜 */
+@supports not ((backdrop-filter: blur(2px)) or (-webkit-backdrop-filter: blur(2px))){
+  .card{ background:linear-gradient(176deg,rgba(9,13,18,.985),rgba(6,9,13,.975)) !important; }
+}
+
+/* ------------------------------------------------------------------ 13. a11y */
+#bgm-btn{
+  border:1px solid var(--line-2) !important; border-radius:2px !important;
+  background:rgba(6,10,13,.86) !important; color:var(--gold-2) !important;
+  font-family:var(--font-ui) !important; font-size:11px !important;
+  letter-spacing:.14em !important; padding:.42rem .7rem !important;
+  backdrop-filter:blur(10px);
+}
+#bgm-btn:hover{ color:var(--gold) !important; border-color:var(--line-3) !important; }
+
+/* ------------------------------------------------------------- 14. scrollbar */
+*{ scrollbar-width:thin; scrollbar-color:rgba(226,193,131,.26) transparent; }
+::-webkit-scrollbar{ width:9px; height:9px; }
+::-webkit-scrollbar-track{ background:rgba(6,9,12,.6); }
+::-webkit-scrollbar-thumb{
+  background:linear-gradient(180deg,rgba(226,193,131,.34),rgba(226,193,131,.16));
+  border-radius:9px; border:2px solid rgba(6,9,12,.9);
+}
+::-webkit-scrollbar-thumb:hover{ background:rgba(226,193,131,.46); }
+
+/* -------------------------------------------------- 15. accent variants (3选1) */
+html[data-ink="frost"]{
+  --gold:#a9c8cd; --gold-2:#89a8ad; --gold-3:#637d82;
+  --line:rgba(169,200,205,.15); --line-2:rgba(169,200,205,.32); --line-3:rgba(169,200,205,.55);
+  --teal:#c8d9b8;
+}
+html[data-ink="frost"] #site-title .st-zh{ color:#e2eef0 !important; }
+html[data-ink="frost"] .card-title{ color:#e4eef0 !important; }
+html[data-ink="vermilion"]{
+  --gold:#e0a184; --gold-2:#bd7d63; --gold-3:#8a5745;
+  --line:rgba(224,161,132,.16); --line-2:rgba(224,161,132,.34); --line-3:rgba(224,161,132,.56);
+  --teal:#b6c3c9;
+}
+html[data-ink="vermilion"] #site-title .st-zh{ color:#f2d9c9 !important; }
+
+.ink-switch{
+  position:fixed; left:14px; bottom:14px; z-index:950;
+  display:flex; align-items:center; gap:2px;
+  padding:4px; border:1px solid var(--line); border-radius:2px;
+  background:rgba(6,10,13,.82); backdrop-filter:blur(10px);
+  font-family:var(--font-ui); opacity:.55; transition:opacity .25s var(--ease);
+}
+.ink-switch:hover,.ink-switch:focus-within{ opacity:1; }
+.ink-switch button{
+  border:0; background:none; cursor:pointer;
+  font:600 10.5px/1 var(--font-ui); letter-spacing:.14em;
+  color:var(--tx-4); padding:.42rem .55rem; border-radius:1px;
+  transition:color .2s var(--ease),background-color .2s var(--ease);
+}
+.ink-switch button[aria-pressed="true"]{ color:var(--gold); background:rgba(226,193,131,.10); }
+.ink-switch button:hover{ color:var(--tx-1); }
+@media (max-width:640px){ .ink-switch{ display:none; } }
+
+
+/* -------------------------------------------------- 10b. 抽取页 #roll 专属修正 */
+/* 该页自带一套 32KB 内联样式，卡面原本近乎透明，正文直接压在背景美术上 ——
+   这里只做一件事：把「纸」还给字。结构、逻辑、配色基调都不动。 */
+#roll .fs-card{
+  background:linear-gradient(178deg,rgba(11,16,21,.955),rgba(7,11,15,.925)) !important;
+  border:1px solid var(--line) !important;
+  border-radius:2px !important;
+  box-shadow:0 30px 60px -48px rgba(0,0,0,.95) !important;
+  transition:border-color .24s var(--ease),transform .24s var(--ease),box-shadow .24s var(--ease) !important;
+}
+#roll .fs-card:hover{
+  border-color:var(--line-2) !important;
+  transform:translateY(-2px);
+  box-shadow:0 34px 60px -44px rgba(0,0,0,1) !important;
+}
+#roll .fs-card.picked{
+  border-color:var(--line-3) !important;
+  background:linear-gradient(178deg,rgba(28,26,20,.96),rgba(12,13,12,.94)) !important;
+  box-shadow:0 0 0 1px rgba(226,193,131,.22),0 30px 60px -48px rgba(0,0,0,.95) !important;
+}
+#roll .fs-card .tag{
+  font-family:var(--font-ui) !important;
+  font-size:9.5px !important; font-weight:600 !important; letter-spacing:.3em !important;
+  text-transform:uppercase; color:var(--gold-3) !important;
+  background:none !important; border:0 !important; padding:0 0 .35rem !important;
+  border-radius:0 !important;
+}
+#roll .fs-card h4{
+  font-family:var(--font-display) !important;
+  font-size:clamp(15px,1.35vw,17.5px) !important;
+  color:var(--gold) !important;
+  margin:.1rem 0 .5rem !important;
+  letter-spacing:.02em !important;
+}
+#roll .fs-card.picked h4{ color:#f6e7c4 !important; }
+#roll .fs-card p{
+  font-family:var(--font-body) !important;
+  font-size:14.2px !important; line-height:1.88 !important;
+  color:#b9c3c6 !important;
+}
+/* 工具条：主按钮只留一个，其余降级为细线幽灵键 */
+#roll .fs-bar button{
+  font-family:var(--font-ui) !important;
+  font-size:13px !important; font-weight:600 !important; letter-spacing:.08em !important;
+  border-radius:2px !important; padding:.58rem 1.05rem !important;
+  border:1px solid var(--line-2) !important;
+  background:none !important; color:#e6dcc4 !important;
+  transition:background-color .18s var(--ease),border-color .18s var(--ease),color .18s var(--ease),transform .14s var(--ease) !important;
+}
+#roll .fs-bar button:hover{ background:rgba(226,193,131,.12) !important; border-color:var(--line-3) !important; color:#fff !important; }
+#roll .fs-bar button:active{ transform:translateY(1px); }
+#roll .fs-bar button.primary,#roll #fs-roll{
+  background:linear-gradient(180deg,rgba(226,193,131,.95),rgba(185,151,95,.95)) !important;
+  border-color:transparent !important; color:#14100a !important;
+  box-shadow:0 12px 26px -16px rgba(226,193,131,.7) !important;
+}
+#roll .fs-bar button.ghost{ border-color:var(--line) !important; color:var(--tx-3) !important; }
+#roll .fs-meta,#roll .fs-picked{
+  background:rgba(8,12,16,.955) !important;
+  border:1px solid var(--line) !important; border-radius:2px !important;
+  backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px);
+}
+#roll .fs-meta{ font-family:var(--font-ui) !important; font-size:12.5px !important; letter-spacing:.06em; color:var(--tx-3) !important; }
+#roll .fs-pill{
+  font-family:var(--font-ui) !important; font-size:11px !important; letter-spacing:.14em;
+  border:1px solid var(--line-2) !important; border-radius:2px !important;
+  color:var(--gold-2) !important; background:rgba(226,193,131,.06) !important;
+  font-variant-numeric:tabular-nums;
+}
+#roll .fs-step{ border-radius:2px !important; border:1px solid var(--line) !important; background:rgba(9,13,18,.9) !important; color:var(--tx-3) !important; }
+#roll .fs-step.on{ border-color:var(--line-3) !important; background:rgba(226,193,131,.12) !important; color:#f3e9d3 !important; }
+#roll .fs-step .n{ border-radius:1px !important; font-family:var(--font-ui); font-variant-numeric:tabular-nums; }
+#roll .fs-brand p{ font-family:var(--font-ui) !important; font-size:12px !important; letter-spacing:.14em; color:var(--tx-3) !important; }
+#roll .fs-picked .pk-head{ font-family:var(--font-ui) !important; font-size:10.5px !important; letter-spacing:.34em; color:var(--gold-3) !important; }
+#roll .fs-picked .pk-k{ color:var(--gold-2) !important; font-family:var(--font-ui) !important; font-size:12px !important; letter-spacing:.1em; }
+#roll .fs-picked .pk-v{ color:var(--tx-2) !important; }
+
+
+/* 抽取页悬浮提示：原为青色渐变胶囊，与全站金属线语言冲突 */
+.fs-toast{
+  border-radius:2px !important;
+  background:linear-gradient(180deg,rgba(230,199,140,.97),rgba(186,152,96,.97)) !important;
+  color:#14100a !important;
+  font-family:var(--font-ui) !important;
+  font-size:12px !important; font-weight:600 !important; letter-spacing:.1em !important;
+  padding:.6rem 1rem !important;
+  box-shadow:0 22px 44px -22px rgba(0,0,0,.95) !important;
+}
+#roll .fs-foot{
+  font-family:var(--font-ui) !important;
+  font-size:11px !important; letter-spacing:.22em !important;
+  color:var(--tx-4) !important;
+}
+
+/* 尘光压过正文：降一档存在感，字优先 */
+#dust{ opacity:.5 !important; }
+
+
+/* ============================================================ 17b. 高特异性旧规则的显式接管
+   旧文件里有 #profile .card / #servant-profile .card / #origin-login .card { ... !important }（含 16px 圆角、24px padding、
+   rgba(12,16,21,.78) 底色），通用 .card 规则压不住它们（ID 选择器权重更高）。这里逐个点名接管。 */
+#profile .card,#servant-profile .card,#origin-login .card,#divine-login .card,#preview-all .card,#record-log .card{
+  border-radius:var(--radius) !important;
+  padding:clamp(20px,2.8vw,40px) !important;
+  background:linear-gradient(176deg,rgba(12,17,22,.965),rgba(7,11,15,.945)) !important;
+  border:1px solid var(--line) !important;
+  box-shadow:0 1px 0 rgba(255,255,255,.035) inset,0 30px 70px -46px rgba(0,0,0,.95) !important;
+  backdrop-filter:none !important;
+  -webkit-backdrop-filter:none !important;
+}
+/* 三个登记页的标题也被旧 ID 规则钉在 1.8rem/#c9a961，一并接管 */
+#profile .card-title,#servant-profile .card-title,#origin-login .card-title,#divine-login .card-title{
+  font-family:var(--font-display) !important;
+  font-size:clamp(21px,2.4vw,29px) !important;
+  font-weight:600 !important;
+  letter-spacing:.1em !important;
+  color:#f0e3c6 !important;
+  border:0 !important;
+  padding:0 0 clamp(14px,1.6vw,20px) !important;
+  margin:0 0 clamp(18px,2.4vw,32px) !important;
+}
+#profile .card-title .en-title,#servant-profile .card-title .en-title,#origin-login .card-title .en-title{
+  font-family:var(--font-ui) !important; font-size:10px !important; font-weight:600 !important;
+  letter-spacing:.46em !important; color:var(--gold-3) !important;
+}
+@media (max-width:640px){
+  #profile .card,#servant-profile .card,#origin-login .card,#divine-login .card{
+    border-radius:2px !important; padding:18px 16px !important;
+  }
+}
+
+/* ============================================================ 17c. 表单焦点环（旧规则里的 outline:none 逐个压回去） */
+#app-shell .form-field input:focus-visible,
+#app-shell .form-field select:focus-visible,
+#app-shell .form-field textarea:focus-visible,
+#profile .form-field input:focus-visible,#profile .form-field select:focus-visible,#profile .form-field textarea:focus-visible,
+#servant-profile .form-field input:focus-visible,#servant-profile .form-field select:focus-visible,#servant-profile .form-field textarea:focus-visible,
+#origin-login .form-field input:focus-visible,#origin-login .form-field select:focus-visible,#origin-login .form-field textarea:focus-visible,
+#divine-login .form-field input:focus-visible,#divine-login .form-field select:focus-visible,#divine-login .form-field textarea:focus-visible{
+  outline:2px solid var(--gold) !important;
+  outline-offset:2px !important;
+  box-shadow:0 0 0 4px rgba(4,7,10,.82),0 1px 0 0 rgba(226,193,131,.55) !important;
+}
+
+/* ------------------------------------------------------------ 16. responsive */
+@media (max-width:900px){
+  .card{ backdrop-filter:blur(8px) saturate(.85) !important; }
+  .tm-section{ scroll-margin-top:64px !important; }
+}
+@media (max-width:640px){
+  /* 小屏 GPU 余量小：大面板关掉实时模糊，改用足量不透明底 */
+  .card{ backdrop-filter:none !important; -webkit-backdrop-filter:none !important;
+         background:linear-gradient(176deg,rgba(10,14,19,.975),rgba(6,10,14,.97)) !important; }
+  #roll .fs-meta,#roll .fs-picked{ backdrop-filter:none !important; -webkit-backdrop-filter:none !important; }
+  body{ font-size:15.5px !important; }
+  #site-title{ margin-top:14px !important; }
+  #site-title .st-zh{ letter-spacing:.18em !important; text-indent:.18em !important; }
+  #horizontal-nav{ gap:14px !important; }
+  #horizontal-nav .nav-btn{ font-size:12px !important; padding:.8rem 0 .62rem !important; }
+  .card{ padding:18px 16px !important; border-radius:2px !important; }
+  .card-title{ font-size:20px !important; }
+}
+
+/* -------------------------------------------------- 17. 收口：圆角与细节归一 */
+/* 旧文件里混杂 10/11/12/18px 圆角与 999px 胶囊，统一到「档案铜牌」的 2–3px */
+.wb-item,.wb-step,.log-body,.round-step,.lb-step,.lb-f,[class*="-note"]{
+  border-radius:2px !important;
+}
+.wb-item{ background:rgba(6,10,13,.55) !important; border-color:var(--line) !important; }
+.wb-item:hover{ border-color:var(--line-2) !important; }
+.log-body{
+  background:rgba(4,7,10,.72) !important;
+  border:1px solid var(--line) !important;
+  color:var(--tx-2) !important;
+  font-size:14.5px !important; line-height:1.9 !important;
+}
+.pv-label{
+  font-family:var(--font-ui) !important;
+  font-size:11px !important; font-weight:600 !important;
+  letter-spacing:.3em !important; text-transform:uppercase;
+  color:var(--gold-2) !important; margin:.2rem 0 .6rem !important;
+}
+.entry-category-count,.entry-category-reveal,.entry-category-back,[class*="-count"]{
+  border-radius:2px !important; font-variant-numeric:tabular-nums;
+}
+.entry-category-count{
+  font-family:var(--font-ui) !important; font-size:11px !important; letter-spacing:.1em;
+  border:1px solid var(--line-2) !important; color:var(--gold-2) !important;
+  padding:.1rem .45rem !important;
+}
+#horizontal-nav{ padding-left:clamp(6px,1.4vw,10px) !important; }
+
+@media print{
+  #horizontal-nav-container,.ink-switch,#bgm-btn,#dust{ display:none !important; }
+  body::after{ display:none; }
+  .card{ background:#fff !important; color:#111 !important; }
+}

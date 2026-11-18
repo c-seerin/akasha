@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" role="img" aria-label="Fate/stay night [Heaven's Feel]">
+  <defs>
+    <linearGradient id="m" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="0.55" stop-color="#e3ebf1"/>
+      <stop offset="1" stop-color="#a9b8c4"/>
+    </linearGradient>
+    <linearGradient id="b" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#dd7f85"/>
+      <stop offset="1" stop-color="#8e1b22"/>
+    </linearGradient>
+  </defs>
+
+  <text x="320" y="92" text-anchor="middle" font-family="Cinzel, 'Noto Serif SC', serif"
+        font-size="74" font-weight="600" fill="url(#m)">Fate/stay night</text>
+
+  <text x="320" y="166" text-anchor="middle" font-family="Cinzel, serif" font-size="44"
+        letter-spacing="6" fill="url(#b)">Heaven's Feel</text>
+</svg>

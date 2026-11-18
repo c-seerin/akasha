@@ -1,0 +1,134 @@
+/* Native atlas foreground; background remains the original animated mesh scene. */
+body[data-screen=roll] #app-shell #roll{padding:12px 3vw calc(var(--dock-height,142px) + 30px)!important;min-height:calc(100dvh - 98px)}
+#roll .fs-wrap{max-width:1440px!important;width:100%;margin:auto;isolation:isolate}
+#roll .fs-wrap:before{content:'';position:absolute;inset:0 -1vw;z-index:-1;pointer-events:none;background:linear-gradient(110deg,rgba(160,221,249,.09),rgba(5,20,36,.16) 45%,rgba(171,225,244,.08));border-inline:1px solid #b9eeff35}
+#roll .fs-brand{position:relative;padding:0!important;margin:0!important;background:none!important;border:0!important;box-shadow:none!important}
+#roll .summon-pool-art{height:clamp(260px,43vh,490px);display:flex;justify-content:center}
+#roll .summon-pool-art img{height:100%;width:100%;object-fit:contain;filter:none}
+#roll .summon-pool-caption{margin:-15px auto 12px;text-align:center;background:linear-gradient(90deg,transparent,#071a34c9 25%,#071a34c9 75%,transparent);padding:5px}
+#roll .summon-pool-caption h1{font-size:clamp(26px,3vw,45px)!important;letter-spacing:.12em!important;color:#fff3ba!important;-webkit-text-fill-color:#fff3ba!important;text-shadow:2px 2px 2px #000}
+#roll .summon-pool-caption p{color:#eaf6ff;margin:0;font-size:16px}
+#roll .fs-steps{margin:8px auto!important;gap:8px!important}
+#roll .fs-step{border-radius:0!important;background:#051a32b8!important;color:#e7f6ff!important;font-size:16px!important;padding:4px 22px!important}
+#roll .fs-step.on{border-color:#efda8a!important;color:#ffe7a7!important}
+#roll .fs-meta{max-width:1060px;margin:12px auto!important;background:#03172bc9!important;border:1px solid #9bbed872!important;border-radius:0!important;color:#fff!important}
+#roll .fs-meta b{color:#d8f5ff!important}
+#roll .fs-bar{display:flex!important;justify-content:center;align-items:center;flex-wrap:wrap;gap:16px!important;margin:12px auto!important}
+body #app-shell #roll #fs-roll{background:url('img/fgo-ui/summon-button.svg') center/contain no-repeat!important;border:0!important;box-shadow:none!important;width:280px!important;height:106px!important;padding:0!important;color:white!important;text-shadow:2px 2px 2px #452600;font:700 36px 'Noto Serif SC',serif!important}
+#roll .summon-return-pool{background:url('img/fgo-ui/native-silver.png') center/100% 100% no-repeat;border:0;color:#163357;padding:12px 28px;font:700 18px 'Noto Serif SC',serif;cursor:pointer}
+#roll[data-summon-view=pool] #fs-grid,#roll[data-summon-view=pool] .summon-card-detail,#roll[data-summon-view=pool] .summon-return-pool,#roll[data-summon-view=pool] #fs-clear,#roll[data-summon-view=pool] #fs-next{display:none!important}
+#roll[data-summon-view=pool] #fs-picked,#roll[data-summon-view=pool] #fs-out{display:none!important}
+#roll[data-summon-view=results] .fs-brand{display:none!important}
+#roll[data-summon-view=results] .fs-bar{order:3}
+#roll #fs-grid{display:flex!important;flex-wrap:wrap;justify-content:center;gap:24px 18px!important;padding:18px 0!important;margin:0 auto!important;max-width:1390px}
+body #app-shell #roll .fs-card{position:relative;flex:0 0 clamp(145px,13vw,208px);width:208px;aspect-ratio:132/180;min-height:0!important;padding:0!important;border:0!important;border-radius:0!important;background:url('img/fgo-ui/summon-card.svg') center/100% 100% no-repeat!important;box-shadow:none!important;overflow:visible!important;cursor:pointer;color:white!important;transition:transform .18s,filter .18s}
+#roll .fs-card h4{position:absolute;left:9%;right:9%;bottom:14%;margin:0!important;font-size:clamp(14px,1.3vw,21px)!important;line-height:1.4!important;text-align:center;color:#fff!important;text-shadow:0 2px 3px #000;background:#03172bcf;padding:8px 3px!important;overflow-wrap:anywhere}
+#roll .fs-card p{display:none!important}
+#roll .fs-card .tag{position:absolute!important;top:auto!important;bottom:3%!important;left:8%!important;right:8%!important;text-align:center;border:0!important;background:none!important;padding:0!important;color:#e8e1cc!important;font-size:14px!important}
+#roll .fs-card:before,#roll .fs-card:after{display:none!important}
+#roll .fs-card.picked{filter:drop-shadow(0 0 8px #84efff)!important;transform:translateY(-8px)}
+#roll .fs-card.picked:after{display:block!important;content:'已选择'!important;position:absolute;top:8%;right:4%;background:#e9f9ff;color:#153957;font-size:13px;padding:2px 8px}
+#roll .fs-card:focus-visible{outline:2px solid #fff;outline-offset:4px}
+#roll .summon-card-detail{max-width:1050px;margin:12px auto;padding:15px 24px;background:#031424db;border-block:1px solid #a4d6f67a;color:#e7f7ff;min-height:70px}
+#roll .summon-card-detail p{margin:5px 0;font-size:15px;line-height:1.8}
+#roll .summon-card-detail strong{color:#f5e5ad;font-size:20px}
+@media(max-width:740px){#roll .summon-pool-art{height:31vh;min-height:190px}#roll .fs-step{padding:4px 10px!important;font-size:13px!important}body #app-shell #roll .fs-card{flex-basis:28%;width:28%}#roll #fs-grid{gap:18px 10px!important}#roll .fs-card h4{font-size:12px!important;padding:3px!important}#roll .fs-card .tag{font-size:10px!important}#roll .fs-meta{font-size:12px!important}body #app-shell #roll #fs-roll{width:220px!important;height:84px!important}#roll .summon-card-detail{padding:12px}}
+body #app-shell #roll .fs-card h4{color:#fff!important;text-shadow:0 2px 3px #000!important}
+body #app-shell #roll .fs-card{aspect-ratio:132/145}
+#roll .summon-pool-art{height:clamp(230px,37vh,410px)}
+body #app-shell #roll .fs-wrap{max-width:1440px!important;width:100%!important}
+#roll .fs-bar:has(#fs-build){display:none!important}
+body #app-shell #roll .fs-card{flex:0 0 14.5%;background-color:#09213be8!important}
+body #app-shell #roll .fs-card.picked:after{bottom:auto!important;left:auto!important;height:auto!important;right:5%!important;top:6%!important;letter-spacing:1px!important}
+#roll[data-summon-view=results] .fs-bar{margin:8px auto!important}
+#roll[data-summon-view=results] #fs-roll{max-width:180px;max-height:68px;font-size:25px!important}
+@media(max-width:740px){body #app-shell #roll .fs-card{flex-basis:28%}#roll .fs-card.picked:after{font-size:10px!important;padding:1px 4px!important}}
+/* Holdings use the original confirmation panel above the summon scene. */
+body #app-shell #roll #fs-picked{display:none!important}
+body #app-shell #roll .fs-card.picked{filter:none!important;transform:none!important}
+body #app-shell #roll .fs-card.picked:after,body #app-shell #roll .fs-card .sheen{display:none!important}
+body #app-shell #roll .summon-holdings{display:block;margin:18px auto 8px;width:210px;padding:0;border:0;background:none;box-shadow:none;cursor:pointer}
+.summon-holdings img{display:block;width:100%;height:auto}
+dialog.summon-holdings-dialog{position:fixed;inset:0;margin:auto;width:min(86vw,1280px);height:min(84dvh,790px);max-width:none;max-height:none;padding:32px 38px 65px;border:0;background:transparent;color:#fff;box-sizing:border-box;overflow:hidden;isolation:isolate;font-family:'Noto Serif SC',serif}
+dialog.summon-holdings-dialog[open]{display:flex;flex-direction:column;gap:18px}
+.summon-holdings-dialog:before{content:'';position:absolute;inset:0;z-index:-1;background:url('img/fgo-ui/release-frame.png') center/100% 100% no-repeat;opacity:.93;pointer-events:none}
+.summon-holdings-dialog::backdrop{background:rgba(0,9,22,.16)}
+.summon-holdings-dialog header{text-align:center;flex:none}
+.summon-holdings-dialog h2{margin:0 0 12px;font-size:clamp(24px,3vw,42px);color:white;text-shadow:2px 2px 2px #081323,-1px -1px 1px #081323}
+.summon-holdings-dialog header p{margin:0;color:white;font-size:clamp(13px,1.5vw,21px);text-shadow:1px 2px 2px #071321}
+.holdings-content{flex:1;min-height:0;overflow:auto;display:flex;justify-content:center;align-content:center;align-items:center;flex-wrap:wrap;gap:22px;padding:22px;background:#071f3b55;border-radius:7px;scrollbar-color:#d9d0a5 #10274466}
+.holding-entry{flex:0 0 clamp(135px,13vw,190px);text-align:center}
+.holding-card{aspect-ratio:132/145;background:#082240 url('img/fgo-ui/summon-card.svg') center/contain no-repeat;position:relative;color:white}
+.holding-card h3{position:absolute;left:9%;right:9%;bottom:14%;padding:7px 3px;margin:0;background:#03172bd9;color:#fff;font-size:clamp(14px,1.3vw,20px);line-height:1.4;overflow-wrap:anywhere;text-shadow:0 2px 3px #000}
+.holding-card span{position:absolute;bottom:3%;left:8%;right:8%;font-size:13px;color:#e8e1cc}
+.holding-category{margin:8px 0 0;padding:8px;background:#07132166;color:#fff;font-size:17px}
+.holdings-empty{color:#fff;text-align:center;line-height:1.8}
+.summon-holdings-dialog footer{text-align:center;flex:none}
+.summon-holdings-dialog .holdings-close{width:clamp(180px,24vw,330px);aspect-ratio:190/55;background:url('img/fgo-ui/native-silver.png') center/100% 100% no-repeat;border:0;box-shadow:none;padding:0;color:#101010;font:700 clamp(25px,3vw,42px) 'Noto Serif SC',serif;cursor:pointer}
+@media(max-width:600px){dialog.summon-holdings-dialog{width:94vw;height:85dvh;padding:25px 15px 44px;gap:12px}.holdings-content{padding:15px 8px;gap:15px;align-content:flex-start}.holding-entry{flex-basis:44%}.holding-category{font-size:14px}.summon-holdings-dialog header p{font-size:12px}}
+/* Full-viewport release summon composition. Each native sprite retains its aspect ratio. */
+body[data-screen=roll] #horizontal-nav-container{display:none!important}
+body[data-screen=roll] #app-shell #roll{position:fixed!important;inset:98px 0 0!important;height:calc(100dvh - 98px)!important;min-height:0!important;padding:0!important;overflow:hidden!important;z-index:10}
+body[data-screen=roll] #roll .fs-wrap{position:relative!important;width:100%!important;height:100%!important;max-width:none!important;padding:0!important;margin:0!important}
+#roll[data-summon-view=pool] .fs-brand{position:absolute!important;inset:0;display:block!important;overflow:hidden}
+#roll .release-figure{position:absolute;object-fit:contain;max-width:none!important;pointer-events:none;z-index:1;filter:drop-shadow(0 0 8px #d5faffaa)}
+#roll .figure-knight{width:49%;height:105%;left:-10%;top:0;object-position:center top}
+#roll .figure-parasol{width:48%;height:105%;right:-8%;top:0;object-position:center top}
+#roll .release-glass{position:absolute;inset:1% 22% 5%;background:linear-gradient(110deg,#64c8eb0c,#07182930 55%,#abf5ff12);border-inline:1px solid #a0edff45;transform:skewX(-3deg);z-index:2}
+#roll .release-title{position:absolute;width:25%;height:38%;left:25%;top:0;object-fit:contain;z-index:3;filter:drop-shadow(0 0 7px #9ce5ff66)}
+#roll .release-fan{position:absolute;left:51%;top:2%;width:24%;height:36%;z-index:2;display:flex;align-items:center;justify-content:center}
+#roll .release-fan img{position:absolute;width:48%;height:96%;object-fit:contain;filter:drop-shadow(0 0 7px #e5f9b9)}
+#roll .release-fan img:first-child{transform:translateX(-50%) rotate(-18deg)}
+#roll .release-fan img:nth-child(2){transform:translateY(-5%);z-index:1}
+#roll .release-fan img:last-child{transform:translateX(50%) rotate(18deg)}
+#roll .release-heading{position:absolute;top:35%;left:25%;width:50%;height:13%;display:flex;align-items:center;justify-content:center;gap:3%;z-index:4;white-space:nowrap}
+#roll .release-heading strong{font:900 italic clamp(32px,4.6vw,92px)/1.1 'Noto Serif SC',serif;letter-spacing:.035em;background:linear-gradient(#fff8cb 8%,#cf9e35 40%,#fff4b2 47%,#bb8a20 75%,#fff2b0);color:transparent;-webkit-background-clip:text;background-clip:text;filter:drop-shadow(3px 4px 1px #000) drop-shadow(-1px -1px 0 #61430c)}
+#roll .release-heading>span{font:700 clamp(18px,2.4vw,48px)/1.3 'Noto Serif SC',serif;color:#ffedb2;padding:1% 3%;border:3px solid #d4ae5d;border-radius:60px;background:linear-gradient(#b7291d,#e50000 48%,#900400 55%,#d62a13);box-shadow:0 0 0 3px #382d14;text-shadow:2px 3px 2px #5d200a}
+#roll .release-strip{position:absolute;left:25%;width:50%;top:49%;height:14%;border-top:3px solid #d3b97c;border-bottom:1px solid #9fe8ff66;background:linear-gradient(90deg,#110d2877,#67467fa8 35%,#081727cf 80%);display:flex;align-items:center;justify-content:space-between;padding:1% 1.5%;box-sizing:border-box;z-index:5;color:#fff;text-shadow:2px 2px 3px #000;font:600 clamp(13px,1.4vw,28px)/1.35 'Noto Serif SC',serif}
+#roll .release-strip>span{text-shadow:0 0 6px #e4c4ff,0 0 16px #b776f7;font-style:italic}
+#roll .release-strip>span b{font-size:1.35em}#roll .release-strip time{font-family:Arial,sans-serif;font-weight:700;text-align:right;font-size:1.05em;white-space:nowrap}
+#roll .release-rules{position:absolute;left:26%;width:48%;top:65%;height:11%;display:flex;align-items:center;justify-content:center;gap:6%;border:2px solid #acb3aa;border-radius:70px;background:linear-gradient(120deg,#000d,#062139c9,#000d);z-index:4;color:white;box-sizing:border-box}
+#roll .release-rule-title{font-size:clamp(20px,2.3vw,46px);text-shadow:0 0 5px #37cfff,0 0 15px #00aeff;white-space:nowrap}
+#roll .release-rule-text{font-size:clamp(12px,1.35vw,27px);line-height:1.55;text-shadow:1px 2px #000}#roll .release-rule-text em{color:#26ddff;font-weight:800;font-style:normal}
+#roll .release-note{position:absolute;top:76%;left:25%;width:50%;margin:0;text-align:center;color:#fcf397;font-size:clamp(10px,.95vw,20px);text-shadow:1px 2px #000;z-index:5}
+#roll[data-summon-view=pool] .fs-meta,#roll[data-summon-view=pool] .fs-foot,#roll[data-summon-view=pool] #fs-reset{display:none!important}
+#roll[data-summon-view=pool] .fs-bar:first-of-type,#roll[data-summon-view=pool] .fs-bar:has(#fs-roll){position:absolute!important;left:35%;width:30%;top:81%;height:10%;margin:0!important;z-index:6}
+body #app-shell #roll[data-summon-view=pool] #fs-roll{width:clamp(190px,20vw,380px)!important;height:clamp(64px,10vh,104px)!important;font-size:clamp(24px,2.7vw,48px)!important}
+#roll[data-summon-view=pool] .summon-holdings{position:absolute;left:2%;bottom:3%;width:13%;min-width:140px;z-index:7;margin:0}
+#roll .fs-steps{position:absolute!important;bottom:1%;left:25%;width:50%;height:7%;display:flex!important;justify-content:center;gap:1%!important;margin:0!important;z-index:8}
+#roll .fs-step{position:relative;flex:1;min-width:0;display:flex!important;align-items:center;justify-content:center;padding:0!important;border:2px solid #71878d!important;background:linear-gradient(120deg,#142249f0,#196a8ed9 45%,#051126f0)!important;font:700 clamp(12px,1.2vw,24px)/1.1 'Noto Serif SC',serif!important;cursor:pointer;text-shadow:1px 2px #000;box-sizing:border-box}
+#roll .fs-step.on{border-color:#ffe99c!important;box-shadow:0 0 8px #d6edff!important;background:linear-gradient(120deg,#0b1c36,#327da3,#162853)!important}
+#roll .fs-step .n{margin-right:6px;background:none!important;border:0!important;color:#ffdc74!important}
+#roll[data-summon-view=results] .fs-wrap{padding:1vh 3vw 10vh!important;box-sizing:border-box;overflow:auto}
+#roll[data-summon-view=results] .fs-steps{position:fixed!important;bottom:1vh}
+#roll[data-summon-view=results] .fs-meta{margin:0 auto 1vh!important}
+#roll[data-summon-view=results] .fs-foot{display:none}
+@media(max-width:900px){body[data-screen=roll] #app-shell #roll{inset:80px 0 0!important;height:calc(100dvh - 80px)!important}#roll .release-title{left:17%;width:33%}#roll .release-fan{left:50%;width:32%}#roll .release-heading,#roll .release-strip,#roll .release-note{left:14%;width:72%}#roll .release-rules{left:15%;width:70%}#roll .fs-steps{left:16%;width:68%}#roll[data-summon-view=pool] .summon-holdings{min-width:100px;bottom:10%}}
+body[data-screen=roll] #app-shell #roll{max-width:none!important;width:100vw!important;margin:0!important;left:0!important;right:0!important;transform:none!important}
+#roll .figure-knight{width:65%;height:115%;left:-22%;top:-1%}
+#roll .figure-parasol{width:65%;height:115%;right:-21%;top:-2%}
+#roll .release-title{top:0;height:39%}
+#roll .release-glass{background:linear-gradient(110deg,#9be1ff0e,#07182950 55%,#b8f5ff15)}
+#roll .fs-step{transform:none!important;clip-path:none!important;border-radius:0!important}
+#roll .fs-wrap:before{display:none!important}
+body[data-screen=roll] #app-shell #roll .fs-wrap{max-width:none!important;width:100%!important}
+#roll .fs-step:before,#roll .fs-step:after{display:none!important} #roll .release-note{font-size:clamp(12px,.95vw,19px)!important;color:#fff0a0!important;line-height:1.5!important}
+
+/* Original atlas halo; no additional central dimming plate. */
+#roll .release-glass{display:none!important}
+#roll .release-rainbow{position:absolute;pointer-events:none;left:50%;top:44%;width:min(88vw,150vh);height:auto;aspect-ratio:1;object-fit:contain;transform:translate(-50%,-50%);mix-blend-mode:screen;opacity:.58;z-index:0}
+#roll .release-figure{z-index:1}
+
+/* Original central assembly: preserve source coordinates, no replacement text yet. */
+#roll, #roll .fs-wrap, #roll .fs-brand{background:transparent!important;box-shadow:none!important;backdrop-filter:none!important}
+#roll .fs-wrap:before,#roll .fs-wrap:after,#roll .fs-brand:before,#roll .fs-brand:after{display:none!important}
+#roll .release-fan,#roll .release-heading,#roll .release-strip,#roll .release-rules,#roll .release-note{display:none!important}
+#roll .release-central-original{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;z-index:5;pointer-events:none;background:none!important}
+#roll[data-summon-view=pool] .fs-bar:has(#fs-roll){left:40.5%!important;top:65%!important;width:19%!important;height:15%!important;background:transparent!important;box-shadow:none!important;border:0!important}
+#roll[data-summon-view=pool] #fs-roll{width:100%!important;height:100%!important;opacity:0!important;cursor:pointer}
+#roll[data-summon-view=pool] #fs-roll:focus-visible{opacity:.25!important}
+#roll .release-figure{background:transparent!important;border:0!important;box-shadow:none!important}
+
+#roll .release-title{left:25%;width:19%;top:2%;height:25%;object-fit:contain}
+
+

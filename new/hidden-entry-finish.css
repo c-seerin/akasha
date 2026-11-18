@@ -1,0 +1,203 @@
+html body #lb-gate .lb-inner{max-width:970px!important;padding:38px 24px 30px!important;margin:0 auto!important;background:none!important;box-shadow:none!important}html body #lb-gate .lb-title{margin:0 0 6px;font-size:32px;color:#e7d4a3;text-shadow:0 2px 2px #000,0 0 12px #b3d9ff22}html body #lb-gate .lb-sub{font-size:10px}html body #lb-gate .lb-rule{margin:20px 0 24px}html body #lb-gate .lb-step{position:relative;background:linear-gradient(#0613211a,#0613211a),url('img/fgo-ui/dialog-native.png') center / cover no-repeat!important;border:0!important;border-radius:0!important;box-shadow:none!important;backdrop-filter:none!important;padding:32px 34px 66px!important;min-height:400px;clip-path:polygon(12px 0,calc(100% - 12px) 0,100% 12px,100% calc(100% - 12px),calc(100% - 12px) 100%,12px 100%,0 calc(100% - 12px),0 12px)}html body #lb-gate .lb-step[hidden]{display:none!important}html body #lb-gate .lb-step[data-step="2"]{aspect-ratio:746/447;min-height:0}html body #lb-gate .lb-quote{font-size:18px!important;border:0!important;padding:0!important;color:#f1f6fc!important;margin:12px 0 38px!important;text-shadow:0 2px 3px #000}html body #lb-gate .lb-types{gap:22px}html body #lb-gate .lb-type{min-height:192px;padding:22px!important;border:1px solid #7d9bb077!important;border-radius:4px!important;background:linear-gradient(#06162433,#06162455),url('img/fgo-ui/record-panel.png') center / cover!important;box-shadow:0 4px 12px #0003!important;text-align:left}html body #lb-gate .lb-type b{font-size:24px!important;color:#f3f7fc;display:block;margin-bottom:15px;letter-spacing:.12em;text-shadow:0 2px 4px #000}html body #lb-gate .lb-type span{font-size:13px!important;color:#d3e3ec!important;line-height:1.9;text-shadow:0 1px 3px #000}html body #lb-gate .lb-type.on{border-color:#ead085!important;box-shadow:inset 0 0 0 1px #ead08566,0 0 12px #4eb3ff33!important}html body #lb-gate .lb-nav{border:0!important;display:flex;justify-content:space-between;margin-top:20px;padding-top:0}html body #lb-gate .lb-btn{width:142px!important;height:42px!important;min-width:0;padding:0!important;border:0!important;border-radius:0!important;background:url('img/fgo-ui/native-silver.png') center/contain no-repeat!important;color:#213d58!important;box-shadow:none!important;font-size:15px!important;letter-spacing:.12em}html body #lb-gate #lb-next{background-image:url('img/fgo-ui/native-blue.png')!important;color:#fff!important;text-shadow:0 1px 3px #001a37}html body #lb-gate .lb-step-title{font-size:18px!important;color:#eee4c9!important;border:0!important;padding:0 0 13px!important;border-bottom:1px solid #c9dcf444!important;margin-bottom:22px!important}html body #lb-gate .lb-grid{gap:18px 22px!important}html body #lb-gate .lb-f{color:#dce8f1!important;font-size:13px!important}html body #lb-gate input,html body #lb-gate select,html body #lb-gate textarea{background:#07132180!important;border:1px solid #90a8ba55!important;border-radius:3px!important;color:#f1f6ff!important;min-height:38px;box-shadow:inset 0 1px 6px #0002!important;font-size:13px!important}html body #lb-gate .lb-hint{font-size:11px;color:#c1d1de}html body #lb-gate .lb-depth-panel{background:#0b192944!important;border-color:#90a8ba44!important}html body #lb-gate .lb-depth-ref{font-size:11px}html body #lb-gate .lb-step[data-step="1"]{max-height:620px;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#d4bd7d #132434}
+
+html body #lb-gate .lb-inner{padding-top:24px!important;max-width:1000px!important}html body #lb-gate .lb-title{font-size:28px!important}html body #lb-gate .lb-rule{margin:16px 0 20px!important}html body #lb-gate .lb-step[data-step="1"]{height:630px;max-height:calc(100dvh - 225px);min-height:0;overflow:hidden;padding:24px 30px 62px!important;display:flex;flex-direction:column;background-size:100% 100%!important}html body #lb-gate .lb-step-title{flex-shrink:0;margin-bottom:14px!important;padding-bottom:12px!important}html body #lb-gate .lb-quote{flex-shrink:0;font-size:15px!important;line-height:1.85!important;margin:0 0 20px!important}html body #lb-gate .lb-step[data-step="1"]>.lb-grid{display:grid!important;grid-template-columns:1fr 1fr!important;gap:16px 24px!important;align-content:start;min-height:0;overflow:auto;padding-right:6px;scrollbar-width:thin;scrollbar-color:#c3ae75 #112232}html body #lb-gate .lb-f{display:flex;flex-direction:column;gap:7px!important;margin:0!important}html body #lb-gate input,html body #lb-gate select{height:38px!important;margin:0!important}html body #lb-gate .lb-hint{font-size:10px!important;line-height:1.5!important;margin:0!important;color:#c3d0dd!important}html body #lb-gate .depth-guide{font-size:11px;color:#d5bd80}.depth-guide summary{cursor:pointer;list-style:none}.depth-guide summary:after{content:' ＋'}.depth-guide[open] summary:after{content:' －'}html body #lb-gate .lb-depth-panel{margin:10px 0 0!important;padding:12px!important}html body #lb-gate .lb-depth-ref-title{display:none}html body #lb-gate .lb-depth-cards{gap:6px!important}html body #lb-gate .lb-reason-box{margin:0!important;padding:0!important;background:none!important;border:0!important}html body #lb-gate textarea{min-height:68px!important;height:68px!important;margin:0!important}html body #lb-gate .lb-nav{margin-top:16px!important}html body #lb-gate .lb-err:empty{display:none}
+@media(max-width:600px){html body #lb-gate .lb-inner{padding:18px 14px!important}html body #lb-gate .lb-step[data-step="1"]{padding:20px 18px 48px!important;max-height:calc(100dvh - 200px)}html body #lb-gate .lb-step[data-step="1"]>.lb-grid{grid-template-columns:1fr!important}html body #lb-gate .lb-quote{font-size:13px!important}.lb-f.wide{grid-column:1!important}}
+
+html body #act3 .a3-inner{width:min(900px,calc(100% - 48px));max-width:none;margin:48px auto 0;padding:0 0 30px;min-height:0}html body #act3 .a3-title{font-size:30px;margin:0 0 10px}html body #act3 .a3-sub{font-size:10px}html body #act3 .a3-rule{margin:20px 0}html body #act3 .a3-quote{padding:0;margin:0 0 22px;border:0}html body #act3 .a3-quote p{margin:0;font-size:14px}html body #act3 #a3-form{margin:0;padding:28px 32px 80px!important;max-height:calc(100dvh - 300px);display:flex;flex-direction:column}.layout-page-heading{font-size:21px;letter-spacing:.12em;color:#4e6072;margin-bottom:24px;flex-shrink:0}.layout-page-content{overflow-y:auto;min-height:0;scrollbar-width:thin;scrollbar-color:#c2b6c8 transparent;padding-right:4px}html body #act3 .a3-grid{grid-template-columns:1.2fr .8fr 1.3fr;gap:24px 22px}html body #act3 .a3-grid label{font-size:13px;letter-spacing:.04em}html body #act3 .a3-grid label:has(#a3-look){grid-column:1/-1}html body #act3 #a3-form input,html body #act3 #a3-form textarea{font-size:14px;min-height:42px}html body #act3 #a3-form textarea{min-height:100px;resize:vertical}html body #act3 #a3-form::after{bottom:8px;height:52px;opacity:.8;background-size:100% auto}.layout-page-footer{display:flex;align-items:center;gap:20px;padding:24px 0 0}.layout-page-footer span{flex:1;text-align:center;color:#697889;font-size:12px;letter-spacing:.1em}.layout-page-footer button{min-width:112px;height:40px;border:1px solid #b7a477;border-radius:6px;background:linear-gradient(#fffefb,#e9e9ee 78%,#fff9ed);color:#384f66;font:14px 'Microsoft YaHei';box-shadow:inset 0 0 0 1px #fff9}.layout-page-footer button:last-child{min-width:150px}@media(max-width:560px){html body #act3 .a3-inner{width:calc(100% - 32px);margin:24px auto 0;padding-bottom:16px}html body #act3 .a3-title{font-size:25px}html body #act3 .a3-quote p{font-size:12px}html body #act3 #a3-form{padding:22px 18px 64px!important;max-height:calc(100dvh - 250px)}html body #act3 .a3-grid{grid-template-columns:1fr!important;gap:15px}.layout-page-heading{font-size:18px;margin-bottom:18px}html body #act3 #a3-form textarea{min-height:74px}.layout-page-footer{gap:10px;padding-top:18px}.layout-page-footer button,.layout-page-footer button:last-child{min-width:86px;height:38px}.layout-page-footer span{font-size:10px}html body #act3 #a3-form::after{background-size:610px auto}}
+html body #act3 #a3-form{background:linear-gradient(115deg,rgba(255,251,240,.43),rgba(246,239,225,.32) 60%,rgba(255,250,239,.40))!important;backdrop-filter:blur(2px) saturate(.85)!important;-webkit-backdrop-filter:blur(2px) saturate(.85)!important;box-shadow:inset 0 0 20px #fff3,0 4px 18px #50414708!important;border-color:#fff9!important}html body #act3 #a3-form::before{opacity:.12!important}html body #act3 #a3-form input,html body #act3 #a3-form textarea{background-color:rgba(255,253,247,.15)!important;color:#3c5368!important}html body #act3 #a3-form label{color:#425e6d!important}html body #act3 #a3-form::after{opacity:.95!important}
+/* Explicit visibility wins over legacy display rules. */
+html body #act3 [hidden]{display:none!important}
+html body #act3 .a3-inner>.a3-row{max-width:360px;margin:18px 0}
+html body #act3 .a3-quote{max-height:28dvh;overflow:auto}
+html body #act3 .a3-grid label[hidden]{display:none!important}
+html body #act3 #a3-pick{max-height:calc(100dvh - 280px);overflow:auto;margin:20px 0 12px;padding:26px 30px 70px!important;background:linear-gradient(115deg,#fffbf06e,#f6efe152,#fffaf066)!important;backdrop-filter:blur(2px);border:1px solid #fff9!important;color:#354c61;line-height:1.95;font-size:14px;scrollbar-width:thin}
+html body #act3 .a3-copy{padding:9px 25px}
+html body #lb-gate .lb-step[data-step="3"],html body #lb-gate .lb-step[data-step="4"]{max-height:calc(100dvh - 225px);overflow:auto;scrollbar-width:thin;scrollbar-color:#c3ae75 #112232;min-height:200px}
+html body #lb-gate #lb-out{white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%;background:#07132199;border:1px solid #91a8ba44;padding:22px;color:#e5eef6;font-size:14px;line-height:1.9}
+html body #lb-gate .lb-type.on{background:linear-gradient(#06162422,#06162444),url('img/fgo-ui/record-panel.png') center/cover!important}
+@media(max-width:600px){html body #lb-gate .lb-step[data-step="2"]{aspect-ratio:auto!important;padding:24px 20px 60px!important;min-height:0}html body #lb-gate .lb-types{grid-template-columns:1fr!important;display:grid!important}html body #lb-gate .lb-type{min-height:130px}html body #lb-gate .lb-step[data-step="3"],html body #lb-gate .lb-step[data-step="4"]{max-height:calc(100dvh - 215px);padding:22px 18px 60px!important}html body #act3 #a3-pick{padding:20px 18px 65px!important;max-height:calc(100dvh - 260px)} }
+html body #lb-gate #lb-next,html body #lb-gate #lb-next:hover,html body #lb-gate #lb-next:focus{background:url('img/fgo-ui/native-blue.png') center / contain no-repeat!important;transform:none!important;filter:none!important}
+html body #lb-gate .lb-step[data-step="4"]{max-height:calc(100dvh - 265px)!important}
+html body #lb-gate>.lb-inner>.lb-nav{gap:12px;align-items:center}
+/* The generated archive is the final step; copying is its primary action. */
+html body #act3[data-page="4"] [data-page-next]{display:none!important}
+html body #act3 .layout-page-footer #a3-copy{margin:0;min-width:150px;height:40px;padding:0 20px}
+html body #lb-gate:has(.lb-step[data-step="4"]:not([hidden])) #lb-next{display:none!important}
+html body #lb-gate #lb-copy{margin-left:auto}
+@media(max-width:560px){html body #act3 .layout-page-footer #a3-copy{min-width:108px;height:38px}}
+/* Full-width supplemental field; native notice row and screenshot-derived tab skins. */
+html body #act3 .a3-grid label:has(#a3-power){grid-column:1/-1!important}
+html body #news-dialog .news-tabs{display:grid!important;grid-template-columns:repeat(4,1fr);width:100%;max-width:none!important;gap:0!important;overflow:hidden;border-radius:12px 12px 0 12px;margin:22px 0 30px!important;border:1px solid #bac0c3}
+html body #news-dialog .news-tabs button,html body #news-dialog .news-tabs button:hover{height:48px;min-height:0;border:0!important;border-right:1px solid #b5b5b5!important;border-radius:0!important;box-shadow:none!important;padding:0 6px!important;background:url('img/fgo-ui/notice-tab-off.png') center / 100% 100% no-repeat!important;color:#72777d!important;font:600 20px/1.2 Arial,'Microsoft YaHei',sans-serif;text-shadow:0 1px 1px #fff8}
+html body #news-dialog .news-tabs button[aria-selected=true]{background-image:url('img/fgo-ui/notice-tab-on.png')!important;color:#fff!important;text-shadow:0 1px 2px #15345c}
+html body #news-dialog .news-tabs button:last-child{border-right:0!important}
+html body #news-dialog .news-row{width:100%!important;max-width:none!important;height:76px!important;aspect-ratio:auto!important;margin:0 0 18px!important;border-style:solid!important;border-width:0 64px 0 76px!important;border-image:url('img/fgo-ui/notice-row.png') 0 58 0 78 fill / 0 64px 0 76px / 0 stretch!important;background:none!important;box-sizing:border-box!important;overflow:visible}
+html body #news-dialog .news-row-art{display:none!important}
+html body #news-dialog .news-row-label,html body #news-dialog .release-news-row .news-row-label{position:absolute;inset:0 -4px 0 -54px!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:24px!important;font:600 19px/1.45 Arial,'Microsoft YaHei',sans-serif!important;color:#f3f5fa}
+html body #news-dialog .news-date{display:block!important;flex:0 0 112px;font:500 14px Arial,sans-serif;color:#e5c16b;white-space:nowrap}
+html body #news-dialog .news-row-label strong{font:inherit!important;min-width:0;overflow-wrap:anywhere}
+@media(max-width:600px){html body #news-dialog .news-tabs button{height:40px;font-size:16px}html body #news-dialog .news-row{height:92px!important;border-width:0 42px 0 48px!important;border-image-width:0 42px 0 48px!important}html body #news-dialog .news-row-label,html body #news-dialog .release-news-row .news-row-label{inset:0 0 0 -30px!important;gap:5px!important;flex-direction:column!important;align-items:flex-start!important;justify-content:center!important;font-size:14px!important}html body #news-dialog .news-date{flex:0 0 auto;font-size:11px} }
+html body #act3 #a3-form textarea#a3-power{min-height:70px;height:70px;line-height:1.7;resize:vertical}
+
+/* Native Chinese UI face: FZZhengHei-DB-GBK, without synthesized bold. */
+html body #news-dialog .news-row-label,
+html body #news-dialog .release-news-row .news-row-label,
+html body #news-dialog .news-date,
+html body #news-dialog .news-tabs button,
+html body #news-dialog .news-article-title{
+ font-family:SummonFGO,sans-serif!important;
+ font-weight:400!important;
+ font-synthesis:none!important;
+}
+/* FGO plaques already include transparent room for their raised emblems. */
+body #app-shell #home .work-chapters[data-work="fgo"]{
+ row-gap:clamp(8px,3cqw,24px)!important;
+ padding-top:12px;
+}
+
+/* Match the native announcement list proportions, independently of viewport zoom. */
+html body #news-dialog .news-content,html body #news-dialog .news-panels{container-type:inline-size}
+html body #news-dialog .news-tabs{border-radius:12px!important;margin:22px 0 36px!important}
+html body #news-dialog .news-tabs button,html body #news-dialog .news-tabs button:hover{height:clamp(36px,6cqw,58px)!important;font-size:clamp(15px,2.25cqw,23px)!important;color:#ececed!important;text-shadow:0 1px 2px #fff8!important}
+html body #news-dialog .news-tabs button[aria-selected=true]{color:#f5f4ed!important;text-shadow:0 1px 2px #183252!important}
+html body #news-dialog .news-row{position:relative;isolation:isolate;height:clamp(58px,8cqw,82px)!important;min-height:0!important;padding:0!important;border:0!important;border-image:none!important;background:none!important}
+html body #news-dialog .news-row::before{content:''!important;display:block!important;position:absolute;inset:0;z-index:-1;pointer-events:none;box-sizing:border-box;border-style:solid;border-width:0 52px 0 72px;border-image:url('img/fgo-ui/notice-row.png') 0 58 0 78 fill / 0 52px 0 72px / 0 stretch;filter:brightness(.72) saturate(.88)}
+html body #news-dialog .news-row-label,html body #news-dialog .release-news-row .news-row-label{inset:0 8% 0 3.5%!important;gap:0!important;letter-spacing:0!important;font-size:clamp(12px,1.7cqw,18px)!important;line-height:1.16!important}
+html body #news-dialog .news-date{flex:0 0 12.5%!important;font-size:clamp(10px,1.4cqw,14px)!important;letter-spacing:-.025em!important;color:#dbb15a!important}
+html body #news-dialog .news-row-label strong{font-weight:400!important;color:#e1e5ec!important}
+@media(max-width:600px){html body #news-dialog .news-row{height:74px!important}html body #news-dialog .news-row-label,html body #news-dialog .release-news-row .news-row-label{flex-direction:column!important;align-items:flex-start!important;gap:5px!important}html body #news-dialog .news-date{flex:0 0 auto!important}html body #news-dialog .news-tabs{margin-bottom:22px!important}}
+
+
+/* Header seam: converging cyan photons and a quiet breathing light. */
+.game-topbar .header-photons{position:absolute;left:50%;bottom:0;width:min(720px,88vw);height:110px;transform:translate(-50%,70%);pointer-events:none;z-index:0;overflow:hidden;mix-blend-mode:screen;contain:layout style}
+.header-photons .photon-halo{position:absolute;left:50%;top:30%;width:70%;height:64px;transform:translate(-50%,-50%);background:radial-gradient(ellipse,#b7ffffb3 0%,#37e6ff55 25%,#21cfff16 52%,transparent 73%);animation:header-breathe 4.2s ease-in-out infinite}
+.header-photons .photon-core{position:absolute;left:50%;top:30%;width:11px;height:8px;border-radius:50%;transform:translate(-50%,-50%);background:#f5ffff;box-shadow:0 0 8px 4px #d9ffff,0 0 23px 10px #54e9ff99;animation:header-breathe 4.2s ease-in-out infinite}
+.header-photons .photon-core::after{content:'';position:absolute;left:50%;top:50%;width:110px;height:2px;transform:translate(-50%,-50%);background:linear-gradient(90deg,transparent,#d7ffff,transparent)}
+.header-photons .photon{position:absolute;left:50%;top:30%;width:var(--size);height:var(--size);background:#b4ffff;box-shadow:0 0 5px #36eaff;border-radius:1px;opacity:0;animation:header-converge var(--duration) linear infinite;animation-delay:var(--delay);will-change:transform,opacity}
+@keyframes header-converge{0%{transform:translate(var(--x),var(--y)) rotate(45deg) scale(.55);opacity:0}18%{opacity:.22}60%{opacity:.65}90%{opacity:.45}100%{transform:translate(0,0) rotate(115deg) scale(.2);opacity:0}}
+@keyframes header-breathe{0%,100%{opacity:.45}50%{opacity:1}}
+body.act3 .header-photons,body.in-genesis .header-photons{display:none}
+@media(max-width:600px){.game-topbar .header-photons{height:85px}.header-photons .photon-core{width:7px;height:5px}.header-photons .photon-halo{height:45px}}
+@media(prefers-reduced-motion:reduce){.header-photons .photon{display:none}.header-photons .photon-core,.header-photons .photon-halo{animation:none;opacity:.55}}
+
+/* Original extracted cyan header sprite, additive blend; placement follows header seam. */
+.game-topbar .header-native-photons{position:absolute;left:50%;bottom:-80px;transform:translateX(-50%);width:min(1100px,96vw);height:100px;pointer-events:none;z-index:0;mix-blend-mode:screen}
+body.act3 .header-native-photons,body.in-genesis .header-native-photons{display:none}
+/* The effect is a scene layer, outside the fixed header's z-index:1000 context. */
+#app-shell>.header-native-photons{position:fixed;left:50%;top:calc(var(--fixed-game-header) - 20px);bottom:auto;transform:translateX(-50%);width:min(1100px,96vw);height:100px;pointer-events:none!important;z-index:0;mix-blend-mode:screen}
+/* Formation: header artwork behind the portrait; navigation remains in the header. */
+body[data-screen="formation"] .game-topbar::before{display:none!important}
+body[data-screen="formation"] #app-shell #formation::before{content:''!important;display:block!important;position:fixed;left:0;right:0;top:0;height:var(--fixed-game-header);z-index:0;pointer-events:none;background:url('img/fgo-ui/silver-header.png') right center/100% 100% no-repeat;border-bottom:2px solid #66d5f9;mask-image:linear-gradient(to right,transparent 0%,#0005 14%,#000 36%,#000 64%,#0005 86%,transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0%,#0005 14%,#000 36%,#000 64%,#0005 86%,transparent 100%)}
+body[data-screen="formation"] #app-shell #formation .formation-character{top:calc(20svh - var(--figure-size)*.35)!important}
+@media(max-width:740px){body[data-screen="formation"] #app-shell #formation .formation-character{top:calc(23svh - var(--figure-size)*.35)!important}}
+/* Native plaque alignment: account for the emblem's transparent top margin. */
+body[data-screen="formation"] #app-shell #formation .formation-list{top:calc(var(--fixed-game-header) + 1svh)!important;padding-top:0!important}
+/* Original home introduction, typeset as a scrolling game announcement. */
+html body #news-dialog .news-home-intro .card{display:block!important;background:none!important;border:0!important;box-shadow:none!important;padding:0!important;margin:0 0 34px!important;transform:none!important;opacity:1!important}
+html body #news-dialog .news-home-intro h3{font:400 21px/1.5 SummonFGO,sans-serif!important;color:#25476a!important;border-bottom:1px solid #c4b27b;padding:0 0 10px;margin:0 0 18px}
+html body #news-dialog .news-home-intro .en-title,html body #news-dialog .news-home-intro .en{font-size:.7em;color:#75818c;margin-left:8px}
+html body #news-dialog .news-home-intro p,html body #news-dialog .news-home-intro li,html body #news-dialog .news-home-intro .src{color:#30363b!important;font:400 16px/1.9 SummonFGO,sans-serif!important}
+html body #news-dialog .news-home-intro .wb-stack,html body #news-dialog .news-home-intro .wb-steps,html body #news-dialog .news-home-intro .wb-grid{display:block!important}
+html body #news-dialog .news-home-intro .wb-layer,html body #news-dialog .news-home-intro .wb-step{background:none!important;border:0!important;box-shadow:none!important;padding:10px 0!important;margin:0!important;color:#30363b!important}
+html body #news-dialog .news-home-intro b{display:block;color:#314e66;font-weight:400}
+html body #news-dialog .news-home-intro .wb-arrow{font-size:12px;color:#8799a4;padding:2px 0}
+html body #news-dialog .news-home-intro li{margin-bottom:12px}
+@media(max-width:600px){html body #news-dialog .news-home-intro p,html body #news-dialog .news-home-intro li,html body #news-dialog .news-home-intro .src{font-size:14px!important}html body #news-dialog .news-home-intro .en-title{display:block;margin:3px 0 0}}
+html body #news-dialog .news-home-intro>[hidden]{display:none!important}
+html body #news-dialog .news-home-intro .tm-card{margin:0 0 26px;padding:0;background:none;border:0}
+html body #news-dialog .news-home-intro .tm-note{color:#667580!important;font-size:14px!important;border-left:2px solid #c6b580;padding-left:14px}
+html body #news-dialog .news-home-intro h2{font:400 23px/1.5 SummonFGO,sans-serif;color:#25476a}
+html body #news-dialog .intro-pagination{display:flex;align-items:center;justify-content:space-between;gap:14px;border-top:1px solid #cfbf92;margin-top:30px;padding-top:18px}
+html body #news-dialog .intro-pagination button{width:128px;height:40px;padding:0;border:0;background:url('img/fgo-ui/native-blue.png') center/contain no-repeat;color:white;font:400 16px SummonFGO,sans-serif;cursor:pointer}
+html body #news-dialog .intro-pagination button:disabled{opacity:.3;cursor:default}
+html body #news-dialog .intro-pagination span{font:14px SummonFGO,sans-serif;color:#597087;white-space:nowrap}
+@media(max-width:600px){html body #news-dialog .intro-pagination button{width:98px;height:34px;font-size:14px}}
+html body #news-dialog .news-home-intro strong,html body #news-dialog .news-home-intro b{color:#294a66!important;text-shadow:none!important}
+html body #news-dialog .news-home-intro .en,html body #news-dialog .news-home-intro .en-title{color:#6d7e8c!important;text-shadow:none!important}
+html body #news-dialog .news-home-intro .wb-arrow{color:#687b89!important}
+html body #news-dialog .news-home-intro .wb-layer::before,html body #news-dialog .news-home-intro .wb-layer::after{display:none!important}
+
+/* Three announcement banners: release, world architecture, card features. */
+html body #news-dialog .news-banner-slot>[hidden]{display:none!important}
+html body #news-dialog .news-topic-banner{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;aspect-ratio:3.5/1;box-sizing:border-box;margin:0;padding:16px;border:5px ridge #d8bf70;border-radius:0;background:linear-gradient(90deg,#10283c9c,#10283c30,#10283c9c),url('img/fgo-ui/formation-bg.png') center/cover;color:#fff;text-shadow:0 2px 4px #102d46;cursor:pointer;box-shadow:inset 0 0 0 1px #fff2b3}
+html body #news-dialog .news-topic-banner.topic-1{background-image:linear-gradient(90deg,#0d192b88,#142b4360,#0d192b88),url('img/fgo-ui/record-panel.png')}
+html body #news-dialog .news-topic-banner small{font:12px SummonFGO,sans-serif;letter-spacing:.24em;color:#e0ce9a}
+html body #news-dialog .news-topic-banner strong{font:400 clamp(25px,4.5cqw,48px)/1.3 SummonFGO,sans-serif;color:#fff;letter-spacing:.16em}
+html body #news-dialog .news-topic-banner span{font:400 clamp(11px,1.8cqw,18px)/1.5 SummonFGO,sans-serif;color:#e1eaf0}
+html body #news-dialog .news-topic-banner em{font:400 12px SummonFGO,sans-serif;color:#e0ce9a;margin-top:4px}
+html body #news-dialog .news-dots{gap:0}
+html body #news-dialog .news-dots button{display:grid;place-items:center;width:27px;height:30px;min-width:0;min-height:0;margin:0;padding:0;border:0;background:none;box-shadow:none;cursor:pointer}
+html body #news-dialog .news-dots i{display:block;width:12px;height:12px;box-sizing:border-box;border:2px solid #737572;border-radius:50%;background:linear-gradient(#727572,#424440);box-shadow:0 1px 2px #3338}
+html body #news-dialog .news-dots button[aria-pressed=true] i{background:linear-gradient(#fff08b,#edba15);border-color:#998347}
+html body #news-dialog .news-dots button:focus-visible{outline:2px solid #4aa4d6;outline-offset:-2px}
+html body #news-dialog .news-home-intro .tm-grid{display:block}
+@media(max-width:600px){html body #news-dialog .news-topic-banner{border-width:3px;gap:3px;padding:8px}html body #news-dialog .news-topic-banner small{font-size:8px}html body #news-dialog .news-topic-banner em{font-size:9px;margin:0}}
+
+/* Pointer-driven announcement carousel; artwork follows the drag. */
+html body #news-dialog .news-banner-slot{overflow:hidden;touch-action:pan-y;cursor:grab;user-select:none}
+html body #news-dialog .news-banner-track{display:flex;width:100%;gap:0;transition:transform .32s ease;will-change:transform}
+html body #news-dialog .news-banner-track>button{flex:0 0 100%!important;min-width:0!important;width:100%!important;cursor:grab!important;user-select:none}
+html body #news-dialog .news-banner-slot.is-dragging,html body #news-dialog .news-banner-slot.is-dragging button{cursor:grabbing!important}
+html body #news-dialog .news-banner-slot.is-dragging .news-banner-track{transition:none}
+html body #news-dialog .news-banner-track img{pointer-events:none;-webkit-user-drag:none}
+@media(prefers-reduced-motion:reduce){html body #news-dialog .news-banner-track{transition:none}}
+
+/* Three announcement banners: release, world architecture, card features. */
+html body #app-shell .terminal-quests .news-banner-slot>[hidden]{display:none!important}
+html body #app-shell .terminal-quests .news-topic-banner{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;aspect-ratio:3.5/1;box-sizing:border-box;margin:0;padding:16px;border:5px ridge #d8bf70;border-radius:0;background:linear-gradient(90deg,#10283c9c,#10283c30,#10283c9c),url('img/fgo-ui/formation-bg.png') center/cover;color:#fff;text-shadow:0 2px 4px #102d46;cursor:pointer;box-shadow:inset 0 0 0 1px #fff2b3}
+html body #app-shell .terminal-quests .news-topic-banner.topic-1{background-image:linear-gradient(90deg,#0d192b88,#142b4360,#0d192b88),url('img/fgo-ui/record-panel.png')}
+html body #app-shell .terminal-quests .news-topic-banner small{font:12px SummonFGO,sans-serif;letter-spacing:.24em;color:#e0ce9a}
+html body #app-shell .terminal-quests .news-topic-banner strong{font:400 clamp(25px,4.5cqw,48px)/1.3 SummonFGO,sans-serif;color:#fff;letter-spacing:.16em}
+html body #app-shell .terminal-quests .news-topic-banner span{font:400 clamp(11px,1.8cqw,18px)/1.5 SummonFGO,sans-serif;color:#e1eaf0}
+html body #app-shell .terminal-quests .news-topic-banner em{font:400 12px SummonFGO,sans-serif;color:#e0ce9a;margin-top:4px}
+html body #app-shell .terminal-quests .news-dots{gap:0}
+html body #app-shell .terminal-quests .news-dots button{display:grid;place-items:center;width:27px;height:30px;min-width:0;min-height:0;margin:0;padding:0;border:0;background:none;box-shadow:none;cursor:pointer}
+html body #app-shell .terminal-quests .news-dots i{display:block;width:12px;height:12px;box-sizing:border-box;border:2px solid #737572;border-radius:50%;background:linear-gradient(#727572,#424440);box-shadow:0 1px 2px #3338}
+html body #app-shell .terminal-quests .news-dots button[aria-pressed=true] i{background:linear-gradient(#fff08b,#edba15);border-color:#998347}
+html body #app-shell .terminal-quests .news-dots button:focus-visible{outline:2px solid #4aa4d6;outline-offset:-2px}
+html body #app-shell .terminal-quests .news-home-intro .tm-grid{display:block}
+@media(max-width:600px){html body #app-shell .terminal-quests .news-topic-banner{border-width:3px;gap:3px;padding:8px}html body #app-shell .terminal-quests .news-topic-banner small{font-size:8px}html body #app-shell .terminal-quests .news-topic-banner em{font-size:9px;margin:0}}
+
+/* Pointer-driven announcement carousel; artwork follows the drag. */
+html body #app-shell .terminal-quests .news-banner-slot{overflow:hidden;touch-action:pan-y;cursor:grab;user-select:none}
+html body #app-shell .terminal-quests .news-banner-track{display:flex;width:100%;gap:0;transition:transform .32s ease;will-change:transform}
+html body #app-shell .terminal-quests .news-banner-track>button{flex:0 0 100%!important;min-width:0!important;width:100%!important;cursor:grab!important;user-select:none}
+html body #app-shell .terminal-quests .news-banner-slot.is-dragging,html body #app-shell .terminal-quests .news-banner-slot.is-dragging button{cursor:grabbing!important}
+html body #app-shell .terminal-quests .news-banner-slot.is-dragging .news-banner-track{transition:none}
+html body #app-shell .terminal-quests .news-banner-track img{pointer-events:none;-webkit-user-drag:none}
+@media(prefers-reduced-motion:reduce){html body #app-shell .terminal-quests .news-banner-track{transition:none}}
+
+html body #app-shell .terminal-quests .home-banner-slot{min-width:0;width:100%;container-type:inline-size}
+html body #app-shell .terminal-quests .home-banner-dots{display:flex;align-items:center;justify-content:center;height:32px;margin:0 0 8px}
+html body #news-dialog .news-content[hidden],html body #news-dialog .news-detail-view[hidden]{display:none!important}
+html body #news-dialog .news-home-intro .card{height:auto!important;min-height:0!important;margin-bottom:24px!important}
+html body #news-dialog .news-home-intro p{white-space:normal!important;margin:8px 0 12px!important}
+html body #news-dialog .news-home-intro .wb-grid,html body #news-dialog .news-home-intro .wb-stack,html body #news-dialog .news-home-intro .wb-steps{margin:12px 0!important;padding:0!important;gap:0!important;min-height:0!important;height:auto!important}
+html body #news-dialog .news-home-intro .wb-layer,html body #news-dialog .news-home-intro .wb-step,html body #news-dialog .news-home-intro .wb-grid>div{min-height:0!important;height:auto!important;margin:0 0 14px!important;padding:8px 0!important}
+html body #news-dialog .news-home-intro .card-title{margin:0 0 12px!important;padding:0 0 8px!important}
+html body #news-dialog .news-home-intro .card-title::after{display:none!important}
+html body #news-dialog .news-home-intro .tm-icon{float:left;margin-right:8px;font-size:20px}
+html body #news-dialog .news-home-intro .tm-card{clear:both}
+html body #news-dialog .news-article:has(.news-home-intro){min-height:0!important;padding-bottom:16px!important}
+html body #news-dialog .news-home-intro>:last-child{margin-bottom:0!important}
+
+/* All three carousel artworks include their own frame and top inset. */
+html body #news-dialog .news-banner-track,
+html body #app-shell .terminal-quests .news-banner-track { gap:clamp(12px,2vw,20px);align-items:center }
+html body #app-shell .news-banner-track > .release-banner,
+html body #news-dialog .news-banner-track > .news-banner {aspect-ratio:8/3!important;border:0!important;outline:0;background:transparent!important;box-shadow:none!important}
+html body .news-banner-track .release-banner .whole-release-poster {position:static!important;width:100%!important;height:auto!important;object-fit:contain!important}
+
+/* Composed artwork uses the complete native-ratio banner, including its own gold rim. */
+html body #news-dialog .news-topic-banner,html body #app-shell .terminal-quests .news-topic-banner{aspect-ratio:8 / 3!important;padding:0!important;border:0!important;outline:0!important;background:none!important;box-shadow:none!important;gap:0!important;overflow:hidden!important}
+html body #news-dialog .topic-poster,html body #app-shell .terminal-quests .topic-poster{display:block;width:100%!important;height:auto!important;max-height:none!important;aspect-ratio:auto;object-fit:contain;pointer-events:none}
+
+/* Article copies are readable immediately, including entries below the fold. */
+html body #news-dialog .news-home-intro .rv{opacity:1;transform:none;animation:none;transition:none}
+html body #news-dialog .news-home-intro .wb-item{background:transparent!important;box-shadow:none!important}
+html body #home .myth-writing .wb-item,
+html body #news-dialog .news-home-intro .myth-writing .wb-item {
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}

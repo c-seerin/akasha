@@ -1,0 +1,111 @@
+@font-face{font-family:SummonFGO;src:url('fonts/fgo-main.ttf') format('truetype');font-display:swap}
+body[data-screen=roll] #horizontal-nav-container{display:block!important;z-index:1100!important}
+body[data-screen=roll] #app-shell #roll[data-composed=true]{inset:0!important;width:100vw!important;height:100dvh!important;margin:0!important;overflow:hidden!important}
+#roll[data-composed=true] .summon-art{display:block!important;position:fixed!important;inset:0!important;width:100vw!important;height:100dvh!important;z-index:0!important;pointer-events:none}
+#roll[data-composed=true] .composition-foreground{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+#roll[data-composed=true] .composition-foreground>img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;pointer-events:none}
+#roll[data-composed=true] .foreground-rainbow{mix-blend-mode:screen}
+#roll[data-composed=true] .fs-wrap{z-index:2}
+#roll[data-composed=true][data-summon-view=results] .composition-foreground{display:none}
+
+#roll[data-composed=true][data-summon-view=pool] .fs-brand{inset:auto!important;left:var(--composition-left)!important;top:var(--composition-top)!important;width:1024px!important;height:576px!important;transform:scale(var(--composition-scale));transform-origin:top left;overflow:hidden!important}
+#roll[data-composed=true] .fs-brand>img,#roll[data-composed=true] .fs-brand>canvas{position:absolute;inset:0;width:100%;height:100%;max-width:none!important;pointer-events:none}
+#roll[data-composed=true] .composition-effects{mix-blend-mode:screen}
+#roll[data-composed=true] .composition-arrow,#roll[data-composed=true] .composition-details{position:absolute;border:0;background:transparent!important;box-shadow:none!important;cursor:pointer;z-index:5;padding:0;transform:none!important}
+#roll[data-composed=true] .composition-arrow{top:245px;width:61px;height:80px}.composition-arrow.prev{left:5px}.composition-arrow.next{right:5px}
+#roll[data-composed=true] .composition-details{left:20px;top:440px;width:120px;height:31px}
+#roll[data-composed=true] .composition-status{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+#roll[data-composed=true] #fs-steps,#roll[data-composed=true] #fs-dust{display:none!important}
+body #app-shell #roll[data-composed=true][data-summon-view=pool] .composition-actions:has(#fs-roll){position:absolute!important;left:calc(var(--composition-left) + 247px * var(--composition-scale))!important;top:calc(var(--composition-top) + 421px * var(--composition-scale))!important;width:533px!important;height:78px!important;display:flex!important;flex-wrap:nowrap!important;gap:7px!important;margin:0!important;padding:0!important;transform:scale(var(--composition-scale));transform-origin:top left;z-index:6;background:transparent!important;border:0!important;box-shadow:none!important}
+#roll[data-composed=true] .composition-actions .summon{width:173px!important;height:78px!important;flex:0 0 173px;padding:0!important;margin:0!important;background:none!important;box-shadow:none!important}
+#roll[data-composed=true] .composition-actions .summon::before,#roll[data-composed=true] .composition-actions .summon::after{display:none!important}
+body #app-shell #roll[data-composed=true] .composition-actions :is(#fs-roll,#fs-clear,#fs-next){display:block!important;flex:0 0 173px;width:173px!important;height:78px!important;max-width:none!important;max-height:none!important;opacity:1!important;margin:0!important;padding:0!important;border:0!important;border-radius:0!important;box-shadow:none!important;transform:none!important;letter-spacing:0!important;font:28px/1 SummonFGO,sans-serif!important;color:#fffbe4!important;-webkit-text-fill-color:#fffbe4!important;text-shadow:1px 1px 1px #263344,-1px -1px 1px #263344!important;background:transparent center/100% 100% no-repeat!important;cursor:pointer}
+body #app-shell #roll[data-composed=true] .composition-actions #fs-roll{background-image:url('img/summon-composer/button-coral.png')!important}
+body #app-shell #roll[data-composed=true] .composition-actions #fs-clear{background-image:url('img/summon-composer/button-purple.png')!important}
+body #app-shell #roll[data-composed=true] .composition-actions #fs-next{background-image:url('img/summon-composer/button-gold.png')!important}
+body #app-shell #roll[data-composed=true] #fs-next:disabled{filter:grayscale(.6);opacity:.6!important;cursor:default}
+#roll[data-composed=true] button:focus-visible{outline:2px solid white!important;outline-offset:2px}
+#roll[data-composed=true][data-summon-view=pool] .composition-holdings{position:absolute!important;left:calc(var(--composition-left) + 20px * var(--composition-scale))!important;top:calc(var(--composition-top) + 479px * var(--composition-scale))!important;bottom:auto!important;width:120px!important;height:31px!important;min-width:0!important;padding:0!important;margin:0!important;transform:scale(var(--composition-scale));transform-origin:top left;z-index:7;opacity:1}
+#roll[data-composed=true][data-summon-view=pool] .composition-holdings img{opacity:0}
+#roll[data-composed=true][data-summon-view=results] .fs-wrap{padding:calc(var(--fixed-game-header) + 12px) 3vw calc(var(--composition-dock) + 25px)!important;overflow:auto!important}
+#roll[data-composed=true][data-summon-view=results] .composition-actions{position:relative!important;inset:auto!important;display:flex!important;flex-wrap:wrap!important;justify-content:center;gap:10px!important;width:auto!important;height:auto!important;transform:none;margin:12px auto!important}
+#roll[data-composed=true][data-summon-view=results] .composition-holdings{position:relative!important;inset:auto!important;transform:none;width:180px;min-width:0;margin:12px auto}
+#roll[data-composed=true] .fs-card:focus-visible{outline:2px solid white!important;outline-offset:3px}
+.composition-help{max-width:min(600px,88vw);padding:24px;background:#071e35;color:#fff;border:1px solid #b6d5e5;font:18px/1.8 SummonFGO,sans-serif}.composition-help::backdrop{background:#0008}.composition-help button{font:inherit;padding:6px 30px;color:#123;background:#e2edfa;border:1px solid #d9bd71}
+@media(max-width:740px){#roll[data-composed=true][data-summon-view=results] .composition-actions{gap:6px!important}body #app-shell #roll[data-composed=true][data-summon-view=results] .composition-actions :is(#fs-roll,#fs-clear,#fs-next),#roll[data-composed=true][data-summon-view=results] .composition-actions .summon{width:105px!important;height:49px!important;flex-basis:105px!important;font-size:19px!important}}
+body #app-shell #roll[data-composed=true] .composition-actions :is(#fs-roll,#fs-clear,#fs-next){min-width:0!important;min-height:0!important;box-sizing:border-box!important}
+
+@media(max-aspect-ratio:4/3){#roll[data-composed=true] .composition-foreground>img{height:auto;object-fit:contain;object-position:center top;mask-image:linear-gradient(#000 76%,transparent 100%)}}
+/* Arrows belong to the viewport, independent of the art's safe-area scale. */
+#roll[data-composed=true]>.composition-arrow{position:fixed!important;top:44vh!important;width:clamp(36px,4.5vw,65px)!important;height:clamp(56px,7vw,90px)!important;border:0;padding:0;z-index:8;background:transparent url('img/summon-composer/arrow.png') center/contain no-repeat!important;box-shadow:none!important;cursor:pointer}
+#roll[data-composed=true]>.composition-arrow.prev{left:0!important;right:auto!important;transform:scaleX(-1)!important}
+#roll[data-composed=true]>.composition-arrow.next{right:0!important;left:auto!important;transform:none!important}
+#roll[data-composed=true][data-summon-view=results]>.composition-arrow{display:none}
+#roll[data-composed=true] .composition-portrait-figures{display:none}
+@media(orientation:portrait){
+body[data-screen=roll]{--fixed-game-header:56px;--dock-height:76px}
+body[data-screen=roll] #app-shell .game-topbar{height:56px!important;padding:0 10px!important;gap:8px!important}
+body[data-screen=roll] .game-back{min-width:74px!important;min-height:35px!important;font-size:15px!important;padding:3px 8px!important}
+body[data-screen=roll] .game-location strong{font-size:23px!important;white-space:nowrap;letter-spacing:0!important}
+body[data-screen=roll] .game-location>span{font-size:7px!important;white-space:nowrap;letter-spacing:1px!important}
+body[data-screen=roll] .game-notice-button{min-width:55px!important;min-height:32px!important;font-size:14px!important;padding:4px!important}
+body[data-screen=roll] #horizontal-nav-container{height:76px!important;padding:5px 6px!important;overflow:hidden!important}
+body[data-screen=roll] #horizontal-nav{min-width:0!important;width:100%!important;gap:0!important;display:flex!important;justify-content:space-around!important}
+body[data-screen=roll] #horizontal-nav .nav-btn{width:25%!important;min-width:0!important;min-height:62px!important}
+body[data-screen=roll] #horizontal-nav .nav-diamond{width:49px!important;height:49px!important}
+body[data-screen=roll] #horizontal-nav .nav-btn .nav-title{font-size:13px!important;bottom:0!important}
+#roll[data-composed=true][data-summon-view=pool] .fs-brand{width:720px!important;height:960px!important}
+#roll[data-composed=true] .composition-foreground>img{display:none!important}
+#roll[data-composed=true] .composition-foreground>.composition-portrait-figures{display:block!important;left:var(--composition-left);top:var(--composition-top);width:720px;height:960px!important;object-fit:contain;mask-image:none;transform:scale(var(--composition-scale));transform-origin:top left}
+#roll[data-composed=true][data-summon-view=pool] .composition-actions{left:calc(var(--composition-left) + 35px * var(--composition-scale))!important;top:calc(var(--composition-top) + 845px * var(--composition-scale))!important;width:650px!important;height:82px!important;gap:10px!important}
+body #app-shell #roll[data-composed=true][data-summon-view=pool] .composition-actions :is(#fs-roll,#fs-clear,#fs-next),#roll[data-composed=true][data-summon-view=pool] .composition-actions .summon{width:210px!important;height:82px!important;flex-basis:210px!important;font-size:32px!important}
+#roll[data-composed=true] .composition-details{top:930px!important;left:190px!important;width:150px!important;height:28px!important;background:transparent!important;color:#eefaff;font:20px SummonFGO,sans-serif}
+#roll[data-composed=true] .composition-details:after{content:'召唤详情'}
+#roll[data-composed=true][data-summon-view=pool] .composition-holdings{left:calc(var(--composition-left) + 380px * var(--composition-scale))!important;top:calc(var(--composition-top) + 930px * var(--composition-scale))!important;width:150px!important;height:28px!important;color:#eefaff;font:20px SummonFGO,sans-serif}
+#roll[data-composed=true][data-summon-view=pool] .composition-holdings img{display:none}
+#roll[data-composed=true][data-summon-view=pool] .composition-holdings:after{content:'持有状况'}
+#roll[data-composed=true]>.composition-arrow{top:38vh!important;width:36px!important;height:58px!important}
+}
+/* Defeat the legacy #fs-roll :has() safe-area rule, which narrowed and offset the whole row. */
+@media(orientation:portrait){
+body #app-shell #roll[data-composed=true][data-summon-view=pool] .composition-actions:has(#fs-roll){left:calc(var(--composition-left) + 35px * var(--composition-scale))!important;right:auto!important;top:calc(var(--composition-top) + 845px * var(--composition-scale))!important;bottom:auto!important;width:650px!important;height:82px!important;min-width:0!important;max-width:none!important;margin:0!important;padding:0!important;display:flex!important;justify-content:center!important;align-items:center!important;gap:10px!important;transform:scale(var(--composition-scale))!important;transform-origin:top left!important}
+}
+
+@media(orientation:portrait){#roll[data-composed=true]>.composition-arrow{top:calc(var(--composition-top) + 480px * var(--composition-scale) - 29px)!important}}
+
+/* Keep the character plates in the same coordinates as the landscape controls. */
+@media (orientation:landscape) {
+  #roll[data-composed=true] .composition-foreground>img {
+    inset:auto;
+    left:var(--composition-left);
+    top:var(--composition-top);
+    width:1024px;
+    height:576px;
+    object-fit:contain;
+    transform:scale(var(--composition-scale));
+    transform-origin:top left;
+    mask-image:none;
+  }
+}
+body[data-screen=roll] #horizontal-nav .native-nav {
+  height:100%;
+  min-height:0!important;
+}
+body[data-screen=roll] #horizontal-nav .native-sprite {
+  height:100%;
+  width:auto;
+  aspect-ratio:1;
+  max-width:100%;
+  transform:none;
+}
+body[data-screen=roll] #horizontal-nav .native-sprite img {width:100%;height:100%}
+@media (orientation:landscape) and (max-height:700px) {
+  body[data-screen=roll] #app-shell .game-topbar {height:clamp(42px,9vh,64px)!important}
+  body[data-screen=roll] .game-location strong {font-size:clamp(20px,4.3vh,30px)!important;line-height:1.05}
+  body[data-screen=roll] .game-location>span {font-size:clamp(7px,1.4vh,10px)!important;line-height:1}
+  body[data-screen=roll] .game-topbar :is(.game-back,.game-notice-button) {min-height:0!important;height:80%!important}
+  body[data-screen=roll] #horizontal-nav-container {
+    height:clamp(48px,14vh,90px)!important;
+    padding:3px 8px!important;
+  }
+}

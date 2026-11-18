@@ -1,0 +1,30 @@
+/* Reverse-side parchment skin. Presentation only: navigation and forms are untouched. */
+html body #act3 #a3-form,html body #act3 #a3-pick,html body #act3 .a3-types>button{
+ position:relative;isolation:isolate;
+ background:linear-gradient(115deg,rgba(255,252,245,.90),rgba(247,241,231,.82) 60%,rgba(255,250,242,.89))!important;
+ border:1px solid rgba(255,255,249,.85)!important;
+ border-radius:13px 9px 14px 11px!important;
+ box-shadow:inset 0 0 18px rgba(255,255,255,.34),0 4px 18px rgba(80,65,71,.06)!important;
+ color:#465a70;
+}
+html body #act3 #a3-form::before,html body #act3 #a3-pick::before,html body #act3 .a3-types>button::before{
+ content:"";position:absolute;inset:0;border-radius:inherit;z-index:-1;pointer-events:none;
+ background:url('img/fgo-ui/reverse-vellum-grain.svg') repeat;opacity:.22;mix-blend-mode:multiply;
+}
+html body #act3 #a3-form,html body #act3 #a3-pick{padding-bottom:66px!important}
+html body #act3 #a3-form::after,html body #act3 #a3-pick::after{
+ content:"";position:absolute;left:12px;right:12px;bottom:3px;height:66px;
+ pointer-events:none;background:url('img/fgo-ui/reverse-vellum-print.svg') left bottom / 100% auto no-repeat;opacity:.9;
+}
+html body #act3 .a3-types>button{padding-bottom:25px}
+html body #act3 .a3-types>button.on{border-color:#ae99ae!important;box-shadow:inset 0 0 0 1px #ae99ae55,0 4px 18px #79677912!important}
+html body #act3 .a3-types>button b{color:#465a70}
+html body #act3 .a3-types>button span{color:#657583}
+html body #act3 #a3-form input,html body #act3 #a3-form select,html body #act3 #a3-form textarea{
+ background-color:rgba(255,255,255,.24)!important;border-color:rgba(122,123,145,.28)!important;color:#445b70!important;box-shadow:none;
+}
+html body #act3 #a3-form input:focus,html body #act3 #a3-form select:focus,html body #act3 #a3-form textarea:focus{outline:2px solid #aa94b54d;outline-offset:1px;border-color:#a18aab!important}
+html body #act3 .a3-go,html body #act3 .a3-copy,html body #act3 .a3-back{
+ background:linear-gradient(180deg,#fffefb,#e9e9ee 78%,#fff9ed)!important;color:#384f66!important;border:1px solid #b7a477!important;border-radius:6px;box-shadow:inset 0 0 0 1px #fff9;font-size:13px;
+}
+@media(max-width:560px){html body #act3 #a3-form::after,html body #act3 #a3-pick::after{background-size:650px auto;height:55px;opacity:.85}html body #act3 #a3-form,html body #act3 #a3-pick{padding-bottom:58px!important}}
