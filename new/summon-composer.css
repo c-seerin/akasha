@@ -5,6 +5,39 @@ body[data-screen=roll] #app-shell #roll[data-composed=true]{inset:0!important;wi
 #roll[data-composed=true] .composition-foreground{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
 #roll[data-composed=true] .composition-foreground>img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;object-position:center;pointer-events:none}
 #roll[data-composed=true] .foreground-rainbow{mix-blend-mode:screen}
+.summon-actors {display:none}
+@media (orientation:landscape) {
+  .summon-actors {display:block;position:absolute;inset:0;overflow:hidden}
+  .summon-actors img {
+    position:absolute;
+    top:var(--actor-top);
+    height:max(var(--actor-height),calc(100% - var(--actor-top) + 2px));
+    width:auto;
+    max-width:none;
+    max-height:none;
+    filter:drop-shadow(0 0 3px #ffefae70);
+  }
+  /* Keep the faces anchored to their labels while the art bleeds behind the dock. */
+  .summon-knight {
+    --actor-top:calc(var(--composition-top) + 42px * var(--composition-scale));
+    --actor-height:calc(550px * var(--composition-scale));
+    left:calc(var(--composition-left) + 183px * var(--composition-scale));
+    transform:translateX(-55%);
+  }
+  .summon-parasol {
+    --actor-top:min(-2px,calc(var(--composition-top) - 8px * var(--composition-scale)));
+    --actor-height:calc(612.77px * var(--composition-scale));
+    aspect-ratio:850 / 768;
+    left:calc(var(--composition-left) + 835px * var(--composition-scale));
+    transform:translateX(-45%);
+  }
+  #roll[data-composed=true] .composition-foreground>img.foreground-rainbow {
+    inset:0;width:100%;height:100%;object-fit:cover;transform:none;
+  }
+  body[data-screen=roll] .game-location :is(strong,span) {
+    text-shadow:0 1px 2px #244567,0 0 4px #305773;
+  }
+}
 #roll[data-composed=true] .fs-wrap{z-index:2}
 #roll[data-composed=true][data-summon-view=results] .composition-foreground{display:none}
 
