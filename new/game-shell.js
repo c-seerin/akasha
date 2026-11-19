@@ -5,7 +5,7 @@
   const home = $('#home'), terminal = $('.game-terminal');
   const labels={home:['终端','Terminal'],timeline:['世界线','World Timeline'],roll:['灵基召唤','Talent Summoning'],profile:['魔术师','Magus Record'],'servant-profile':['英灵','Servant Record'],'origin-login':['原角色','Original Character'],'preview-all':['资料室','Archives'],'record-log':['记事录','Chronicle'],'divine-login':['里侧登录','Reverse Side']};
   terminal.innerHTML=`<div class="terminal-scene" aria-label="旋转地图">
-   <div class="map-status"><strong>月の记事录</strong><span>c-surrive</span></div>
+   <div class="map-status"><strong>月の记事录</strong><span lang="en">Chronicles of the Moon</span><small>c-surrive</small></div>
    <div class="map-viewport"><canvas id="world-map" tabindex="0" role="img" aria-label="可旋转地图，拖动或使用左右方向键旋转"></canvas><div class="map-fallback" hidden>地图暂不可显示，请使用右侧入口继续。</div>
 
    </div>
