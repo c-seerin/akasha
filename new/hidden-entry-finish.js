@@ -34,7 +34,8 @@ root.querySelector('.a3-types button.on')?.click();
  function install(){
   const h=document.querySelector('.game-topbar');if(!h)return;
   const c=document.createElement('canvas');c.className='header-native-photons';c.setAttribute('aria-hidden','true');document.querySelector('#app-shell').prepend(c);
-  const ctx=c.getContext('2d'),img=new Image();img.src='img/fgo-ui/ef_header_particles_21.png';
+  const assetURL = window.akashaRenderAssetURL || (async path => path);
+ const ctx=c.getContext('2d'),img=new Image();
   let sprite=null,w=0,dpr=1,frame=0,last=0,elapsed=0;const reduce=matchMedia('(prefers-reduced-motion:reduce)');
   let seed=7319;const random=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return seed/4294967296};const particles=Array.from({length:1500},()=>({x:random(),y:random(),phase:random(),size:4.5+random()*5.1}));
   function resize(){w=c.clientWidth;dpr=Math.min(devicePixelRatio||1,2);c.width=w*dpr;c.height=100*dpr;ctx.setTransform(dpr,0,0,dpr,0,0)}
@@ -76,7 +77,9 @@ root.querySelector('.a3-types button.on')?.click();
    if(!reduce.matches)frame=requestAnimationFrame(draw);
   }
   function start(){if(sprite&&!frame)frame=requestAnimationFrame(draw)}
-  img.onload=()=>{sprite=document.createElement("canvas");sprite.width=img.width;sprite.height=img.height;const sc=sprite.getContext("2d");sc.drawImage(img,0,0);const data=sc.getImageData(0,0,img.width,img.height);for(let i=0;i<data.data.length;i+=4){const a=Math.max(data.data[i],data.data[i+1],data.data[i+2]);for(let k=0;k<3;k++)data.data[i+k]=a?data.data[i+k]*255/a:0;data.data[i+3]=a;}sc.putImageData(data,0,0);start()};document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;last=0}else start()});reduce.addEventListener('change',start);resize();start();
+  img.onload=()=>{sprite=document.createElement("canvas");sprite.width=img.width;sprite.height=img.height;const sc=sprite.getContext("2d");sc.drawImage(img,0,0);const data=sc.getImageData(0,0,img.width,img.height);for(let i=0;i<data.data.length;i+=4){const a=Math.max(data.data[i],data.data[i+1],data.data[i+2]);for(let k=0;k<3;k++)data.data[i+k]=a?data.data[i+k]*255/a:0;data.data[i+3]=a;}sc.putImageData(data,0,0);start()};
+  assetURL('img/fgo-ui/ef_header_particles_21.png').then(url=>{img.src=url;}).catch(console.warn);
+  document.addEventListener('visibilitychange',()=>{if(document.hidden){cancelAnimationFrame(frame);frame=0;last=0}else start()});reduce.addEventListener('change',start);resize();start();
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install,{once:true});else install();
 })();

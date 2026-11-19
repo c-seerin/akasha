@@ -4,14 +4,15 @@
 (async()=>{
  const canvas=document.querySelector('.summon-native-canvas');if(!canvas)return;
  const gl=canvas.getContext('webgl',{alpha:false,antialias:true});if(!gl)return;
- const data=await fetch('img/fgo-ui/summon-scene.json').then(r=>r.json());
+ const assetURL = window.akashaRenderAssetURL || (async path => path);
+ const data=await fetch(await assetURL('img/fgo-ui/summon-scene.json')).then(r=>r.json());
  const vs=`attribute vec3 p;attribute vec2 uv;uniform vec3 shift;uniform float aspect,time,speed;varying vec2 v;void main(){vec3 q=p+shift;float z=-q.z+2.;gl_Position=vec4(-q.x/(.4663*aspect),(q.y-.2)/.4663,z*.999-0.2,z);v=uv+vec2(time*speed,0.);}`;
  const fs=`precision mediump float;uniform sampler2D tex;uniform vec4 tint;varying vec2 v;void main(){vec4 c=texture2D(tex,v);gl_FragColor=vec4(c.rgb*c.a*tint.rgb*2.*tint.a,1.);}`;
  function shader(type,s){const sh=gl.createShader(type);gl.shaderSource(sh,s);gl.compileShader(sh);if(!gl.getShaderParameter(sh,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(sh));return sh}
  const pr=gl.createProgram();gl.attachShader(pr,shader(gl.VERTEX_SHADER,vs));gl.attachShader(pr,shader(gl.FRAGMENT_SHADER,fs));gl.linkProgram(pr);gl.useProgram(pr);
  const loc={};for(const n of ['shift','aspect','time','speed','tex','tint'])loc[n]=gl.getUniformLocation(pr,n);
  const pos=gl.getAttribLocation(pr,'p'),uv=gl.getAttribLocation(pr,'uv');gl.enableVertexAttribArray(pos);gl.enableVertexAttribArray(uv);
- const images={},textures={};await Promise.all(['10500_bg_tex001','10500_bg_tex002'].map(n=>new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>{images[n]=im;const t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,im);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.REPEAT);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.REPEAT);textures[n]=t;resolve()};im.onerror=reject;im.src='img/fgo-ui/'+n+'.png'})));
+ const images={},textures={};await Promise.all(['10500_bg_tex001','10500_bg_tex002'].map(n=>new Promise((resolve,reject)=>{const im=new Image();im.onload=()=>{images[n]=im;const t=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,t);gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL,true);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,im);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.REPEAT);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.REPEAT);textures[n]=t;resolve()};im.onerror=reject;assetURL('img/fgo-ui/'+n+'.png').then(url=>{im.src=url;},reject)})));
  const meshes=data.map(m=>{m.buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,m.buffer);gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(m.vertices),gl.STATIC_DRAW);return m});
  const fx=document.createElement('canvas');fx.className='summon-light-canvas';fx.setAttribute('aria-hidden','true');fx.style.cssText='position:absolute;inset:0;width:100%;height:100%;pointer-events:none;mix-blend-mode:screen';canvas.after(fx);const cx=fx.getContext('2d');
  gl.disable(gl.CULL_FACE);gl.disable(gl.DEPTH_TEST);gl.enable(gl.BLEND);gl.blendFunc(gl.ONE,gl.ONE);gl.clearColor(.001,.004,.012,1);
