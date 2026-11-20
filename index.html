@@ -2465,7 +2465,7 @@ requestAnimationFrame(function(){ requestAnimationFrame(function(){ g.classList.
 } else {
 if (window.stopShindaiBGM) window.stopShindaiBGM();
 g.classList.remove('show');
-setTimeout(function(){ g.classList.remove('on'); document.body.classList.remove('in-genesis'); }, 900);
+setTimeout(function(){ if(g.classList.contains('show')) return; g.classList.remove('on'); document.body.classList.remove('in-genesis'); }, 900);
 }
 };
 if(back) back.addEventListener('click', function(){ window.karaGenesis(false); });
@@ -2627,7 +2627,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape' && g.class
       <div class="a3-pools" id="a3-pools" hidden=""></div>
       <div class="a3-talent-tip">
         天赋抽取的四步结果会自动写进档案 ·
-        <a href="#talent" id="a3-to-talent">去抽天赋</a>
+        <a href="#roll" id="a3-to-talent">去抽天赋</a>
       </div>
       <button class="a3-go">生 成 神 代 档 案</button>
     </div>
@@ -2915,7 +2915,9 @@ navigator.clipboard.writeText(txt).then(done).catch(fallback);
 } else fallback();
 });
 document.addEventListener('click', function(e){
-if(!e.target.closest || !e.target.closest('#a3-back')) return;
+var shortcut = e.target.closest && e.target.closest('#a3-to-talent');
+if(!shortcut && !e.target.closest('#a3-back')) return;
+if(shortcut) window.karaGenesis(false);
 document.body.classList.remove('act3');
 document.body.classList.remove('act2');
 var gEl=document.getElementById('genesis'); if(gEl) gEl.dataset.act='';
@@ -3512,7 +3514,7 @@ body,div,span,p,li,dl,dd,dt,label,button,input,select,textarea,h1,h2,h3,h4,h5,h6
   function close(){
     gate.classList.remove('on');
     document.body.style.overflow = '';
-    setTimeout(function(){ gate.hidden = true; }, 450);
+    setTimeout(function(){ if(!gate.classList.contains('on')) gate.hidden = true; }, 450);
   }
 
   gate.addEventListener('click', function(e){
