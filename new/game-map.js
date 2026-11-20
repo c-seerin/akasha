@@ -12,7 +12,7 @@ window.AkashaMap={init(canvas){
  const tex=gl.createTexture();gl.bindTexture(gl.TEXTURE_2D,tex);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,1,1,0,gl.RGBA,gl.UNSIGNED_BYTE,new Uint8Array([225,230,240,255]));
  const assetURL = window.akashaRenderAssetURL || (async path => path);
  const pic=new Image();pic.onload=()=>{try {gl.bindTexture(gl.TEXTURE_2D,tex);gl.texImage2D(gl.TEXTURE_2D,0,gl.RGBA,gl.RGBA,gl.UNSIGNED_BYTE,pic);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.LINEAR);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.REPEAT);gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);canvas.dataset.texture='ready';} catch(error) { console.warn('地图纹理上传失败',error); fallback(); }};pic.onerror=fallback;
- assetURL('img/fgo-ui/WhiteEarth_Color.png').then(url=>{pic.src=url;},fallback);
+ assetURL('img/fgo-ui/WhiteEarth_Color.png').then(url=>{if (/^https?:$/i.test(location.protocol)) pic.crossOrigin='anonymous';pic.src=url;},fallback);
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');let mode=0,yaw=.8,pitch=.50,roll=.23,zoom=.86,shift=0,drag=false,lastX=0,lastY=0,prev=0,visible=true,paused=reduced.matches,tween=null,focus=null;
  const pause=document.getElementById('map-pause');function updatePause(){pause.textContent=paused?'▶':'Ⅱ';pause.setAttribute('aria-pressed',String(paused));pause.setAttribute('aria-label',paused?'开始地图旋转':'暂停地图旋转');}pause.onclick=()=>{paused=!paused;updatePause();};updatePause();reduced.addEventListener('change',e=>{paused=e.matches;updatePause();});
  // Regional anchors for the existing mythic login points, not archaeological claims.
