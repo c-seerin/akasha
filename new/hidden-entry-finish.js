@@ -17,9 +17,18 @@ const pools=form.querySelector('#a3-pools');if(pools)pools.hidden=n!==2||!pools.
 // Keep subtype selection with identity instead of duplicating it across pages.
 const subtype=content.querySelector('.a3-row');types.after(subtype);
 const originalShow=show;show=function(n){originalShow(n);subtype.hidden=n!==0;};
-root.addEventListener('click',e=>{if(e.target.closest('.a3-types button')){save();queueMicrotask(()=>{key=(root.querySelector('.a3-types .on')?.dataset.type||'')+'|'+root.querySelector('#a3-sub').value;restore();show(0);});}},true);
+// Save the old fields before the legacy handler rebuilds them. Restore the
+// new fields after its document-level handler has finished the same event.
+function syncIdentity(){
+ key=(types.querySelector('.on')?.dataset.type||'')+'|'+subtype.querySelector('select').value;
+ restore();
+ show(0);
+}
+root.addEventListener('click',e=>{if(e.target.closest('.a3-types button'))save();},true);
+window.addEventListener('click',e=>{if(e.target.closest('#act3 .a3-types button'))syncIdentity();});
 function restore(){for(const [id,value]of Object.entries(drafts[key]||{})){const e=form.querySelector('#'+id);if(e)e.value=value;}const power=form.querySelector('input#a3-power');if(power){const area=document.createElement('textarea');area.id=power.id;area.placeholder=power.placeholder;area.value=power.value;area.rows=2;power.replaceWith(area);}const look=form.querySelector('input#a3-look');if(look){const area=document.createElement('textarea');area.id=look.id;area.placeholder=look.placeholder;area.value=look.value;area.rows=3;look.replaceWith(area);}}
-subtype.addEventListener('change',()=>{save();queueMicrotask(()=>{key=(root.querySelector('.a3-types .on')?.dataset.type||'')+'|'+root.querySelector('#a3-sub').value;restore();show(0);});},true);
+subtype.addEventListener('change',save,true);
+subtype.addEventListener('change',syncIdentity);
 footer.querySelector('[data-page-back]').onclick=()=>{save();if(page===0)oldBack.click();else show(page-1);};footer.querySelector('[data-page-next]').onclick=()=>{save();if(page===0&&!root.querySelector('.a3-types .on')){footer.querySelector('span').textContent='先选一个类型。';return;}if(page===3){form.querySelector('.a3-go').click();show(4);}else if(page===4)oldBack.click();else show(page+1);};
 show(0);
 root.querySelector('.a3-types button.on')?.click();
