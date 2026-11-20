@@ -29,9 +29,15 @@ window.AkashaMap={init(canvas){
  const panel=root.querySelector('.ordeal-detail'),region=root.querySelector('.region-name');
  function animate(to){if(reduced.matches){({yaw,pitch,roll,zoom,shift}=to);tween=null;}else tween={from:{yaw,pitch,roll,zoom,shift},to,start:performance.now()};}
  function select(i){const p=chapters[i];if(!mode||!p)return;focus=p;root.classList.add('map-focused');region.textContent=p.name;
- panel.innerHTML='<small>Ordeal Call · 神代登录</small><a class="divine-enter" href="#divine-login"><i class=shortcut-emblem aria-hidden=true></i><span><strong>'+p.title+'</strong><em>'+p.sub+'</em></span><b>登录　›</b></a><p class="divine-description" hidden></p>';
+ panel.innerHTML='<small>Ordeal Call · 神代登录</small><button type="button" class="divine-enter"><i class=shortcut-emblem aria-hidden=true></i><span><strong>'+p.title+'</strong><em>'+p.sub+'</em></span><b>登录　›</b></button><p class="divine-description" hidden></p>';
  const radio=document.getElementById(p.id),card=radio.closest('.timeline-card');panel.querySelector('.divine-description').textContent=card.querySelector('p').textContent;
- panel.querySelector('.divine-enter').onclick=()=>{radio.click();const field=document.getElementById('d-pantheon');field.value=p.pantheon;field.dispatchEvent(new Event('change',{bubbles:true}));const era=document.getElementById('d-era');if(!era.value.trim()||era.value===era.dataset.mapRegion) {era.value=p.name;era.dataset.mapRegion=p.name;era.dispatchEvent(new Event('input',{bubbles:true}));}document.dispatchEvent(new CustomEvent('akasha:divine-selected',{detail:p}));};
+ const enter=panel.querySelector('.divine-enter');
+ function showChoice(){
+  enter.setAttribute('aria-pressed',String(radio.checked));
+  enter.querySelector('b').textContent=radio.checked?'✓ 已选择':'选择';
+ }
+ enter.onclick=()=>{radio.click();showChoice();};
+ showChoice();
  panel.dataset.chapter=String(i);root.querySelectorAll('[data-chapter]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.chapter===i)));
  markers.forEach(m=>m.b.setAttribute('aria-pressed',String(m.p===p)));
  let target=(180-p.lon)/360*Math.PI*2-Math.PI/2;while(target-yaw>Math.PI)target-=Math.PI*2;while(target-yaw< -Math.PI)target+=Math.PI*2;

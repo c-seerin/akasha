@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hans"><head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
 <title>月の记事录</title>
 <!-- 字体走系统回退，原先引用的 gfonts.css 不存在，已移除 -->
 <!-- Impeccable pass：字型本地自托管（子集 woff2，无外部 CDN 依赖），离线也有完整字形 -->
@@ -4876,6 +4876,41 @@ select{ color:inherit; }
 <link rel="stylesheet" href="game-ui.css">
 <link rel="stylesheet" href="game-shell.css"><script src="game-map.js" defer></script><script src="game-shell.js" defer></script><script src="game-worlds.js" defer></script>
 <link rel="stylesheet" href="summon-view.css"><script src="summon-view.js"></script><link rel="stylesheet" href="summon-composer.css"><script src="summon-composer.js"></script><script src="hidden-entry-finish.js"></script>
+
+<style>
+html.touch-editing textarea:focus{max-height:var(--edit-field-limit)!important;min-height:0!important;overflow-y:auto!important}
+html.touch-editing #lb-gate,html.touch-editing #act3{max-height:var(--edit-height)!important;overflow-y:auto!important}
+html.touch-editing .modal-content{max-height:var(--edit-height)!important}
+html.touch-editing body{padding-bottom:var(--keyboard-inset)!important}
+</style>
+<script>
+(()=>{
+ const root=document.documentElement, viewport=window.visualViewport;
+ const selector='textarea,input:not([type]),input[type=text],input[type=search],input[type=email],input[type=url],input[type=tel],input[type=number],input[type=password]';
+ let frame;
+ function update(){
+  const field=document.activeElement;
+  if(!matchMedia('(any-pointer: coarse)').matches || !field?.matches(selector)){
+   root.classList.remove('touch-editing');return;
+  }
+  const height=viewport?.height || window.innerHeight, top=viewport?.offsetTop || 0;
+  root.style.setProperty('--edit-height',Math.floor(height)+'px');
+  root.style.setProperty('--edit-field-limit',Math.max(44,Math.floor(height*.45))+'px');
+  root.style.setProperty('--keyboard-inset',Math.max(0,window.innerHeight-height)+'px');
+  root.classList.add('touch-editing');
+  const box=field.getBoundingClientRect();
+  if(box.top<top+12 || box.bottom>top+height-12){
+   field.scrollIntoView({block:'center',inline:'nearest',behavior:'instant'});
+   const after=field.getBoundingClientRect();
+   if(after.bottom>top+height-12)window.scrollBy(0,after.bottom-top-height+12);
+  }
+ }
+ function schedule(){cancelAnimationFrame(frame);frame=requestAnimationFrame(update);}
+ for(const event of ['focusin','focusout','input'])document.addEventListener(event,schedule);
+ window.addEventListener('resize',schedule);
+ viewport?.addEventListener('resize',schedule);
+})();
+</script>
 </body></html>
 
 

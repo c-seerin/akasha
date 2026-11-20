@@ -594,3 +594,6 @@ body #home button.ordeal-rank:focus-visible{outline:2px solid #85edff;outline-of
 .map-status>span[lang="en"]{font:normal clamp(10px,.9vw,13px)/1.35 Georgia,serif;letter-spacing:.09em;text-indent:.09em}
 .map-status>small{margin-top:.16rem;font:normal clamp(9px,.72vw,11px)/1.3 Georgia,serif;letter-spacing:.12em;text-indent:.12em}
 .terminal-caption>small{display:block;font:10px/1.5 Georgia,serif;letter-spacing:.12em;color:#d6f1ff}
+
+body #home button.divine-enter{width:100%;font:inherit;cursor:pointer;touch-action:manipulation}
+@media(pointer:coarse){.globe-marker::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:max(100%,44px);height:max(100%,44px)}}

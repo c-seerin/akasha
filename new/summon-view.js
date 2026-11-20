@@ -17,7 +17,7 @@
  holdings.addEventListener('click',()=>{renderHoldings();dialog.showModal();});dialog.querySelector('.holdings-close').addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>holdings.focus());
  new MutationObserver(()=>{if(dialog.open)renderHoldings();}).observe(root.querySelector('#fs-picked'),{childList:true,subtree:true});
  const results=document.createElement('dialog');results.className='summon-results-dialog';results.setAttribute('aria-labelledby','summon-results-title');
- results.innerHTML='<header><h2 id="summon-results-title">召唤结果</h2><p class="results-rule"></p></header><div class="results-scroll"></div><footer><button type="button" data-action="clear">清空选择</button><button type="button" data-action="close">确认选择</button></footer>';
+ results.innerHTML='<header><button type="button" class="results-dismiss" aria-label="关闭召唤结果">×</button><h2 id="summon-results-title">召唤结果</h2><p class="results-rule"></p></header><div class="results-scroll"></div><footer><button type="button" data-action="clear">清空选择</button><button type="button" data-action="redraw">重新抽取</button><button type="button" data-action="close">确认选择</button></footer>';
  root.append(results);results.querySelector('.results-scroll').append(grid,detail);
  const skin=document.createElement('style');skin.textContent=`
  body #app-shell #roll dialog.summon-results-dialog{position:fixed!important;inset:0!important;margin:auto!important;width:min(1100px,94vw);height:min(620px,86dvh);max-width:none;max-height:none;padding:28px 34px 50px;border:0;background:url('img/fgo-ui/release-frame.png') center/100% 100% no-repeat;color:white;overflow:hidden;font-family:SummonFGO,sans-serif;box-sizing:border-box}
@@ -41,6 +41,10 @@
  const formationSkin=document.createElement('link');formationSkin.rel='stylesheet';formationSkin.href='summon-results.css';document.head.append(formationSkin);
  function updateResultTitle(){let i=[...root.querySelectorAll('.fs-step')].findIndex(e=>e.classList.contains('on'));i=Math.max(0,i);results.querySelector('h2').textContent=names[i]+'召唤结果';results.querySelector('.results-rule').textContent='请选择 '+picks[i]+' 张 · 已选 '+grid.querySelectorAll('.picked').length+' 张';}
  new MutationObserver(updateResultTitle).observe(grid,{childList:true});
+ results.querySelector('.results-dismiss').onclick=()=>results.close();
+ results.querySelector('[data-action=redraw]').onclick=()=>{
+  if(!grid.classList.contains('fs-rolling'))roll.click();
+ };
  results.querySelector('[data-action=clear]').onclick=()=>document.querySelector('#fs-clear').click();
  results.querySelector('[data-action=close]').onclick=()=>results.close();
  results.addEventListener('close',()=>roll.focus());
