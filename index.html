@@ -4185,25 +4185,40 @@ select{ color:inherit; }
     setTimeout(function(){ box.hidden=true; busy=false; if(done) done(); }, 420);
   }
   window.__playLostbeltFlash=function(done){
-    if(busy){ if(done) done(); return; }
+    if(busy) return;
     busy=true;
     box.hidden=false; box.classList.remove('out');
     rainStart();
     if(!v){ finish(done); return; }
     try{ v.currentTime=0; }catch(e){}
-    v.muted=false; v.volume=1;
-    var pr=v.play();
-    function fallback(){
-      v.muted=true;
-      var p2=v.play();
-      if(p2&&p2.catch) p2.catch(function(){ finish(done); });
+    var settled=false, guard=null;
+    function complete(withThunder){
+      if(settled) return;
+      settled=true;
+      clearTimeout(guard);
+      v.onended=null;
+      v.pause();
+      if(withThunder) boom();
+      finish(done);
     }
-    if(pr&&pr.catch) pr.catch(fallback);
-    var guard=null;
-    function once(){ if(guard){ clearTimeout(guard); guard=null; } boom(); finish(done); }
-    v.onended=once;
+    function play(muted){
+      if(settled) return;
+      v.muted=muted;
+      function failed(){
+        if(settled) return;
+        if(muted) complete(false);
+        else play(true);
+      }
+      try{
+        var result=v.play();
+        if(result && result.catch) result.catch(failed);
+      }catch(e){ failed(); }
+    }
+    v.volume=1;
+    v.onended=function(){ complete(true); };
     var dur=isFinite(v.duration)&&v.duration>0 ? v.duration : 5.8;
-    guard=setTimeout(once, dur*1000+900);
+    guard=setTimeout(function(){ complete(true); }, dur*1000+900);
+    play(false);
   };
 })();
 </script>
