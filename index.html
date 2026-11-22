@@ -3635,8 +3635,8 @@ body,div,span,p,li,dl,dd,dt,label,button,input,select,textarea,h1,h2,h3,h4,h5,h6
       setTimeout(function(){
         intro.hidden = true;
         if (window.__rainStop) { window.__rainStop(900); }
-        if (window.__playNarration) { window.__playNarration(); }
         open();
+        window.__openLostbeltPV();
       }, 520);
     }
     timer = setTimeout(finish, 9500);
@@ -4352,65 +4352,43 @@ select{ color:inherit; }
 #lb-gate .lb-reason-box{background:rgba(8,13,19,.76) !important}
 </style>
 
-<script id="lb-narr-js">
+<style>
+#lb-pv {box-sizing:border-box;width:min(96vw,1120px);max-width:96vw;max-height:95vh;margin:auto;padding:0;border:1px solid #78747c;background:#0a0a10;color:white}
+#lb-pv::backdrop {background:rgba(3,4,10,.88)}
+#lb-pv header {display:flex;justify-content:space-between;align-items:center;padding:.4rem .9rem;font-size:.92rem}
+#lb-pv button {font:inherit;color:white;background:transparent;border:1px solid #777;padding:.35rem .8rem;cursor:pointer}
+#lb-pv video {display:block;width:100%;max-height:78vh;background:black}
+</style>
+<dialog id="lb-pv" aria-labelledby="lb-pv-caption"><header><span id="lb-pv-caption">月の记事录</span><button type="button" autofocus>关闭</button></header><video playsinline controls preload="none" aria-label="月の记事录 PV"></video></dialog>
+<script>
 (function(){
-  var a=null;
-  window.__playNarration=function(){
-    try{
-      window.__loginBgmOn = true;
-      window.__narrPlaying = true;
-      if (window.__bgmMuteAll) window.__bgmMuteAll();
-      else { try{ var arch0=document.getElementById('bgm'); if(arch0 && !arch0.paused) arch0.pause(); }catch(e){} }
-      if(!a){ a=new Audio('img/fgo/lbpv/02-异闻带登录.mp3'); a.preload='auto';
-        a.addEventListener('timeupdate', function(){
-          if(!window.__faeStarted && a.ended){
-            window.__faeStarted = true; if(window.__startFaeBGM) window.__startFaeBGM();
-          }
-        });
-        a.addEventListener('ended', function(){ if(!window.__faeStarted && window.__startFaeBGM) window.__startFaeBGM(); });
-      }
-      a.currentTime=0; a.volume=0.9; window.__narrRef=a;
-      var p=a.play(); if(p&&p.catch) p.catch(function(){});
-    }catch(e){}
+  const dialog=document.getElementById('lb-pv');
+  const video=dialog.querySelector('video');
+  const gate=document.getElementById('lb-gate');
+  let active=false;
+  function finish(){
+    if (!active) return;
+    active=false;
+    video.pause();
+    video.removeAttribute('src');
+    video.load();
+    if(dialog.open) dialog.close();
+    window.__narrPlaying=false;
+    if(!gate.hidden) window.__bgmMode('lostbelt',{fadeIn:1200});
+  }
+  window.__openLostbeltPV=function(){
+    if(active) return;
+    active=true;
+    window.__loginBgmOn=true;
+    window.__bgmMuteAll();
+    dialog.showModal();
+    video.src='img/fgo/lbpv/moon-pv.mp4';
+    video.play().catch(function(){ /* 浏览器限制自动播放时，可用原生播放控件继续。 */ });
   };
-  window.__stopNarration=function(){
-    if(!a) return;
-    try{ a.pause(); a.currentTime=0; }catch(e){}
-  };
-
-  /* 异闻带登录 BGM：旁白播完后循环播放《戴冠式～妖精円卓領域：崩壊》 */
-  var fa=null;
-  window.__startFaeBGM=function(){
-    try{
-      window.__narrPlaying = false;
-      try{ if(a && !a.paused){ a.pause(); a.currentTime = a.duration || 0; } }catch(e){}
-      /* 等旁白真正静音后再起 BGM，避免末尾 100ms 重叠 */
-      var _try = 0;
-      (function wait(){
-        if (a && !a.paused && _try++ < 12){ return setTimeout(wait, 30); }
-        if (window.__bgmMode) window.__bgmMode('lostbelt', {fadeIn:1200});
-      })();
-      return;
-      if (window.__bgmMode){ window.__bgmMode('lostbelt', {fade:1600}); return; }
-      window.__loginBgmOn = true;
-      try{ var arch=document.getElementById('bgm'); if(arch && !arch.paused){ arch.pause(); } }catch(e){}
-      if(!fa){ fa=new Audio('img/fgo/lbpv/faerie_bgm.mp3?v=20261110a'); fa.preload='auto'; fa.loop=true; window.__faeRef=fa; }
-      fa.volume=0.0;
-      try{ fa.currentTime=0; }catch(e){}
-      var pr=fa.play(); if(pr&&pr.catch) pr.catch(function(){});
-      var target=0.9, dur=3500, t0=Date.now();
-      var iv=setInterval(function(){
-        var el=Date.now()-t0, k=Math.min(1, el/dur);
-        fa.volume=target*(k*k*(3-2*k));                  // smoothstep：起头更轻、收尾更稳
-        if(k>=1) clearInterval(iv);
-      }, 40);
-    }catch(e){}
-  };
-  window.__stopFaeBGM=function(){
-    if(!fa) return;
-    var v0=fa.volume, steps=20, i=0;
-    var iv=setInterval(function(){ i++; fa.volume=Math.max(0, v0*(1-i/steps)); if(i>=steps){ clearInterval(iv); try{ fa.pause(); fa.currentTime=0; }catch(e){} } }, 40);
-  };
+  dialog.querySelector('button').addEventListener('click',finish);
+  dialog.addEventListener('cancel',function(e){e.preventDefault();finish();});
+  video.addEventListener('ended',finish);
+  new MutationObserver(function(){if(gate.hidden && active) finish();}).observe(gate,{attributes:true,attributeFilter:['hidden']});
 })();
 </script>
 <style id="p-custom-style">
@@ -4708,7 +4686,7 @@ select{ color:inherit; }
   if(!gate) return;
   var mo=new MutationObserver(function(){
     if(gate.hidden){
-      if(window.__stopFaeBGM) window.__stopFaeBGM();
+      
       window.__loginBgmOn = false;
       if(window.startArchiveBGM) { try{ window.startArchiveBGM(); }catch(e){} }
     }
@@ -4716,26 +4694,7 @@ select{ color:inherit; }
   mo.observe(gate,{attributes:true,attributeFilter:['hidden','class']});
 })();
 </script>
-<script id="fae-handoff-js">
-/* 旁白 → 登录 BGM 的平滑交接：剩 2.2 秒开始淡入 */
-(function(){
-  var started = false, iv = null;
-  function tick(){
-    var a = window.__narrRef;
-    if (!a || started) return;
-    if (!a.duration || isNaN(a.duration)) return;
-    if (a.ended) {
-      started = true; window.__faeStarted = true;
-      if (window.__startFaeBGM) window.__startFaeBGM();
-      if (iv) { clearInterval(iv); iv = null; }
-    }
-  }
-  iv = setInterval(tick, 250);
-  document.addEventListener('play', function(e){
-    if (e.target && e.target.id === 'x') return;
-  }, true);
-})();
-</script>
+
 <style id="lb-blocks-style">
 /* ===== 异闻带记录：改成与主界面一致的分块卡片 ===== */
 #lb-gate .lb-inner{max-width:1180px !important;margin:0 auto !important;padding:2.6rem 1.4rem 4rem !important}
@@ -4837,7 +4796,7 @@ select{ color:inherit; }
       if (!a.__origPlay){
         a.__origPlay = a.play.bind(a);
         a.play = function(){
-          if (window.__bgmLocked && window.__bgmLocked !== k) return Promise.resolve();
+          if (document.getElementById('lb-pv').open || (window.__bgmLocked && window.__bgmLocked !== k)) return Promise.resolve();
           return a.__origPlay();
         };
       }
@@ -4877,16 +4836,7 @@ select{ color:inherit; }
   /* 严格串行切换 */
   function switchTo(next, opts){
     opts = opts || {};
-    var narrLive = window.__narrRef && !window.__narrRef.paused && !window.__narrRef.ended;
-    if (narrLive){
-      if (next && next !== 'lostbelt'){
-        /* 离开异闻带场景：先停旁白，再让新 BGM 起来 */
-        if (window.__stopNarration){ try{ window.__stopNarration(); }catch(e){} }
-        window.__narrPlaying = false;
-      } else if (next){
-        return;                       /* 旁白还在播，同场景内不许起 BGM */
-      }
-    }
+    if (window.__narrPlaying && document.getElementById('lb-pv').open) return;
     var my = ++seq;
     window.__bgmLocked = next || null;
     var others = Object.keys(DEF).filter(function(k){ return k !== next; });
