@@ -2692,7 +2692,7 @@ var DEITY_FORM = ['神代本体（完全权能）','人形终端·拟体（机�
 var POOL_ITEMS = {"authority_nature": ["雷霆", "天空", "风暴", "海洋", "地震", "火山", "太阳", "月", "星辰", "光明", "黑暗", "夜", "昼", "火", "水", "土", "风", "大地", "森林", "山岳", "河流", "湖泊", "洋流", "泉水", "雾", "干旱", "春", "夏", "秋", "冬", "金星", "丰收", "农业", "狩猎", "死亡", "瘟疫", "疾病", "治愈", "灵魂", "轮回", "转生", "时间", "空间", "黄泉", "冥界", "天堂", "地狱", "炼狱", "虚空", "深渊"], "authority_human": ["战争", "智慧", "爱", "美", "王权", "秩序", "混沌", "正义", "律法", "审判", "命运", "预言", "梦", "睡眠", "疯狂", "恐惧", "欲望", "欢愉", "音乐", "诗歌", "戏剧", "工艺", "商业", "旅行", "道路", "边界", "契约", "誓约", "婚姻", "生育", "家宅", "医术", "竞技", "记忆", "遗忘", "酒", "神谕", "祭祀", "航海", "牧羊", "献祭", "卢恩", "财富", "幸运", "业"], "concept": ["概念池", "战争", "爱", "美", "死亡", "命运", "智慧", "狩猎", "丰收", "王权", "复仇", "正义", "审判", "秩序", "混沌", "梦", "睡眠", "恐惧", "希望", "绝望", "欲望", "欢愉", "痛苦", "牺牲", "誓约", "契约", "罪", "救赎", "灵魂", "轮回", "记忆", "遗忘", "时间", "空间", "创造", "毁灭", "生命", "真理", "虚数", "根源", "界限", "起源", "终末", "光", "暗", "夜", "昼", "因果", "和平", "律法", "业", "虚空", "深渊", "疯狂", "丰穰", "王座", "加冕", "神谕", "祭祀", "献祭", "血液", "铁", "金", "银", "宝石", "锻造", "城邦", "社稷", "语言", "文字", "知识", "诗歌", "戏剧", "舞蹈", "音乐", "艺术", "医疗", "瘟疫", "转生", "黄泉", "天堂", "地狱", "炼狱", "末日", "星", "海", "大地"], "phenomena": ["丰收", "台风", "地震", "地鸣", "季风", "寒潮", "山火", "干旱", "日晕", "日食", "星辰错位", "暴雪", "月相异变", "月食", "极光", "极夜", "极昼", "枯萎", "梅雨", "死者骚动", "沙尘暴", "河水改道", "洪水", "流星雨", "浓雾", "海啸", "海市", "涌泉", "潮汐", "火山", "热浪", "献祭之印", "瘟疫", "瘟疫退散", "落雷", "虹", "蝗灾", "镜面之雾", "陨石", "雷暴", "霜冻", "风止", "黄泉之门", "龙卷"]};
 var PHEN2AUTH = {"雷暴": "雷霆", "落雷": "雷霆", "台风": "风暴", "龙卷": "风暴", "沙尘暴": "风", "季风": "风", "风止": "风", "地震": "大地", "地鸣": "大地", "海啸": "海洋", "潮汐": "海洋", "洪水": "水", "涌泉": "水", "河水改道": "水", "干旱": "干旱", "火山": "火", "山火": "火", "日食": "太阳", "日晕": "太阳", "极昼": "太阳", "月食": "月", "月相异变": "月", "极光": "光明", "虹": "光明", "海市": "光明", "流星雨": "星辰", "陨石": "星辰", "星辰错位": "星辰", "浓雾": "雾", "蝗灾": "丰收", "丰收": "丰收", "枯萎": "丰收", "瘟疫": "瘟疫", "瘟疫退散": "治愈", "死者骚动": "冥界", "黄泉之门": "冥界", "极夜": "夜", "镜面之雾": "夜", "献祭之印": "献祭", "霜冻": "冬", "暴雪": "冬", "寒潮": "冬", "梅雨": "夏", "热浪": "夏"};
 var PHEN_MAP = {"雷霆": ["雷暴", "落雷"], "风暴": ["台风", "龙卷"], "风": ["沙尘暴", "季风", "风止"], "大地": ["地震", "地鸣"], "海洋": ["海啸", "潮汐"], "水": ["洪水", "涌泉", "河水改道"], "干旱": ["干旱"], "火": ["火山", "山火"], "太阳": ["日食", "日晕", "极昼"], "月": ["月食", "月相异变"], "光明": ["极光", "虹", "海市"], "星辰": ["流星雨", "陨石", "星辰错位"], "雾": ["浓雾"], "丰收": ["蝗灾", "丰收", "枯萎"], "瘟疫": ["瘟疫"], "治愈": ["瘟疫退散"], "冥界": ["死者骚动", "黄泉之门"], "夜": ["极夜", "镜面之雾"], "献祭": ["献祭之印"], "冬": ["霜冻", "暴雪", "寒潮"], "夏": ["梅雨", "热浪"]};
-window.__WORLDLINE__=function(){try{var r=document.querySelector('input[name="entry-world"]:checked');if(!r)return '';if(r.id==='pick-custom'){var c=document.getElementById('custom-timeline-entry');var v=c&&c.value.trim();return v?('原创：'+v):'原创（玩家选择完全原创，未填具体设定）';}var card=r.closest('.timeline-card');var h=card?card.querySelector('h4'):null;var t=h?h.textContent.trim():'';var ns=card?card.querySelector('select[id^="node-"]'):null;var ci=ns?document.getElementById(ns.id+'-custom'):null;var nv=(ci&&ci.value&&ci.value.trim())?ci.value.trim():((ns&&ns.value)?ns.value.replace(/^时期：/,''):'');var tl=card?card.getAttribute('data-tl-choice'):'';var base=t||r.value||'';if(tl)base=base+'｜时期：'+tl;return base;}catch(e){return '';}};
+window.__WORLDLINE__=function(){try{var r=document.querySelector('input[name="entry-world"]:checked');if(!r)return '';if(r.id==='pick-custom'){var c=document.getElementById('custom-timeline-entry');var v=c&&c.value.trim();return v?('原创：'+v):'原创（玩家选择完全原创，未填具体设定）';}var card=r.closest('.timeline-card');var h=card?card.querySelector('h4'):null;var t=h?h.textContent.trim():'';return t||r.value||'';}catch(e){return '';}};
 var POOL_TITLES = {authority_nature:'权能池·自然', authority_human:'权能池·人文', concept:'概念池', phenomena:'现象池'};
 var poolSel = {authority_nature:[], authority_human:[], concept:[], phenomena:[]};
 var poolShow = {authority_nature:[], authority_human:[], concept:[], phenomena:[]};var poolRank = {authority_nature:{}, authority_human:{}, concept:{}, phenomena:{}};var RANKS=["C","B","A","A+","A++","A+++"];window.__FMT_POOL__=function(k){return (poolSel[k]||[]).map(function(v){var r=(poolRank[k]||{})[v];return r?v+"（"+r+"）":v;}).join("、");};
@@ -4527,32 +4527,24 @@ select{ color:inherit; }
 (function(){
   var DATA = {
     su: { title:'里侧登录点 · 苏美尔神话', opts:[
-      ['提亚马特创世','约14,000年前'],
-      ['伊什塔尔挑战艾比夫山','约前5,500'],
-      ['伊什塔尔下冥界','约前5,200'],
-      ['吉尔伽美什即位','约前5,000'],
-      ['恩奇都之死与求不死','即位之后'],
-      ['诀别 · 美索不达米亚神代终结','约前2,600'],
-      ['神代消退契机','约前7世纪']
+      ['早期','约前 12,000 年 · 赛法卢来袭'],
+      ['中期','约前 5,000 年 · 吉尔伽美什即位'],
+      ['后期','约前 2,600 年 · 与诸神诀别']
     ]},
     gr: { title:'里侧登录点 · 希腊神话', opts:[
-      ['机神舰队抵达','约14,000年前'],
-      ['白之毁灭 · 机神真体被毁','约前12,000'],
-      ['提坦之战','神话层，无精确年代'],
-      ['英雄时代 · 特洛伊','约前12世纪'],
-      ['神代余晖期','年代未记载']
+      ['早期','约前 12,000 年 · 十二机神抵达'],
+      ['中期','约前 12 世纪 · 特洛伊战争'],
+      ['后期','约前 7 世纪 · 神代消退的契机']
     ]},
     no: { title:'里侧登录点 · 北欧神话', opts:[
-      ['阿斯加德全盛','无精确年代'],
-      ['诸神黄昏前夜','—'],
-      ['终末进行中','—'],
-      ['终末之后','—']
+      ['早期','约前 10,000 年 · 阿萨-华纳战争'],
+      ['中期','约前 1,080 年 · 巴德尔之死'],
+      ['后期','约前 1,000 年 · 诸神黄昏']
     ]},
     ar: { title:'里侧登录点 · 亚瑟王传说', opts:[
-      ['卡美洛建成期','—'],
-      ['圆桌全盛期','—'],
-      ['剑栏之战','—'],
-      ['神代余韵消散','—']
+      ['早期','卡美洛建立（A.D.500 前后）'],
+      ['中期','讨伐伏提庚'],
+      ['后期','卡姆兰之丘']
     ]}
   };
   var curCard=null, curKey=null, picked=null;
@@ -4570,7 +4562,7 @@ select{ color:inherit; }
     d.opts.forEach(function(o,i){
       html += '<button type="button" class="tl-opt'+(picked===i?' on':'')+'" data-i="'+i+'"><b><i>'+o[0]+'</i>'+o[1]+'</b></button>';
     });
-    html += '<button type="button" class="tl-opt'+(picked==='c'?' on':'')+'" data-i="c"><b><i>自选时期</i>自己填一个时期</b><span>不在上面列表里时，直接描述你要落在哪一刻。</span></button>';
+    html += '<button type="button" class="tl-opt'+(picked==='c'?' on':'')+'" data-i="c"><b><i>自定义</i>自己写一个时间点</b><span>不从上面三段里选，直接描述你要落在哪一刻。</span></button>';
     optsEl.innerHTML=html;
     [].slice.call(optsEl.querySelectorAll('.tl-opt')).forEach(function(btn){
       btn.addEventListener('click', function(){ var i=btn.getAttribute('data-i');
@@ -4852,12 +4844,12 @@ select{ color:inherit; }
 })();
 </script>
 <link rel="stylesheet" href="akasha-ui.css">
-<script src="akasha-ui.js?v=20261124b" defer></script>
+<script src="akasha-ui.js" defer></script>
 <link rel="stylesheet" href="announcement.css">
-<script src="announcement.js?v=20261124b" defer></script>
+<script src="announcement.js" defer></script>
 <link rel="stylesheet" href="game-ui.css">
-<link rel="stylesheet" href="game-shell.css"><script src="game-map.js?v=20261124b" defer></script><script src="game-shell.js?v=20261124b" defer></script><script src="game-worlds.js?v=20261124b" defer></script>
-<link rel="stylesheet" href="summon-view.css"><script src="summon-view.js?v=20261124b"></script><link rel="stylesheet" href="summon-composer.css"><script src="summon-composer.js?v=20261124b"></script><script src="hidden-entry-finish.js?v=20261124b"></script>
+<link rel="stylesheet" href="game-shell.css"><script src="game-map.js" defer></script><script src="game-shell.js" defer></script><script src="game-worlds.js" defer></script>
+<link rel="stylesheet" href="summon-view.css"><script src="summon-view.js"></script><link rel="stylesheet" href="summon-composer.css"><script src="summon-composer.js"></script><script src="hidden-entry-finish.js"></script>
 
 <style>
 html.touch-editing textarea:focus{max-height:var(--edit-field-limit)!important;min-height:0!important;overflow-y:auto!important}
