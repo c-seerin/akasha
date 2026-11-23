@@ -1834,13 +1834,13 @@ if(!curType||!curSub){ alert('先选类型和细分类'); return; }
 const desc=TYPES[curType].subs[curSub]||'';
 const lines=['【里侧登录】','类型：'+curType,'细分类：'+curSub+'（'+desc+'）'];
 if(TRAITS[curType]) lines.push('种族共通特性：'+TRAITS[curType]);
-if(curType === '神明') lines.push('权能/现象约束：只作用于已选领域；现代会衰减；大权能需主神级或特例，并有巨大代价。');
+if(curType === '神明') lines.push('权能/现象约束：权能只作用于已选领域，越界会被世界拒绝；载体降档＝本体0／人形终端1／分灵2／凭依·神灵从者3；大权能仅本体可用，必有代价。');
 const common=[['神系 / 地域','d-pantheon'],['真以太适应','d-mana']];
 common.forEach(([label,id])=>{const v=val(id); if(v) lines.push(label+'：'+v);});
 if(curType === '神明'){
 const rank=val('d-rank'); if(rank) lines.push('神格位阶（职位）：'+rank);
 const form=val('d-form'); if(form) lines.push('现界形态：'+form);
-activePools.forEach(k=>{ if(selectedPools[k].length) lines.push(POOLS[k].title+'：'+selectedPools[k].join('、')); });
+activePools.forEach(k=>{ if(selectedPools[k].length) lines.push(POOLS[k].title+'：'+(window.__FMT_POOL__?window.__FMT_POOL__(k):selectedPools[k].join('、'))); });
 }
 const fields=[['姓名 / 神名','d-name'],['性别','d-gender'],['时代 / 地域','d-era'],['外貌','d-look']];
 if(curType === '幻想种'){
@@ -1857,7 +1857,7 @@ fields.push(['弱点','d-vamp-weak']);
 if(curType === '神明眷属') fields.push(['侍奉神明','d-att-god'],['眷属职阶','d-att-rank'],['恩赐 / 权能','d-att-blessing']);
 if(curType === '神明' && curSub === '机神') fields.push(['真体特性 / 功能','d-truebody']);
 fields.push(['性格','d-persona'],['特性 / 池外补充','d-power'],['补充说明','d-notes']);
-fields.forEach(([label,id])=>{const v=val(id); if(v) lines.push(label+'：'+v);});
+try{ (window.__GREAT_AUTH__?window.__GREAT_AUTH__():[]).forEach(function(l){lines.push(l);}); }catch(e){}fields.forEach(([label,id])=>{const v=val(id); if(v) lines.push(label+'：'+v);});
 try {
 const roll = window.__TALENT_EXPORT__ ? window.__TALENT_EXPORT__() : null;
 const picked = (roll && Array.isArray(roll.selected) ? roll.selected : []).filter(function(x){ return String(x.step||'').indexOf('异世界') < 0; });
@@ -2597,7 +2597,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape' && g.class
         <select id="a3-sub"><option selected="selected">龙种</option><option>兽类</option><option>妖精</option><option>精灵</option></select>
       </div>
       <div class="a3-grid"><label class="a3-f">姓名 / 神名<input id="a3-name" placeholder="你在神代的称呼" value=""></label><label class="a3-f">性别<input id="a3-gender" placeholder="男 / 女 / 无性 / 随形态变化" value=""></label><label class="a3-f">时代 / 地域<input id="a3-era" placeholder="神代之前 / 神代 / 神代之后" value=""></label><label class="a3-f">外貌<input id="a3-look" placeholder="一眼能认出来的特征" value=""></label><label class="a3-f">格位<select id="a3-race-rank"><option selected="selected">魔兽级之龙</option><option>幻兽级之龙</option><option>神兽级之龙</option></select></label><label class="a3-f a3-f-wide">种族能力<textarea id="a3-ability" rows="2" placeholder="这个种族天生会的事，以及为此付出的代价"></textarea></label><label class="a3-f a3-f-wide">权能 / 特殊能力总述<textarea id="a3-special" rows="2" placeholder="能做什么、做不到什么，一句话概括"></textarea></label><label class="a3-f">性格<input id="a3-persona" placeholder="说话方式、执念、会在什么事上失态" value=""></label><label class="a3-f">特性 / 池外补充<input id="a3-power" placeholder="池子里没抽到、但确实属于你的设定" value=""></label><label class="a3-f a3-f-wide">补充说明<textarea id="a3-notes" rows="2" placeholder="你想补充的内容"></textarea></label></div>
-      <div class="a3-pools" id="a3-pools" hidden=""></div>
+      <div class="a3-pools" id="a3-pools" hidden=""></div><div class="card" id="greatAuthCard" style="display:none"><h3 class="card-title">大权能（自定义 · 选填）</h3><div style="color:var(--text-secondary);line-height:1.9;font-size:.86rem;margin-bottom:.6rem">大权能＝改写世界之法的力（造界／创生·消灭／时空间），与权能不是一个层级。来源：神代本体可行使；分灵／凭依／从者形态不可。名称、效果、补充随便写，形式参照宝具。</div><div id="greatAuthList"></div><button type="button" id="addGreatAuth" style="margin-top:.6rem;padding:.35rem .9rem;border:1px solid rgba(43,85,96,.5);background:transparent;color:#2b5560;cursor:pointer">＋ 添加大权能</button><div style="margin-top:.5rem;color:var(--text-secondary);font-size:.8rem;line-height:1.7">建议：名称写「概念」（土／夜／镜／名／潮），效果写「能改写什么」，补充写「代价」与来源。AI 会按概念升华成奇迹，不会按数值放大。</div></div><script>(function(){var list=document.getElementById('greatAuthList');var card=document.getElementById('greatAuthCard');if(!list||!card)return;function row(){var d=document.createElement('div');d.style.marginTop='.5rem';d.innerHTML='<label class="a3-f">名称<input class="ga-name" placeholder="例：国土创造"></label><label class="a3-f">效果<input class="ga-effect" placeholder="一句话说明它能做什么"></label><label class="a3-f a3-f-wide">补充说明<textarea class="ga-note" rows="2" placeholder="来源、限制、代价等"></textarea></label>';list.appendChild(d);}window.__GREAT_AUTH__=function(){var out=[];var rows=list.children;for(var i=0;i<rows.length;i++){var n=(rows[i].querySelector('.ga-name').value||'').trim();if(!n)continue;var e=(rows[i].querySelector('.ga-effect').value||'').trim();var t=(rows[i].querySelector('.ga-note').value||'').trim();out.push('- 名称：'+n+(e?'｜效果：'+e:'')+(t?'｜补充：'+t:''));}return out.length?['大权能（自定义）：'].concat(out):[];};var btn=document.getElementById('addGreatAuth');if(btn)btn.addEventListener('click',function(ev){ev.preventDefault();card.style.display='block';row();});})();</script>
       <div class="a3-talent-tip">
         天赋抽取的四步结果会自动写进档案 ·
         <a href="#roll" id="a3-to-talent">去抽天赋</a>
@@ -2688,11 +2688,13 @@ var RANKS = {
 var FAIRY_LINEAGE = ['亚铃的子孙','亚铃（原生 · 大父 / 大母级）','返亚铃（子孙返祖而具亚铃灵基）','乐园妖精（星之种 · 会成长）','非不列颠外来妖精'];
 var FAIRY_STATE = ['在世','妖精亡主（失去光辉而堕落）','摩耳斯化（妖精的末路）'];
 var DEITY_RANK = ['主神','从属神','地方神','野生神（无社无祭/零落）','原始神'];
-var DEITY_FORM = ['神代本体（完全权能）','现代拟似从者/凭依','神灵从者（权能受限）','残留神骸/神体碎片'];
-var POOL_ITEMS = {"authority": ["权能池", "雷霆", "天空", "风暴", "海洋", "海啸", "地震", "火山", "冥界", "死亡", "太阳", "月", "星辰", "光明", "黑暗", "夜", "昼", "火", "水", "土", "风", "森林", "山岳", "河流", "湖泊", "丰收", "农业", "季节", "潮汐", "战争", "智慧", "狩猎", "爱", "美", "王权", "秩序", "混沌", "正义", "审判", "命运", "预言", "梦", "睡眠", "治愈", "瘟疫", "疾病", "疯狂", "恐惧", "欲望", "欢愉", "音乐", "诗歌", "工艺", "锻造", "商业", "旅行", "道路", "边界", "门", "契约", "誓约", "灵魂", "轮回", "转生", "记忆", "遗忘", "时间", "空间", "创造", "毁灭", "起源", "终末", "虚数", "根源", "雨", "干旱", "季风", "台风", "龙卷风", "沙尘暴", "暴雪", "寒潮", "热浪", "霜", "露", "虹", "霞", "冰川", "雪山", "高原", "盆地", "峡谷", "平原", "湿地", "深海", "洋流", "尼罗河", "洪水", "沙漠", "绿洲", "玉米", "稻米", "小麦", "葡萄", "橄榄", "蜂蜜", "酒", "炉火", "家宅", "婚姻", "生育", "母性", "守护", "医药", "文字", "书写", "知识", "律法", "城邦", "社稷", "王座", "加冕", "戏剧", "舞蹈", "艺术", "神谕", "祭祀", "仪式", "铁", "金", "银", "宝石", "工匠", "建筑", "城墙", "港口", "航海", "货币", "牧羊", "马", "鹰", "狼", "蛇", "龙", "牛", "金星", "水星", "火星", "木星", "土星", "黎明", "黄昏", "正午", "午夜", "春", "夏", "秋", "冬", "因果", "业", "黄泉", "天堂", "地狱", "炼狱", "末日", "虚空", "深渊", "虚无", "羽蛇", "血液", "献祭", "世界树", "卢恩", "冰霜", "雷", "诗", "德鲁伊", "彼世", "妖精", "泉水", "言灵", "秽", "祓", "稻荷", "武", "苦行", "财富", "幸运", "语言", "维持"], "concept": ["概念池", "战争", "爱", "美", "死亡", "命运", "智慧", "狩猎", "丰收", "王权", "复仇", "正义", "审判", "秩序", "混沌", "梦", "睡眠", "恐惧", "希望", "绝望", "欲望", "欢愉", "痛苦", "牺牲", "誓约", "契约", "罪", "救赎", "灵魂", "轮回", "记忆", "遗忘", "时间", "空间", "创造", "毁灭", "生命", "真理", "虚数", "根源", "界限", "起源", "终末", "光", "暗", "夜", "昼", "因果", "和平", "律法", "业", "虚空", "深渊", "疯狂", "丰穰", "王座", "加冕", "神谕", "祭祀", "献祭", "血液", "铁", "金", "银", "宝石", "锻造", "城邦", "社稷", "语言", "文字", "知识", "诗歌", "戏剧", "舞蹈", "音乐", "艺术", "医疗", "瘟疫", "转生", "黄泉", "天堂", "地狱", "炼狱", "末日", "星", "海", "大地"], "phenomena": ["现象池", "太阳", "月", "星辰", "日食", "月食", "彗星", "极光", "天空", "雷霆", "闪电", "风暴", "雨", "雪", "冰", "雾", "云", "风", "海洋", "海啸", "潮汐", "河流", "湖泊", "泉水", "沼泽", "山岳", "火山", "地震", "沙漠", "草原", "森林", "洞穴", "地热", "火焰", "洪水", "干旱", "饥荒", "丰收", "瘟疫", "疾病", "死亡", "季节", "大地", "季风", "梅雨", "台风", "龙卷风", "沙尘暴", "暴雪", "寒潮", "热浪", "霜", "露", "虹", "霞", "雾凇", "冰川", "雪山", "高原", "盆地", "峡谷", "平原", "湿地", "红树林", "珊瑚", "深海", "洋流", "火山灰", "泥石流", "山洪", "蝗灾", "极昼", "极夜", "日晕", "月晕", "流星雨", "银河", "冰雹", "雷暴", "海雾", "月相", "太阳风", "陨石", "地磁暴"]};
-var POOL_TITLES = {authority:'权能池', concept:'概念池', phenomena:'现象池'};
-var poolSel = {authority:[], concept:[], phenomena:[]};
-var poolShow = {authority:[], concept:[], phenomena:[]};
+var DEITY_FORM = ['神代本体（完全权能）','人形终端·拟体（机神，降1档）','分灵（降2档）','现代拟似从者/凭依（降3档）','神灵从者（权能受限，降3档）','残留神骸/神体碎片（不可行使）'];
+var POOL_ITEMS = {"authority_nature": ["雷霆", "天空", "风暴", "海洋", "地震", "火山", "太阳", "月", "星辰", "光明", "黑暗", "夜", "昼", "火", "水", "土", "风", "大地", "森林", "山岳", "河流", "湖泊", "洋流", "泉水", "雾", "干旱", "春", "夏", "秋", "冬", "金星", "丰收", "农业", "狩猎", "死亡", "瘟疫", "疾病", "治愈", "灵魂", "轮回", "转生", "时间", "空间", "黄泉", "冥界", "天堂", "地狱", "炼狱", "虚空", "深渊"], "authority_human": ["战争", "智慧", "爱", "美", "王权", "秩序", "混沌", "正义", "律法", "审判", "命运", "预言", "梦", "睡眠", "疯狂", "恐惧", "欲望", "欢愉", "音乐", "诗歌", "戏剧", "工艺", "商业", "旅行", "道路", "边界", "契约", "誓约", "婚姻", "生育", "家宅", "医术", "竞技", "记忆", "遗忘", "酒", "神谕", "祭祀", "航海", "牧羊", "献祭", "卢恩", "财富", "幸运", "业"], "concept": ["概念池", "战争", "爱", "美", "死亡", "命运", "智慧", "狩猎", "丰收", "王权", "复仇", "正义", "审判", "秩序", "混沌", "梦", "睡眠", "恐惧", "希望", "绝望", "欲望", "欢愉", "痛苦", "牺牲", "誓约", "契约", "罪", "救赎", "灵魂", "轮回", "记忆", "遗忘", "时间", "空间", "创造", "毁灭", "生命", "真理", "虚数", "根源", "界限", "起源", "终末", "光", "暗", "夜", "昼", "因果", "和平", "律法", "业", "虚空", "深渊", "疯狂", "丰穰", "王座", "加冕", "神谕", "祭祀", "献祭", "血液", "铁", "金", "银", "宝石", "锻造", "城邦", "社稷", "语言", "文字", "知识", "诗歌", "戏剧", "舞蹈", "音乐", "艺术", "医疗", "瘟疫", "转生", "黄泉", "天堂", "地狱", "炼狱", "末日", "星", "海", "大地"], "phenomena": ["丰收", "台风", "地震", "地鸣", "季风", "寒潮", "山火", "干旱", "日晕", "日食", "星辰错位", "暴雪", "月相异变", "月食", "极光", "极夜", "极昼", "枯萎", "梅雨", "死者骚动", "沙尘暴", "河水改道", "洪水", "流星雨", "浓雾", "海啸", "海市", "涌泉", "潮汐", "火山", "热浪", "献祭之印", "瘟疫", "瘟疫退散", "落雷", "虹", "蝗灾", "镜面之雾", "陨石", "雷暴", "霜冻", "风止", "黄泉之门", "龙卷"]};
+var PHEN2AUTH = {"雷暴": "雷霆", "落雷": "雷霆", "台风": "风暴", "龙卷": "风暴", "沙尘暴": "风", "季风": "风", "风止": "风", "地震": "大地", "地鸣": "大地", "海啸": "海洋", "潮汐": "海洋", "洪水": "水", "涌泉": "水", "河水改道": "水", "干旱": "干旱", "火山": "火", "山火": "火", "日食": "太阳", "日晕": "太阳", "极昼": "太阳", "月食": "月", "月相异变": "月", "极光": "光明", "虹": "光明", "海市": "光明", "流星雨": "星辰", "陨石": "星辰", "星辰错位": "星辰", "浓雾": "雾", "蝗灾": "丰收", "丰收": "丰收", "枯萎": "丰收", "瘟疫": "瘟疫", "瘟疫退散": "治愈", "死者骚动": "冥界", "黄泉之门": "冥界", "极夜": "夜", "镜面之雾": "夜", "献祭之印": "献祭", "霜冻": "冬", "暴雪": "冬", "寒潮": "冬", "梅雨": "夏", "热浪": "夏"};
+var PHEN_MAP = {"雷霆": ["雷暴", "落雷"], "风暴": ["台风", "龙卷"], "风": ["沙尘暴", "季风", "风止"], "大地": ["地震", "地鸣"], "海洋": ["海啸", "潮汐"], "水": ["洪水", "涌泉", "河水改道"], "干旱": ["干旱"], "火": ["火山", "山火"], "太阳": ["日食", "日晕", "极昼"], "月": ["月食", "月相异变"], "光明": ["极光", "虹", "海市"], "星辰": ["流星雨", "陨石", "星辰错位"], "雾": ["浓雾"], "丰收": ["蝗灾", "丰收", "枯萎"], "瘟疫": ["瘟疫"], "治愈": ["瘟疫退散"], "冥界": ["死者骚动", "黄泉之门"], "夜": ["极夜", "镜面之雾"], "献祭": ["献祭之印"], "冬": ["霜冻", "暴雪", "寒潮"], "夏": ["梅雨", "热浪"]};
+var POOL_TITLES = {authority_nature:'权能池·自然', authority_human:'权能池·人文', concept:'概念池', phenomena:'现象池'};
+var poolSel = {authority_nature:[], authority_human:[], concept:[], phenomena:[]};
+var poolShow = {authority_nature:[], authority_human:[], concept:[], phenomena:[]};var poolRank = {authority_nature:{}, authority_human:{}, concept:{}, phenomena:{}};var RANKS=["C","B","A","A+","A++","A+++"];window.__FMT_POOL__=function(k){return (poolSel[k]||[]).map(function(v){var r=(poolRank[k]||{})[v];return r?v+"（"+r+"）":v;}).join("、");};
 var curType = '', curSub = '';
 function el(id){ return document.getElementById(id); }
 function opts(list){ return list.map(function(v){ return '<option>'+v+'</option>'; }).join(''); }
@@ -2751,9 +2753,9 @@ return out;
 }
 function poolActive(t, sub){
 var a = [];
-if(t === '神明') a.push('authority');
+if(t === '神明' && sub === '自然神'){ a.push('phenomena'); } else if(t === '神明'){ a.push('authority_nature'); a.push('authority_human'); }
 if(t === '神明' && sub === '概念神') a.push('concept');
-if(t === '神明' && sub === '自然神') a.push('phenomena');
+
 return a;
 }
 function drawCandidates(key, n){
@@ -2762,6 +2764,10 @@ var pick = n || 12;
 while(src.length && out.length < pick){ out.push(src.splice(Math.floor(Math.random()*src.length),1)[0]); }
 return out;
 }
+function phenRow(){var sel=(poolSel.authority_nature||[]).concat(poolSel.authority_human||[]);if(!sel.length)return '';var out=[];sel.forEach(function(a){var list=(PHEN_MAP[a]||[]);if(!list.length)return;out.push('<div style="margin:.3rem 0"><span style="color:#3d5f68">'+a+' 的现象：</span>'+list.map(function(v){var on=(poolSel.phenomena||[]).indexOf(v)>=0?' class="on"':'';return '<button type="button" data-pool="phenomena" data-item="'+v+'"'+on+'>'+v+'</button>';}).join('')+'</div>');});return out.length?'<div class="a3-phen">'+out.join('')+'</div>':'';}
+function derivedRow(){var ph=(poolSel.phenomena||[])[0];if(!ph)return '';var au=(PHEN2AUTH[ph]||'');if(!au)return '';var cur=(poolRank.derived||{})[au]||'';return '<div style="margin-top:.4rem"><span style="color:#3d5f68">对应权能：'+au+'</span> <select data-rank="derived|'+au+'"><option value="">等级</option>'+RANKS.map(function(r){return '<option'+(r===cur?' selected':'')+'>'+r+'</option>';}).join('')+'</select></div>';}
+function rankRow(key){if(key==='phenomena')return '';var items=(poolSel[key]||[]);if(!items.length)return '';return '<div class="a3-ranks" style="margin-top:.4rem;font-size:.8rem;color:#3d5f68">'+items.map(function(v){var cur=(poolRank[key]||{})[v]||'';return '<label style="margin-right:.8rem">'+v+' <select data-rank="'+key+'|'+v+'"><option value="">等级</option>'+RANKS.map(function(r){return '<option'+(r===cur?' selected':'')+'>'+r+'</option>';}).join('')+'</select></label>';}).join('')+'</div>';}
+document.addEventListener('change',function(ev){var s=ev.target&&ev.target.closest?ev.target.closest('select[data-rank]'):null;if(!s)return;var p=s.dataset.rank.split('|');poolRank[p[0]][p[1]]=s.value;});
 function renderPools(t, sub){
 var box = el('a3-pools'); if(!box) return;
 var act = poolActive(t, sub);
@@ -2775,7 +2781,7 @@ return '<button type="button" data-pool="'+key+'" data-item="'+v+'"'+on+'>'+v+'<
 }).join('');
 return '<div class="a3-pool"><div class="a3-pool-h"><span>'+POOL_TITLES[key]+'（最多 2）</span>'
 + '<button type="button" data-redraw="'+key+'">换 一 批</button></div>'
-+ '<div class="a3-pool-cards">'+chips+'</div></div>';
++ '<div class="a3-pool-cards">'+chips+'</div>'+ rankRow(key) + derivedRow() + phenRow() +'</div>';
 }).join('');
 }
 function render(t, sub){
@@ -2815,7 +2821,7 @@ if(!chip) return;
 var key = chip.dataset.pool, item = chip.dataset.item, arr = poolSel[key];
 var i = arr.indexOf(item);
 if(i >= 0) arr.splice(i,1);
-else { if(arr.length >= 2) arr.shift(); arr.push(item); }
+else { var cap = (key==='phenomena')?1:2; while(arr.length >= cap) arr.shift(); arr.push(item); }
 renderPools(curType, curSub);
 });
 var LABELS = {
@@ -2833,13 +2839,13 @@ if(!go) return;
 var pick = el('a3-pick');
 if(!curType){ if(pick) pick.textContent = '先选一个类型。'; return; }
 var lines = ['【里侧登录】', '类型：' + curType + (curSub ? ' · ' + curSub : '')];var _w = (function(){ try { var r = document.querySelector('input[name="entry-world"]:checked'); if(!r) return ''; if (r.id === 'pick-custom') { var c = document.getElementById('custom-timeline-entry'); return c && c.value.trim() ? '自定义: ' + c.value.trim() : ''; } var card = r.closest('.timeline-card'); var h = card ? card.querySelector('h4') : null; return (h ? h.textContent.trim() : '') || r.value; } catch(e) { return ''; } })(); if (_w) lines.push('世界线：' + _w);
-Object.keys(LABELS).forEach(function(id){
+try{ (window.__GREAT_AUTH__?window.__GREAT_AUTH__():[]).forEach(function(l){lines.push(l);}); }catch(e){}Object.keys(LABELS).forEach(function(id){
 var n = el(id); if(!n) return;
 var v = (n.value||'').trim();
 if(v) lines.push(LABELS[id] + '：' + v);
 });
-['authority','concept','phenomena'].forEach(function(k){
-if(poolSel[k] && poolSel[k].length) lines.push(POOL_TITLES[k] + '：' + poolSel[k].join('、'));
+['authority_nature','authority_human','concept','phenomena'].forEach(function(k){
+if(poolSel[k] && poolSel[k].length) if(k==='phenomena'){ var _ph=poolSel.phenomena||[]; if(_ph.length){ if(curType==='神明'&&curSub==='自然神'){ var _au=_ph.map(function(x){return window.__PHEN2AUTH__&&window.__PHEN2AUTH__[x]||'—';}); var _rk=(poolRank.derived||{})[_au[0]]||''; lines.push('本源现象（化身）：'+_ph.join('、')+'｜可自由行使、不耗额度'); lines.push('权能池·自然：'+_au.map(function(a){return _rk? a+'（'+_rk+'）': a;}).join('、')); } else { lines.push('现象：'+_ph.join('、')); } } } else lines.push(POOL_TITLES[k] + '：' + (window.__FMT_POOL__?window.__FMT_POOL__(k):poolSel[k].join('、')));
 });
 try{
 var roll = window.__TALENT_EXPORT__ ? window.__TALENT_EXPORT__() : null;
