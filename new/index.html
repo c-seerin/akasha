@@ -1860,10 +1860,10 @@ fields.push(['性格','d-persona'],['特性 / 池外补充','d-power'],['补充�
 fields.forEach(([label,id])=>{const v=val(id); if(v) lines.push(label+'：'+v);});
 try {
 const roll = window.__TALENT_EXPORT__ ? window.__TALENT_EXPORT__() : null;
-const picked = roll && Array.isArray(roll.selected) ? roll.selected : [];
+const picked = (roll && Array.isArray(roll.selected) ? roll.selected : []).filter(function(x){ return String(x.step||'').indexOf('异世界') < 0; });
 if (picked.length || (roll && roll.custom)) {
 lines.push('-------------------------------------------------');
-lines.push('天赋 / 异世界能力：');
+lines.push('天赋 / 能力：');
 picked.forEach((x) => {
 const rating = x.rating ? ' · ' + x.rating : '';
 lines.push('- 【' + x.step + rating + '】' + x.name);
@@ -2832,7 +2832,7 @@ var go = e.target.closest && e.target.closest('.a3-go');
 if(!go) return;
 var pick = el('a3-pick');
 if(!curType){ if(pick) pick.textContent = '先选一个类型。'; return; }
-var lines = ['【里侧登录】', '类型：' + curType + (curSub ? ' · ' + curSub : '')];
+var lines = ['【里侧登录】', '类型：' + curType + (curSub ? ' · ' + curSub : '')];var _w = (function(){ try { var r = document.querySelector('input[name="entry-world"]:checked'); if(!r) return ''; if (r.id === 'pick-custom') { var c = document.getElementById('custom-timeline-entry'); return c && c.value.trim() ? '自定义: ' + c.value.trim() : ''; } var card = r.closest('.timeline-card'); var h = card ? card.querySelector('h4') : null; return (h ? h.textContent.trim() : '') || r.value; } catch(e) { return ''; } })(); if (_w) lines.push('世界线：' + _w);
 Object.keys(LABELS).forEach(function(id){
 var n = el(id); if(!n) return;
 var v = (n.value||'').trim();
@@ -2843,10 +2843,10 @@ if(poolSel[k] && poolSel[k].length) lines.push(POOL_TITLES[k] + '：' + poolSel[
 });
 try{
 var roll = window.__TALENT_EXPORT__ ? window.__TALENT_EXPORT__() : null;
-var picked = (roll && Array.isArray(roll.selected)) ? roll.selected : [];
+var picked = (roll && Array.isArray(roll.selected) ? roll.selected : []).filter(function(x){ return String(x.step||'').indexOf('异世界') < 0; });
 if(picked.length || (roll && roll.custom)){
 lines.push('-------------------------------------------------');
-lines.push('天赋 / 异世界能力：');
+lines.push('天赋 / 能力：');
 picked.forEach(function(x){
 lines.push('- 【' + x.step + (x.rating ? ' · ' + x.rating : '') + '】' + x.name);
 if(x.summary) lines.push('  ' + x.summary);
