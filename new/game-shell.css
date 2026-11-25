@@ -604,21 +604,26 @@ body #home .chapter-plate>img{display:block;width:100%;height:auto;}
 body #home .chapter-plate>b{top:100%;bottom:auto;}
 
 
-/* Local scaling happens before the globe's perspective transform. */
+/* Each wave resets at zero opacity. The map projection stays on its parent. */
+.globe-marker i {
+  border:0; background:transparent; box-shadow:none;
+}
+.globe-marker[aria-pressed=true] i {box-shadow:none}
+.globe-marker i::after {
+  inset:0; box-sizing:border-box; border:calc(var(--marker-size,36px) * .08) solid #57eff3;
+  box-shadow:0 0 4px #8cffff88;
+  transform:scale(.35);
+}
+.globe-marker i:nth-child(2)::after {transform:scale(.78);opacity:.85}
+.globe-marker i:nth-child(3)::after {transform:scale(1.22);opacity:.35}
 @media (prefers-reduced-motion: no-preference) {
-  .is-globe .globe-marker i {
-    animation: divine-ring-expand 3.2s linear infinite;
-    box-shadow: 0 0 calc(var(--marker-size,36px) * .25) #83ffffa8;
-  }
-  .is-globe .globe-marker i::after {
-    animation: divine-core-expand 3.2s linear infinite;
-  }
+  .is-globe .globe-marker i::after {animation:divine-wave 3.3s linear infinite}
+  .is-globe .globe-marker i:nth-child(2)::after {animation-delay:-1.1s}
+  .is-globe .globe-marker i:nth-child(3)::after {animation-delay:-2.2s}
 }
-@keyframes divine-ring-expand {
-  from { transform: rotate(var(--surface-angle,0deg)) scaleY(var(--foreshorten)) scale(.68); }
-  to { transform: rotate(var(--surface-angle,0deg)) scaleY(var(--foreshorten)) scale(1.05); }
-}
-@keyframes divine-core-expand {
-  from { transform: scale(.24); }
-  to { transform: scale(1.12); }
+@keyframes divine-wave {
+  0% {transform:scale(.16);opacity:0}
+  12% {opacity:1}
+  52% {opacity:.92}
+  100% {transform:scale(1.48);opacity:0}
 }
