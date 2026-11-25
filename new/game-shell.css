@@ -615,16 +615,18 @@ body #home .chapter-plate>b{top:100%;bottom:auto;}
 }
 .globe-marker[aria-pressed=true] i {box-shadow:none}
 .globe-marker i::after {
-  inset:0; box-sizing:border-box; border:calc(var(--marker-size,36px) * .13) solid #57eff3;
-  box-shadow:0 0 4px #8cffff88;
+  inset:0; box-sizing:border-box; border:calc(var(--marker-size,36px) * .15) solid #57eff3;
+  background:radial-gradient(circle,#95ffff44,#76f8ff26 65%,transparent);
+  box-shadow:0 0 calc(var(--marker-size,36px) * .13) #78faff99,
+             inset 0 0 calc(var(--marker-size,36px) * .08) #86ffff77;
   transform:scale(.35);
 }
 .globe-marker i:nth-child(2)::after {transform:scale(.78);opacity:.85}
 .globe-marker i:nth-child(3)::after {transform:scale(1.22);opacity:.35}
 @media (prefers-reduced-motion: no-preference) {
-  .is-globe .globe-marker i::after {animation:divine-wave 4.8s linear infinite}
-  .is-globe .globe-marker i:nth-child(2)::after {animation-delay:-1.6s}
-  .is-globe .globe-marker i:nth-child(3)::after {animation-delay:-3.2s}
+  .is-globe .globe-marker i::after {animation:divine-wave 5.7s linear infinite}
+  .is-globe .globe-marker i:nth-child(2)::after {animation-delay:-1.9s}
+  .is-globe .globe-marker i:nth-child(3)::after {animation-delay:-3.8s}
 }
 @keyframes divine-wave {
   0% {transform:scale(.16);opacity:0}
