@@ -547,10 +547,10 @@ body[data-screen=roll] .summon-art{position:fixed!important;inset:0!important;z-
 
 /* Isolated white myth emblems: source order 2, 1, 3, 4. */
 body #home .chapter-selectors button .shortcut-emblem{width:36px;height:40px;flex:0 0 36px;transform:none;margin:0;background-position:center!important;background-size:contain!important;background-repeat:no-repeat;}
-body #home .chapter-selectors button:nth-child(1) .shortcut-emblem{background-image:url('img/fgo-ui/myth-sumer.svg');}
-body #home .chapter-selectors button:nth-child(2) .shortcut-emblem{background-image:url('img/fgo-ui/myth-greek.svg');}
-body #home .chapter-selectors button:nth-child(3) .shortcut-emblem{background-image:url('img/fgo-ui/myth-norse.svg');}
-body #home .chapter-selectors button:nth-child(4) .shortcut-emblem{background-image:url('img/fgo-ui/myth-arthur.svg');}
+body #home .chapter-selectors button:nth-child(1) .shortcut-emblem{background-image:url('img/divine-plates/sumer-mark.webp');}
+body #home .chapter-selectors button:nth-child(2) .shortcut-emblem{background-image:url('img/divine-plates/greek-mark.webp');}
+body #home .chapter-selectors button:nth-child(3) .shortcut-emblem{background-image:url('img/divine-plates/norse-mark.webp');}
+body #home .chapter-selectors button:nth-child(4) .shortcut-emblem{background-image:url('img/divine-plates/arthur-mark.webp');}
 @media(max-width:740px){body #home .chapter-selectors button .shortcut-emblem{width:26px;height:30px;flex-basis:26px;}}
 
 /* Keep the complete emblem inset inside the native plate at every size. */
@@ -597,3 +597,8 @@ body #home button.ordeal-rank:focus-visible{outline:2px solid #85edff;outline-of
 
 body #home button.divine-enter{width:100%;font:inherit;cursor:pointer;touch-action:manipulation}
 @media(pointer:coarse){.globe-marker::before{content:'';position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:max(100%,44px);height:max(100%,44px)}}
+
+body #home .ordeal-detail .divine-enter.chapter-plate{display:block;width:100%;padding:0;min-height:0;background:none;border:0;box-shadow:none;}
+body #home .ordeal-detail .chapter-plate::before{content:none;}
+body #home .chapter-plate>img{display:block;width:100%;height:auto;}
+body #home .chapter-plate>b{top:100%;bottom:auto;}
