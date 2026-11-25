@@ -14,7 +14,11 @@ window.AkashaMap={init(canvas){
  function point(lat,lon){const v=(90-lat)/180,u=(180-lon)/360,t=u*Math.PI*2;return[Math.cos(t)*Math.sin(v*Math.PI),Math.cos(v*Math.PI),Math.sin(t)*Math.sin(v*Math.PI)];}
  function rotation(q){let [x,y,z]=q,c=Math.cos(yaw),s=Math.sin(yaw);[x,z]=[c*x+s*z,-s*x+c*z];[y,z]=[Math.cos(pitch)*y-Math.sin(pitch)*z,Math.sin(pitch)*y+Math.cos(pitch)*z];return[Math.cos(roll)*x-Math.sin(roll)*y,Math.sin(roll)*x+Math.cos(roll)*y,z];}
  const points=chapters;
- const markers=points.map((p,i)=>{const b=document.createElement('button');b.className='globe-marker';b.hidden=true;b.dataset.login=p.id;b.setAttribute('aria-label','定位'+p.title);b.innerHTML='<i></i><b>1</b><span class="marker-diamond" aria-hidden="true">◇</span>';b.onclick=()=>select(i);canvas.parentElement.append(b);return{p,b,q:point(p.lat,p.lon)};});
+ const markers=points.map((p,i)=>{const b=document.createElement('button');b.className='globe-marker';b.hidden=true;b.dataset.login=p.id;b.setAttribute('aria-label','定位'+p.title);b.innerHTML='<i></i><b>'+window.divineTimeline.count(p.id)+'</b><span class="marker-diamond" aria-hidden="true">◇</span>';b.onclick=()=>select(i);canvas.parentElement.append(b);return{p,b,q:point(p.lat,p.lon)};});
+ document.addEventListener('change',event=>{
+  if(event.target.id===focus?.id) panel.querySelector('.divine-enter b').textContent='✓ 已选择';
+  if(event.target.id===focus?.id) panel.querySelector('.divine-enter').setAttribute('aria-pressed','true');
+ });
  const panel=root.querySelector('.ordeal-detail'),region=root.querySelector('.region-name');
  function animate(to){if(reduced.matches){({yaw,pitch,roll,zoom,shift}=to);tween=null;}else tween={from:{yaw,pitch,roll,zoom,shift},to,start:performance.now()};}
  function select(i){const p=chapters[i];if(!mode||!p)return;focus=p;root.classList.add('map-focused');region.textContent=p.name;
@@ -25,7 +29,8 @@ window.AkashaMap={init(canvas){
   enter.setAttribute('aria-pressed',String(radio.checked));
   enter.querySelector('b').textContent=radio.checked?'✓ 已选择':'选择';
  }
- enter.onclick=()=>{radio.click();showChoice();};
+ enter.onclick=()=>window.divineTimeline.open(p.id);
+ enter.setAttribute('aria-haspopup','dialog');
  showChoice();
  panel.dataset.chapter=String(i);root.querySelectorAll('[data-chapter]').forEach(b=>b.setAttribute('aria-pressed',String(+b.dataset.chapter===i)));
  markers.forEach(m=>m.b.setAttribute('aria-pressed',String(m.p===p)));

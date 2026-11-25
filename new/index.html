@@ -274,12 +274,12 @@ window.akashaRenderAssetURL = (() => {
 <link rel="stylesheet" href="hidden-entry-finish.css">
 </head>
 <body>
-<div id="tl-modal" hidden="">
+<dialog id="tl-modal" aria-labelledby="tl-modal-title">
   <div class="tl-mask"></div>
   <div class="tl-panel">
     <div class="tl-head"><span id="tl-modal-title">里侧登录点 · 亚瑟王传说</span><button type="button" class="tl-x" id="tl-close">×</button></div>
     <p class="tl-lead">这条世界线里，你要落在哪一段？</p>
-    <div id="tl-options"><button type="button" class="tl-opt" data-i="0"><b><i>早期</i>卡美洛建立（A.D.500 前后）</b></button><button type="button" class="tl-opt" data-i="1"><b><i>中期</i>讨伐伏提庚</b></button><button type="button" class="tl-opt" data-i="2"><b><i>后期</i>卡姆兰之丘</b></button><button type="button" class="tl-opt" data-i="c"><b><i>自定义</i>自己写一个时间点</b><span>不从上面三段里选，直接描述你要落在哪一刻。</span></button></div>
+    <div id="tl-options"></div>
     <div id="tl-custom-wrap" hidden="">
       <input id="tl-custom-input" placeholder="自己写一个时间点，例：诸神黄昏前夜，第三度寒冬的第一天" value="">
     </div>
@@ -288,7 +288,7 @@ window.akashaRenderAssetURL = (() => {
       <button type="button" class="tl-btn" id="tl-cancel">返回</button>
     </div>
   </div>
-</div>
+</dialog>
 
 
 <canvas id="gate-petals" aria-hidden="true" width="3840" height="1906"></canvas>
@@ -4485,8 +4485,8 @@ select{ color:inherit; }
 </style>
 
 <style id="tl-modal-style">
-#tl-modal{position:fixed;inset:0;z-index:100010;display:grid;place-items:center}
-#tl-modal[hidden]{display:none}
+#tl-modal{margin:0;padding:0;border:0;background:transparent;width:100%;height:100%;max-width:none;max-height:none;position:fixed;inset:0;z-index:100010;display:grid;place-items:center}
+#tl-modal:not([open]){display:none}
 #tl-modal .tl-mask{position:absolute;inset:0;background:rgba(3,6,9,.72);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
 #tl-modal .tl-panel{
   position:relative;width:min(680px,92vw);max-height:84vh;overflow:auto;
@@ -4526,25 +4526,47 @@ select{ color:inherit; }
 <script id="tl-chooser-js">
 (function(){
   var DATA = {
-    su: { title:'里侧登录点 · 苏美尔神话', opts:[
-      ['早期','约前 12,000 年 · 赛法卢来袭'],
-      ['中期','约前 5,000 年 · 吉尔伽美什即位'],
-      ['后期','约前 2,600 年 · 与诸神诀别']
+    su: { title: '里侧登录点 · 苏美尔神话', opts: [
+      ['提亚马特创世', '约14,000年前'],
+      ['伊什塔尔挑战艾比夫山', '约前5,500'],
+      ['伊什塔尔下冥界', '约前5,200'],
+      ['吉尔伽美什即位', '约前5,000'],
+      ['恩奇都之死与求不死', '约前5,000年后'],
+      ['诀别 · 美索不达米亚神代终结', '约前2,600'],
+      ['神代消退契机', '约前7世纪']
     ]},
-    gr: { title:'里侧登录点 · 希腊神话', opts:[
-      ['早期','约前 12,000 年 · 十二机神抵达'],
-      ['中期','约前 12 世纪 · 特洛伊战争'],
-      ['后期','约前 7 世纪 · 神代消退的契机']
+    gr: { title: '里侧登录点 · 希腊神话', opts: [
+      ['机神舰队抵达 · 白之毁灭', '约14,000年前'],
+      ['亚特兰蒂斯机神沉海', '约前12,000'],
+      ['提坦之战', '神话时代'],
+      ['英雄时代 · 特洛伊战争', '约前12世纪'],
+      ['神代余晖期', '神代末期']
     ]},
-    no: { title:'里侧登录点 · 北欧神话', opts:[
-      ['早期','约前 10,000 年 · 阿萨-华纳战争'],
-      ['中期','约前 1,080 年 · 巴德尔之死'],
-      ['后期','约前 1,000 年 · 诸神黄昏']
+    no: { title: '里侧登录点 · 北欧神话', opts: [
+      ['旧神世代', '前14,000年以前'],
+      ['奥丁以赛法卢尸骸造瓦尔基里', '约前12,000—前10,000'],
+      ['阿萨-华纳战争', '约前10,000'],
+      ['漫长神话时代', '约前8,000—前3,000'],
+      ['神话时代晚期', '约前3,000—前1,100'],
+      ['巴德尔之死', '约前1,080'],
+      ['诸神黄昏预兆', '约前1,050'],
+      ['诸神黄昏', '约前1,000'],
+      ['新世界', '约前1,000年以后']
     ]},
-    ar: { title:'里侧登录点 · 亚瑟王传说', opts:[
-      ['早期','卡美洛建立（A.D.500 前后）'],
-      ['中期','讨伐伏提庚'],
-      ['后期','卡姆兰之丘']
+    ar: { title: '里侧登录点 · 亚瑟王传说', opts: [
+      ['罗马撤军', '410'],
+      ['伏提庚取得主导', '425'],
+      ['尤瑟崛起', '5世纪前半'],
+      ['亚瑟即位 · 十二场会战', '5世纪后半'],
+      ['讨伐白龙伏提庚 · 卡美洛鼎盛', '约500年'],
+      ['巴顿山之战', '500'],
+      ['高文与绿骑士', '510'],
+      ['圣杯探索', '515—520'],
+      ['莫德雷德入圆桌', '525'],
+      ['圆桌分裂', '530'],
+      ['远征罗马 · 缔结和约', '535'],
+      ['卡姆兰 · 归还圣剑 · 阿瓦隆', '537'],
+      ['神代余韵终结', '537以后']
     ]}
   };
   var curCard=null, curKey=null, picked=null;
@@ -4554,15 +4576,20 @@ select{ color:inherit; }
   var optsEl=document.getElementById('tl-options');
   var customWrap=document.getElementById('tl-custom-wrap');
   var customInput=document.getElementById('tl-custom-input');
-  function close(){ modal.hidden=true; }
+  document.body.appendChild(modal);
+  function close(){ modal.close(); }
   function open(key, card){ curKey=key; curCard=card; picked=null; titleEl.textContent=DATA[key].title;
-    customInput.value=''; customWrap.hidden=true; render(); modal.hidden=false; }
+    var saved=card.getAttribute('data-tl-choice')||'';
+    var idx=DATA[key].opts.findIndex(function(o){return o.join(' · ')===saved;});
+    picked=idx>=0?idx:saved.startsWith('自定义时间点：')?'c':null;
+    customInput.value=picked==='c'?saved.slice('自定义时间点：'.length):'';
+    customWrap.hidden=picked!=='c'; render(); modal.showModal(); }
   function render(){
     var d=DATA[curKey], html='';
     d.opts.forEach(function(o,i){
       html += '<button type="button" class="tl-opt'+(picked===i?' on':'')+'" data-i="'+i+'"><b><i>'+o[0]+'</i>'+o[1]+'</b></button>';
     });
-    html += '<button type="button" class="tl-opt'+(picked==='c'?' on':'')+'" data-i="c"><b><i>自定义</i>自己写一个时间点</b><span>不从上面三段里选，直接描述你要落在哪一刻。</span></button>';
+    html += '<button type="button" class="tl-opt'+(picked==='c'?' on':'')+'" data-i="c"><b><i>自选时期</i>自己填一个时期</b><span>不在上面列表里时，直接描述你要落在哪一刻。</span></button>';
     optsEl.innerHTML=html;
     [].slice.call(optsEl.querySelectorAll('.tl-opt')).forEach(function(btn){
       btn.addEventListener('click', function(){ var i=btn.getAttribute('data-i');
@@ -4576,8 +4603,8 @@ select{ color:inherit; }
       text='自定义时间点：'+v; label='自定义 · '+v; }
     else { var o=DATA[curKey].opts[picked]; text=o[0]+' · '+o[1]; label=o[0]+' · '+o[1]; }
     var radio=curCard.querySelector('.pick');
-    if (radio){ radio.checked=true; radio.dispatchEvent(new Event('change',{bubbles:true})); }
     curCard.setAttribute('data-tl-choice', text);
+    if (radio){ radio.checked=true; radio.dispatchEvent(new Event('change',{bubbles:true})); }
     var tag=curCard.querySelector('.tl-chosen');
     if (!tag){ tag=document.createElement('div'); tag.className='tl-chosen';
       var row=curCard.querySelector('.pick-row'); curCard.insertBefore(tag,row); }
@@ -4589,6 +4616,11 @@ select{ color:inherit; }
   document.getElementById('tl-confirm').addEventListener('click', commit);
   modal.querySelector('.tl-mask').addEventListener('click', close);
   var MAP=[['pick-divine-sumer','su'],['pick-divine-greek','gr'],['pick-divine-norse','no'],['pick-divine-arthur','ar']];
+  var keys=new Map(MAP);
+  window.divineTimeline={
+    count:function(id){return DATA[keys.get(id)].opts.length;},
+    open:function(id){open(keys.get(id), document.getElementById(id).closest('.timeline-card'));}
+  };
   MAP.forEach(function(pair){
     var radio=document.getElementById(pair[0]); if(!radio) return;
     var card=radio.closest('.timeline-card'); if(!card) return;
@@ -4848,7 +4880,7 @@ select{ color:inherit; }
 <link rel="stylesheet" href="announcement.css">
 <script src="announcement.js" defer></script>
 <link rel="stylesheet" href="game-ui.css">
-<link rel="stylesheet" href="game-shell.css?v=fe4e25a"><script src="game-map.js?v=title-ratio-2" defer></script><script src="game-shell.js" defer></script><script src="game-worlds.js" defer></script>
+<link rel="stylesheet" href="game-shell.css?v=fe4e25a"><script src="game-map.js?v=timeline-counts" defer></script><script src="game-shell.js" defer></script><script src="game-worlds.js" defer></script>
 <link rel="stylesheet" href="summon-view.css"><script src="summon-view.js"></script><link rel="stylesheet" href="summon-composer.css"><script src="summon-composer.js"></script><script src="hidden-entry-finish.js"></script>
 
 <style>
