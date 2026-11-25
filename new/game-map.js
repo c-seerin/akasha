@@ -6,10 +6,10 @@ window.AkashaMap={init(canvas){
  const pause=document.getElementById('map-pause');function updatePause(){pause.textContent=paused?'▶':'Ⅱ';pause.setAttribute('aria-pressed',String(paused));pause.setAttribute('aria-label',paused?'开始地图旋转':'暂停地图旋转');}pause.onclick=()=>{paused=!paused;updatePause();};updatePause();reduced.addEventListener('change',e=>{paused=e.matches;updatePause();});
  // Regional anchors for the existing mythic login points, not archaeological claims.
  const chapters=[
- {id:'pick-divine-sumer',plate:'img/divine-plates/sumer.webp?v=fe4e25a',plateTitle:'神代乌鲁克',name:'美索不达米亚 · 乌鲁克',title:'苏美尔神话',pantheon:'美索不达米亚',lat:31.32,lon:45.64},
- {id:'pick-divine-greek',plate:'img/divine-plates/greek.webp?v=fe4e25a',plateTitle:'奥林波斯',name:'希腊神话区域',title:'希腊神话',pantheon:'希腊',lat:38,lon:24},
- {id:'pick-divine-norse',plate:'img/divine-plates/norse.webp?v=fe4e25a',plateTitle:'诸神黄昏',name:'北欧神话区域',title:'北欧神话',pantheon:'北欧',lat:62,lon:16},
- {id:'pick-divine-arthur',plate:'img/divine-plates/arthur.webp?v=fe4e25a',plateTitle:'神代终结',name:'不列颠 · 神代余韵',title:'亚瑟王传说',pantheon:'凯尔特',lat:51,lon:-3}];
+ {id:'pick-divine-sumer',plate:'img/divine-plates/sumer.webp?v=title-ratio-2',plateTitle:'神代乌鲁克',name:'美索不达米亚 · 乌鲁克',title:'苏美尔神话',pantheon:'美索不达米亚',lat:31.32,lon:45.64},
+ {id:'pick-divine-greek',plate:'img/divine-plates/greek.webp?v=title-ratio-2',plateTitle:'奥林波斯',name:'希腊神话区域',title:'希腊神话',pantheon:'希腊',lat:38,lon:24},
+ {id:'pick-divine-norse',plate:'img/divine-plates/norse.webp?v=title-ratio-2',plateTitle:'诸神黄昏',name:'北欧神话区域',title:'北欧神话',pantheon:'北欧',lat:62,lon:16},
+ {id:'pick-divine-arthur',plate:'img/divine-plates/arthur.webp?v=title-ratio-2',plateTitle:'神代终结',name:'不列颠 · 神代余韵',title:'亚瑟王传说',pantheon:'凯尔特',lat:51,lon:-3}];
  root.querySelectorAll('[data-chapter]').forEach((b,i)=>{b.innerHTML='<i class=shortcut-emblem aria-hidden=true></i><span><strong>'+chapters[i].title+'</strong><small>'+chapters[i].plateTitle+'</small></span>';b.setAttribute('aria-label','定位'+chapters[i].title);});
  function point(lat,lon){const v=(90-lat)/180,u=(180-lon)/360,t=u*Math.PI*2;return[Math.cos(t)*Math.sin(v*Math.PI),Math.cos(v*Math.PI),Math.sin(t)*Math.sin(v*Math.PI)];}
  function rotation(q){let [x,y,z]=q,c=Math.cos(yaw),s=Math.sin(yaw);[x,z]=[c*x+s*z,-s*x+c*z];[y,z]=[Math.cos(pitch)*y-Math.sin(pitch)*z,Math.sin(pitch)*y+Math.cos(pitch)*z];return[Math.cos(roll)*x-Math.sin(roll)*y,Math.sin(roll)*x+Math.cos(roll)*y,z];}
