@@ -289,7 +289,12 @@ body #home .ordeal-detail .divine-enter{margin:0;display:flex;align-items:center
 body #home .ordeal-detail .divine-enter::before{content:'';position:absolute;inset:0;z-index:-1;background:repeating-linear-gradient(135deg,#fff5 0 35px,transparent 35px 70px),linear-gradient(#fffef4,#dbeaf0);border:5px ridge #b9ad86;clip-path:polygon(3% 0,97% 0,100% 50%,97% 100%,3% 100%,0 50%);}
 body #home .divine-enter>span{flex:1;text-align:center;}body #home .divine-enter strong{display:block;font-size:clamp(22px,2.5vw,48px);margin:0 0 6px;}body #home .divine-enter em{font-style:normal;font-size:clamp(13px,1.5vw,28px);color:#35495b;}body #home .divine-enter>b{position:absolute;right:5%;bottom:-22px;background:#fffef0;border:2px solid #a89f7c;padding:4px 22px;font-size:18px;}
 body #home .map-focused .region-name{left:19%;top:71%;padding:8px 24px;background:#304354;color:white;clip-path:polygon(8% 0,92% 0,100% 50%,92% 100%,8% 100%,0 50%);font-size:20px;text-shadow:none;}
-.globe-marker{width:var(--marker-size,36px);height:var(--marker-size,36px);}.globe-marker i{inset:0;width:100%;height:100%;box-sizing:border-box;border:calc(var(--marker-size,36px)*.18) solid #71f6f7;background:#aaffff55;box-shadow:0 0 0 calc(var(--marker-size,36px)*.25) #93f9ff33;}.globe-marker i::after{inset:28%;border-width:2px;}.globe-marker b{width:45%;height:45%;font-size:calc(var(--marker-size,36px)*.32);top:-25%;right:-25%;}.marker-diamond{left:75%;top:70%;font-size:calc(var(--marker-size,36px)*.5);}
+.globe-marker{width:var(--marker-size,36px);height:var(--marker-size,36px);}.globe-marker i{inset:0;width:100%;height:100%;box-sizing:border-box;border:calc(var(--marker-size,36px)*.18) solid #71f6f7;background:#aaffff55;box-shadow:0 0 0 calc(var(--marker-size,36px)*.25) #93f9ff33;}.globe-marker i::after{inset:28%;border-width:2px;}.globe-marker b{
+  display:grid;place-items:center;box-sizing:border-box;
+  width:max(21px,48%);height:max(21px,48%);
+  font:600 max(10px,calc(var(--marker-size,36px)*.22))/1 Arial,sans-serif;
+  font-variant-numeric:tabular-nums;top:-30%;right:-30%;
+}.marker-diamond{left:75%;top:70%;font-size:calc(var(--marker-size,36px)*.5);}
 @media(max-width:740px){.is-globe .chapter-selectors{width:45%;top:12%;}body #home .chapter-selectors button{font-size:13px;}.shortcut-emblem{transform:scale(.7);margin:-4px;}body #home .map-focused .ordeal-detail{width:48%;right:2%;top:27%;}body #home .ordeal-detail .divine-enter{padding:12px;min-height:125px;gap:0;}body #home .divine-enter .shortcut-emblem{display:none;}body #home .divine-enter strong{font-size:21px;}body #home .divine-enter em{font-size:13px;}body #home .map-focused .region-name{left:4%;font-size:12px;padding:8px;}}
 .is-globe .map-viewport{position:absolute;left:calc(-1 * var(--scene-left,0px));top:calc(-1 * var(--scene-top,98px));right:auto;bottom:auto;}
 body #home .divine-enter>b{color:#315478!important;text-shadow:0 1px white;}.divine-enter .shortcut-emblem{transform:scale(1.8);margin:0 15px;}
@@ -610,16 +615,16 @@ body #home .chapter-plate>b{top:100%;bottom:auto;}
 }
 .globe-marker[aria-pressed=true] i {box-shadow:none}
 .globe-marker i::after {
-  inset:0; box-sizing:border-box; border:calc(var(--marker-size,36px) * .08) solid #57eff3;
+  inset:0; box-sizing:border-box; border:calc(var(--marker-size,36px) * .13) solid #57eff3;
   box-shadow:0 0 4px #8cffff88;
   transform:scale(.35);
 }
 .globe-marker i:nth-child(2)::after {transform:scale(.78);opacity:.85}
 .globe-marker i:nth-child(3)::after {transform:scale(1.22);opacity:.35}
 @media (prefers-reduced-motion: no-preference) {
-  .is-globe .globe-marker i::after {animation:divine-wave 3.3s linear infinite}
-  .is-globe .globe-marker i:nth-child(2)::after {animation-delay:-1.1s}
-  .is-globe .globe-marker i:nth-child(3)::after {animation-delay:-2.2s}
+  .is-globe .globe-marker i::after {animation:divine-wave 4.8s linear infinite}
+  .is-globe .globe-marker i:nth-child(2)::after {animation-delay:-1.6s}
+  .is-globe .globe-marker i:nth-child(3)::after {animation-delay:-3.2s}
 }
 @keyframes divine-wave {
   0% {transform:scale(.16);opacity:0}
