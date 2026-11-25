@@ -16,8 +16,20 @@ window.AkashaMap={init(canvas){
  const points=chapters;
  const markers=points.map((p,i)=>{const b=document.createElement('button');b.className='globe-marker';b.hidden=true;b.dataset.login=p.id;b.setAttribute('aria-label','定位'+p.title);b.innerHTML='<i aria-hidden="true"></i><i aria-hidden="true"></i><i aria-hidden="true"></i><b>'+window.divineTimeline.count(p.id)+'</b><span class="marker-diamond" aria-hidden="true">◇</span>';b.onclick=()=>select(i);canvas.parentElement.append(b);return{p,b,q:point(p.lat,p.lon)};});
  document.addEventListener('change',event=>{
-  if(event.target.id===focus?.id) panel.querySelector('.divine-enter b').textContent='✓ 已选择';
-  if(event.target.id===focus?.id) panel.querySelector('.divine-enter').setAttribute('aria-pressed','true');
+  const chapter=chapters.find(p=>p.id===event.target.id);
+  if(!chapter || !event.target.checked)return;
+  if(chapter===focus){
+   panel.querySelector('.divine-enter b').textContent='✓ 已选择';
+   panel.querySelector('.divine-enter').setAttribute('aria-pressed','true');
+  }
+  const field=document.getElementById('d-pantheon'),era=document.getElementById('d-era');
+  field.value=chapter.pantheon;
+  field.dispatchEvent(new Event('change',{bubbles:true}));
+  if(!era.value.trim() || era.value===era.dataset.mapRegion){
+   era.value=chapter.name;era.dataset.mapRegion=chapter.name;
+   era.dispatchEvent(new Event('input',{bubbles:true}));
+  }
+  document.dispatchEvent(new CustomEvent('akasha:divine-selected',{detail:chapter}));
  });
  const panel=root.querySelector('.ordeal-detail'),region=root.querySelector('.region-name');
  function animate(to){if(reduced.matches){({yaw,pitch,roll,zoom,shift}=to);tween=null;}else tween={from:{yaw,pitch,roll,zoom,shift},to,start:performance.now()};}

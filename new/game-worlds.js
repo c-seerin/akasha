@@ -99,9 +99,11 @@ const init=()=>{
  const fitTitles=()=>{
   chapters.querySelectorAll('.metal-story-card:not([hidden])').forEach(card=>{
    const title=card.querySelector('h4');if(!title)return;
-   let size=Math.min(28,Math.max(16,card.clientWidth*.043));title.style.setProperty('font-size',size+'px','important');
+   title.style.removeProperty('font-size');
    const limit=Math.max(36,card.clientHeight-24);
-   while(size>12&&(title.scrollWidth>title.clientWidth+1||title.getBoundingClientRect().height>limit)){size-=.5;title.style.setProperty('font-size',size+'px','important');}
+   let size=parseFloat(getComputedStyle(title).fontSize)||Math.min(28,Math.max(16,card.clientWidth*.043));
+   let guard=0;
+   while(guard++<40&&size>9&&(title.scrollWidth>title.clientWidth+1||title.getBoundingClientRect().height>limit)){size-=.5;title.style.setProperty('font-size',size+'px','important');}
   });
  };
  const titleObserver=new ResizeObserver(()=>requestAnimationFrame(fitTitles));titleObserver.observe(chapters);
