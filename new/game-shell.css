@@ -602,3 +602,20 @@ body #home .ordeal-detail .divine-enter.chapter-plate{display:block;width:100%;p
 body #home .ordeal-detail .chapter-plate::before{content:none;}
 body #home .chapter-plate>img{display:block;width:100%;height:auto;}
 body #home .chapter-plate>b{top:100%;bottom:auto;}
+
+/* Keep the diamond and hit target on the globe while the ring and count hop. */
+@media (prefers-reduced-motion: no-preference) {
+  .is-globe .globe-marker i,
+  .is-globe .globe-marker b {
+    animation: divine-marker-hop 1.65s infinite;
+    animation-delay: var(--hop-delay, 0s);
+  }
+  .globe-marker[data-login="pick-divine-greek"] { --hop-delay: -.24s; }
+  .globe-marker[data-login="pick-divine-norse"] { --hop-delay: -.48s; }
+  .globe-marker[data-login="pick-divine-arthur"] { --hop-delay: -.72s; }
+}
+@keyframes divine-marker-hop {
+  0% { translate: 0 0; animation-timing-function: ease-out; }
+  25% { translate: 0 calc(var(--marker-size, 36px) * -.18); animation-timing-function: ease-in; }
+  48%, 100% { translate: 0 0; }
+}
