@@ -547,10 +547,10 @@ body[data-screen=roll] .summon-art{position:fixed!important;inset:0!important;z-
 
 /* Isolated white myth emblems: source order 2, 1, 3, 4. */
 body #home .chapter-selectors button .shortcut-emblem{width:36px;height:40px;flex:0 0 36px;transform:none;margin:0;background-position:center!important;background-size:contain!important;background-repeat:no-repeat;}
-body #home .chapter-selectors button:nth-child(1) .shortcut-emblem{background-image:url('img/divine-plates/sumer-mark.webp');}
-body #home .chapter-selectors button:nth-child(2) .shortcut-emblem{background-image:url('img/divine-plates/greek-mark.webp');}
-body #home .chapter-selectors button:nth-child(3) .shortcut-emblem{background-image:url('img/divine-plates/norse-mark.webp');}
-body #home .chapter-selectors button:nth-child(4) .shortcut-emblem{background-image:url('img/divine-plates/arthur-mark.webp');}
+body #home .chapter-selectors button:nth-child(1) .shortcut-emblem{background-image:url('img/divine-plates/sumer-mark.webp?v=fe4e25a');}
+body #home .chapter-selectors button:nth-child(2) .shortcut-emblem{background-image:url('img/divine-plates/greek-mark.webp?v=fe4e25a');}
+body #home .chapter-selectors button:nth-child(3) .shortcut-emblem{background-image:url('img/divine-plates/norse-mark.webp?v=fe4e25a');}
+body #home .chapter-selectors button:nth-child(4) .shortcut-emblem{background-image:url('img/divine-plates/arthur-mark.webp?v=fe4e25a');}
 @media(max-width:740px){body #home .chapter-selectors button .shortcut-emblem{width:26px;height:30px;flex-basis:26px;}}
 
 /* Keep the complete emblem inset inside the native plate at every size. */
