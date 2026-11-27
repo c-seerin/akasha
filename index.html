@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh-Hans"><head>
+<script>const akashaRegistrationHeader = "【月の记事录·新建登记 v1】";
+function akashaRegistration(text) { return akashaRegistrationHeader + "\n" + text; }</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, interactive-widget=resizes-content">
 <title>月の记事录</title>
@@ -1818,7 +1820,7 @@ if (x.effect && x.effect !== x.summary) lines.push('  效果：' + x.effect);
 if (roll && roll.custom) lines.push('- 【自定义】' + roll.custom);
 }
 } catch (e) { console.warn('天赋带入失败', e); }
-outputEl.textContent=lines.join('\n');
+outputEl.textContent= akashaRegistration(lines.join('\n'));
 }
 document.getElementById('build-divine-profile')?.addEventListener('click',build);
 document.getElementById('copy-divine-profile')?.addEventListener('click',async()=>{
@@ -1928,7 +1930,7 @@ lines.push("-------------------------------------------------");
 lines.push("补充说明：\n" + notes);
 }
 lines.push("=================================================");
-profileOutput.textContent = lines.join('\n');
+profileOutput.textContent = akashaRegistration(lines.join('\n'));
 }
 if (buildButton) buildButton.addEventListener("click", buildProfileText);
 if (copyButton) copyButton.addEventListener("click", () => {
@@ -2044,7 +2046,7 @@ lines.push(`- ${skill.k}\n  ${skill.d}`);
 lines.push("------------------------------------------------");
 }
 lines.push("【宝具】"); if (nps.length) { nps.forEach(function(np, i){ if (i > 0) lines.push(""); lines.push(`◆ ${np.name}`); lines.push(` 等级: ${np.rank || '?'}\n 种类: ${np.type || '?'}\n ${np.desc || '（无描述）'}`); }); } else { lines.push("（未登录宝具）"); } lines.push("=================================================");
-outputEl.textContent = lines.join('\n');
+outputEl.textContent = akashaRegistration(lines.join('\n'));
 }
 if (buildBtn) buildBtn.addEventListener("click", buildServantProfileText);
 if (copyBtn) copyBtn.addEventListener("click", () => {
@@ -2091,7 +2093,7 @@ function val(id){ var e = document.getElementById(id); return e ? e.value.trim()
 function build(){
 var n = val('o-name'), l = val('o-line'), x = val('o-note');
 if(!n){ out.textContent = '先在上面填一个角色名。'; return; }
-var s = '【入场登记】\n姓名：' + n;
+var s = akashaRegistration('【入场登记】\n姓名：' + n);
 if(l) s += '\n世界线：' + l;
 if(x) s += '\n备注：' + x;
 out.textContent = s;
@@ -2891,7 +2893,7 @@ if(roll.custom) lines.push('- 【自定义】' + roll.custom);
 }catch(err){}
 if(pick){
 pick.style.textAlign='left'; pick.style.whiteSpace='pre-wrap'; pick.style.letterSpacing='.06em';
-pick.textContent = lines.join('\n');
+pick.textContent = akashaRegistration(lines.join('\n'));
 var cp = el('a3-copy'); if(cp) cp.hidden = false;
 }
 });
@@ -2984,6 +2986,7 @@ if(timer){ clearTimeout(timer); timer = null; }
     return false;
   }
   document.getElementById('build-record').addEventListener('click', function(){
+    var hasRegistration = false;
     var parts=[];
     try{
       if(window.__akashaRollText){
@@ -2991,16 +2994,20 @@ if(timer){ clearTimeout(timer); timer = null; }
         if(rt && rt.indexOf('〔四步抽卡结果〕')>=0) parts.push(rt.trim());
       }
     }catch(e){}
-    var pick = window.__lastFilledSection || 'servant-profile';
+    var pick = window.__lastFilledSection;
     sources.forEach(function(s){
       if(s[2] !== pick) return;                 // 只生成「最近填过」的那一份
       if(!filled(s[2])) return;                 // 该栏没填内容就跳过
       var btn=document.getElementById(s[0]); if(btn){ try{ btn.click(); }catch(e){} }
       var el=document.getElementById(s[1]);
       var t=el?(el.textContent||'').trim():'';
-      if(t && t.indexOf('＿＿＿')<0 && t.indexOf('先在上面填')<0) parts.push(t);
+      if(t && t.indexOf('＿＿＿')<0 && t.indexOf('先在上面填')<0) {
+        hasRegistration = t.startsWith(akashaRegistrationHeader + "\n");
+        parts.push(hasRegistration ? t.slice(akashaRegistrationHeader.length + 1) : t);
+      }
     });
-    out.textContent = parts.length ? parts.join('\n\n————————\n\n') : '先去填一栏记录。';
+    var record = parts.join('\n\n————————\n\n');
+    out.textContent = hasRegistration ? akashaRegistration(record) : (record || '先去填一栏记录。');
     out.style.whiteSpace='pre-wrap';
   });
   document.getElementById('copy-record').addEventListener('click', function(){
@@ -3607,7 +3614,7 @@ body,div,span,p,li,dl,dd,dt,label,button,input,select,textarea,h1,h2,h3,h4,h5,h6
     if (val('lb-reason-notes')) reasons.push(val('lb-reason-notes'));
     if (reasons.length) L.push('被裁定原因：' + reasons.join('；'));
 
-    outEl.textContent = L.join('\n');
+    outEl.textContent = akashaRegistration(L.join('\n'));
   }
 
   function playIntro(){
